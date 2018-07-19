@@ -1,7 +1,7 @@
 ic_unload_tetin
 #==============Parameters
 # Meta
-set {mesh_option} 0
+set {mesh_option} 1
 
 #### Geometry
 # multiplies by inlet diameter for in_len
@@ -29,17 +29,11 @@ set {out_len} [expr $out_len_multi * $in_r * 2]
 
 set {prsm_totheight} [expr $prsm_initheight * ( (1-pow($prsm_growthratio , $prsm_numlayer)) / (1-$prsm_growthratio) )]
 
-set {dif_angrad} [expr $dif_ang*(3.14159265/180)]
-# set {03_i} [expr $in_len + $trans_r*(1-cos ($dif_angrad*0.5)) ]
-# set {04_i} [expr $in_len + $trans_r*(1-cos ($dif_angrad)) ]
-# set {03_j} [expr $in_r - $trans_r + $trans_r * sin($dif_angrad*0.5) ]
-# set {04_j} [expr $in_r - $trans_r + $trans_r * sin($dif_angrad) ]
+set {dif_angrad} [expr $dif_ang*(3.141592653589793/180)]
 set {05_i} [expr $in_len + $dif_len]
 set {05_j} [expr $in_r + $dif_len * tan($dif_angrad)]
 set {06_i} [expr $05_i + $out_len]
 set {06_j} $05_j
-# set {ang_start} [expr 360 - $dif_ang]
-set {ang_start} 353.0
 ic_geo_set_units mm
 ###
 ic_geo_new_family GEOM
