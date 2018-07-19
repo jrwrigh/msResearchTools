@@ -3,15 +3,16 @@ ic_unload_tetin
 # Meta
 set {mesh_option} 0
 
-# Geometry
-set {in_len} 150
-set {out_len} 200
-set {in_r} 20
-set {dif_len} 50
-set {dif_ang} 5.0 
+#### Geometry
+# multiplies by inlet diameter for in_len
+set {in_len_multi}  8
+set {out_len_multi} 12 
+set {in_r} 50.8
+set {dif_len} 539.68647
+set {dif_ang} 6.0 
 set {trans_r} 20
 
-# Meshing 
+#### Meshing 
 set {global_ref} 1
 set {global_max} 2
 set {prsm_numlayer} 20
@@ -22,6 +23,9 @@ set {walls_max} 2
 set {vol_expanratio} 1.1
 
 # Calculation of Parameters
+
+set {in_len} [expr $in_len_multi * $in_r * 2]
+set {out_len} [expr $out_len_multi * $in_r * 2]
 
 set {prsm_totheight} [expr $prsm_initheight * ( (1-pow($prsm_growthratio , $prsm_numlayer)) / (1-$prsm_growthratio) )]
 
