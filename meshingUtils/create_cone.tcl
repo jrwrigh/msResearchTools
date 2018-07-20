@@ -1,25 +1,49 @@
 ic_unload_tetin
 #==============Parameters
 # Meta
-set {mesh_option} 1
+set {mesh_option} 0
+
+
+#                                                   c3
+#                                       p5*-------------------------*p6
+#                                        /                          |
+#                                       /                           |
+#                                 p3*  / c2                         |
+#                        c1           /                             |
+#               p1*-----------------*/                              |
+#                 |                 ^p2,p4,c5                       |c4
+#                 |                                                 |
+#               c0|                                                 |
+#                 |                                                 |
+#                 |                                                 |
+# rot_axis-->   p0*-------------------------------------------------*p7
+
 
 #### Geometry
 # multiplies by inlet diameter for in_len
-set {in_len_multi}  8
+set {in_len_multi}  3
 set {out_len_multi} 12 
 set {in_r} 50.8
-set {dif_len} 539.68647
-set {dif_ang} 6.0 
+set {out_r} 57.92091
+set {dif_ang} 4.0 
 set {trans_r} 20
 
 #### Meshing 
-set {global_ref} 1
-set {global_max} 2
+    # global reference size (not used as reference in this script)
+set {global_ref} 5
+    # absolute global size
+set {global_max_abs} 6
+    # number of prism layers
 set {prsm_numlayer} 20
+    # prism layer expansion rule
 set {prsm_law} exponential
+    # prism layer growth rate
 set {prsm_growthratio} 1.1
+    # first layer height of prism
 set {prsm_initheight} .05
-set {walls_max} 2
+    # absolute maximum element size on wall
+set {walls_max_abs} 5
+    # expansion rate for volume element mesh
 set {vol_expanratio} 1.1
 
 # Calculation of Parameters
@@ -30,8 +54,9 @@ set {out_len} [expr $out_len_multi * $in_r * 2]
 set {prsm_totheight} [expr $prsm_initheight * ( (1-pow($prsm_growthratio , $prsm_numlayer)) / (1-$prsm_growthratio) )]
 
 set {dif_angrad} [expr $dif_ang*(3.141592653589793/180)]
-set {05_i} [expr $in_len + $dif_len]
-set {05_j} [expr $in_r + $dif_len * tan($dif_angrad)]
+set {05_i} [expr ($out_r - $in_r - $trans_r * (1 - cos($dif_angrad))) / tan($dif_angrad) + $trans_r * sin($dif_angrad) + $in_len]
+set {05_j} $out_r
+# set {05_j} [expr $in_r + $dif_len * tan($dif_angrad)]
 set {06_i} [expr $05_i + $out_len]
 set {06_j} $05_j
 ic_geo_set_units mm
@@ -46,8 +71,6 @@ ic_point {} GEOM pnt.03 $in_len,[expr $in_r + $trans_r],0
 ic_point {} GEOM pnt.05 $05_i,$05_j,0
 ic_curve arc_ctr_rad GEOM crv.05 "pnt.03 pnt.02 pnt.05 $trans_r 0 $dif_ang"
 ic_point curve_end GEOM pnt.04 {crv.05 ymax}
-# ic_point {} GEOM pnt.03 $03_i,$03_j,0
-# ic_point {} GEOM pnt.04 $04_i,$04_j,0
 ic_point {} GEOM pnt.06 $06_i,$06_j,0
 ic_point {} GEOM pnt.07 $06_i,0,0
 ic_curve point GEOM crv.00 {pnt.00 pnt.01}
@@ -55,11 +78,11 @@ ic_curve point GEOM crv.01 {pnt.01 pnt.02}
 ic_curve point GEOM crv.02 {pnt.04 pnt.05}
 ic_curve point GEOM crv.03 {pnt.05 pnt.06}
 ic_curve point GEOM crv.04 {pnt.06 pnt.07}
-# ic_curve arc GEOM crv.05 {pnt.02 pnt.03 pnt.04}
 ic_geo_cre_srf_rev GEOM srf.00 {crv.00 crv.01 crv.05 crv.04 crv.03 crv.02} pnt.00 {1 0 0} 0 360 c 1
 ic_geo_new_family BODY
 ic_boco_set_part_color BODY
 ic_geo_create_body {srf.00.1 srf.00.5 srf.00.4 srf.00.3 srf.00.2 srf.00} {} BODY
+
 #Creating parts for the surfaces
 ic_geo_set_part surface srf.00 INLET 0
 ic_delete_empty_parts 
@@ -67,20 +90,27 @@ ic_geo_set_part surface srf.00.3 OUTLET 0
 ic_delete_empty_parts 
 ic_geo_set_part surface {srf.00.2 srf.00.1 srf.00.4 srf.00.5} WALLS 0
 ic_delete_empty_parts 
+
 # Global Meshing parameters
-ic_set_meshing_params global 0 gref $global_ref gmax $global_max gfast 0 gedgec 0.2 gnat 0 gcgap 1 gnatref 10
+ic_set_meshing_params global 0 gref $global_ref gmax $global_max_abs gfast 0 gedgec 0.2 gnat 0 gcgap 1 gnatref 10
+
 # Volume Inflation Layer meshing parameters
 ic_set_meshing_params variable 0 tetra_verbose 1 tetra_expansion_factor $vol_expanratio
+
 # Inflation Layer meshing parameters
 ic_set_meshing_params prism 0 law $prsm_law layers $prsm_numlayer height $prsm_initheight ratio $prsm_growthratio total_height $prsm_totheight prism_height_limit 0 max_prism_height_ratio {} stair_step 1 auto_reduction 0 min_prism_quality 0.0099999998 max_prism_angle 180 fillet 0.1 tetra_smooth_limit 0.30000001 n_tetra_smoothing_steps 10 n_triangle_smoothing_steps 5
 ic_set_meshing_params variable 0 tgrid_n_ortho_layers 0 tgrid_fix_first_layer 0 tgrid_gap_factor 0.5 tgrid_enhance_norm_comp 0 tgrid_enhance_offset_comp 0 tgrid_smoothing_level 1 tgrid_max_cap_skew 0.98 tgrid_max_cell_skew 0.90 tgrid_last_layer_aspect {} triangle_quality inscribed_area
+
 # Setting Family meshing parameters
-ic_geo_set_family_params WALLS prism 1 emax 4
+ic_geo_set_family_params WALLS prism 1 emax $walls_max_abs
+
 #### Create mesh
 if {$mesh_option == 1} {
     ic_set_global geo_cad 0.3 toler
+
     # Create the surface mesh
     ic_quad2 what surfaces entities {} element 3 proj 1 conver 0.025 geo_tol 0 ele_tol 0.3 dev 0.0 improvement 1 block 0.2 bunch 0 debug 0 adjust_nodes 0 adjust_nodes_max 0 try_harder 1 error_subset Failed_surfaces pattern 150 big 1 board 0 remove_old -1 inner 0 simple_offset 0 enn 0 b_smooth 0 time_max 0 ele_max 0 four 0 merge_dormant 1 max_length 0.0 max_area 0.0 min_angle 0.0 max_nodes 0 max_elements 0 smoothdormant 0 breakpoint 0 freeb 0 n_threads 0 snorm 1 shape 0
+
     # Run the Advancing Front mesher in batch mode
     ic_uns_subset_delete afmesh_errors
     ic_save_unstruct afmesh_temp0.uns 1 {} {} {}
