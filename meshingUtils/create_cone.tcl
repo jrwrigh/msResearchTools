@@ -133,6 +133,103 @@ if {$mesh_option == 1} {
     ic_delete_empty_parts
     ic_set_global geo_cad 0.3 toler
     }
-# elseif {$mesh_option == 2} {
 
-# }
+### For block instead of unstructured tet mesh
+elseif {$mesh_option == 2} {
+    # Make Initial block
+    ic_hex_unload_blocking 
+    ic_hex_initialize_blocking {surface srf.00.4 surface srf.00.3 surface srf.00.2 surface srf.00.1 surface srf.00 surface srf.00.5} BODY 0 101
+    ic_hex_unblank_blocks 
+    ic_hex_multi_grid_level 0
+    ic_hex_projection_limit 0
+    ic_hex_default_bunching_law default 2.0
+    ic_hex_floating_grid off
+    ic_hex_transfinite_degree 1
+    ic_hex_unstruct_face_type one_tri
+    ic_hex_set_unstruct_face_method uniform_quad
+    ic_hex_set_n_tetra_smoothing_steps 20
+    ic_hex_error_messages off_minor
+
+    # Split Block apart
+    ic_hex_mark_blocks unmark
+    ic_hex_mark_blocks unmark
+    ic_undo_group_begin 
+    ic_hex_undo_major_start split_grid
+    ic_hex_split_grid 26 42 0.187383 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_undo_major_end split_grid
+    ic_undo_group_end 
+    ic_undo_group_begin 
+    ic_hex_undo_major_start split_grid
+    ic_hex_split_grid 74 42 0.0848017 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_undo_major_end split_grid
+
+    # Associate block edges with curves
+    ic_hex_set_edge_projection 25 26 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 21 25 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 21 22 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 22 26 0 1 srf.00.1e12
+    ic_undo_group_end 
+    ic_hex_find_comp_curve srf.00.1e10
+    ic_undo_group_begin 
+    ic_hex_set_edge_projection 70 74 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 69 70 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 69 73 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 73 74 0 1 srf.00.1e10
+    ic_undo_group_end 
+    ic_hex_find_comp_curve srf.00.4e23
+    ic_undo_group_begin 
+    ic_hex_set_edge_projection 86 90 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 85 86 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 85 89 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 89 90 0 1 srf.00.4e23
+    ic_undo_group_end 
+    ic_hex_find_comp_curve srf.00.3e19
+    ic_undo_group_begin 
+    ic_hex_set_edge_projection 41 42 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 37 41 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 37 38 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 38 42 0 1 srf.00.3e19
+
+    # Snap verticies to curves
+    ic_hex_project_to_surface 0:1,1 1:2,2 2:1,1 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:1,1 1:2,2 2:2,2 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:1,1 1:1,1 2:2,2 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:1,1 1:1,1 2:1,1 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:2,2 1:2,2 2:1,1 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:2,2 1:2,2 2:2,2 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:2,2 1:1,1 2:2,2 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:2,2 1:1,1 2:1,1 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:3,3 1:2,2 2:1,1 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:3,3 1:2,2 2:2,2 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:3,3 1:1,1 2:2,2 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:3,3 1:1,1 2:1,1 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:4,4 1:2,2 2:1,1 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:4,4 1:2,2 2:2,2 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:4,4 1:1,1 2:2,2 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+    ic_hex_project_to_surface 0:4,4 1:1,1 2:1,1 INLET SHELL GEOM OUTLET LUMP BODY WALLS
+
+    # select blocks for O-Grid
+    ic_hex_mark_blocks superblock 13
+    ic_hex_mark_blocks superblock 28
+    ic_hex_mark_blocks superblock 27
+
+    # select faces for O-Grid
+    ic_hex_mark_blocks face_neighbors corners { 21 25 22 26 } { 37 41 38 42 } { 69 70 73 74 } { 85 86 89 90 }
+
+    # create O-Grid
+    ic_hex_ogrid 1 m GEOM BODY SHELL LUMP INLET OUTLET WALLS -version 50
+    ic_hex_mark_blocks unmark
+
+    # adjust O-Grid scale
+    ic_hex_rescale_ogrid 3 0 20 m GEOM BODY SHELL LUMP INLET OUTLET WALLS abs
+
+
+    # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
+    # set edge mesh criteria
+    ic_hex_set_mesh 25 102 n 80 h1rel 0.00164041994751 h2rel 0.0 r1 1.2 r2 2 lmax 0 exp1 copy_to_parallel unlocked
+
+    # TODO: need to convert pre-mesh to .uns mesh
+    #       need to export mesh to .cfx5 file format
+    #       need to setup adjustment parameters for pre-mesh settings
+
+}
