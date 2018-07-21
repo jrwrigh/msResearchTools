@@ -1,4 +1,4 @@
-# State file created:  2018/07/21 09:12:57
+# State file created:  2018/07/21 09:51:50
 # Build 19.0 2017-12-01T23:36:31.332000
 
 LIBRARY:
@@ -8,7 +8,13 @@ LIBRARY:
       axialVelocity = 50 [m/s]
       inletStaticTemperature = 300 [K]
       outletStaticPressure = 101312 [Pa]
+      staticPressureRecovery = (areaAve(Pressure)@Outlet - \
+        areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet *.5 \
+        *areaAve(Density)@Inlet)
       thetaVelocity = r*angularVelocity
+      varKineticEnergy = Density * Velocity ^2 * 0.5
+      yPlusAvg = areaAve(Yplus)@REGION:WALLS
+      yPlusMax = maxVal(Yplus)@REGION:WALLS
     END
   END
   MATERIAL: Air Ideal Gas
@@ -233,13 +239,45 @@ FLOW: Flow Analysis 1
     END
   END
   OUTPUT CONTROL:
+    MONITOR OBJECTS:
+      MONITOR BALANCES:
+        Option = Full
+      END
+      MONITOR FORCES:
+        Option = Full
+      END
+      MONITOR PARTICLES:
+        Option = Full
+      END
+      MONITOR POINT: mpStaticPressureRecovery
+        Coord Frame = Coord 0
+        Expression Value = staticPressureRecovery
+        Option = Expression
+      END
+      MONITOR POINT: mpYPlusAvg
+        Coord Frame = Coord 0
+        Expression Value = yPlusAvg
+        Option = Expression
+      END
+      MONITOR POINT: mpYPlusMax
+        Coord Frame = Coord 0
+        Expression Value = yPlusMax
+        Option = Expression
+      END
+      MONITOR RESIDUALS:
+        Option = Full
+      END
+      MONITOR TOTALS:
+        Option = Full
+      END
+    END
     RESULTS:
       File Compression Level = Default
       Option = Standard
     END
   END
   SOLVER CONTROL:
-    Turbulence Numerics = First Order
+    Turbulence Numerics = High Resolution
     ADVECTION SCHEME:
       Option = High Resolution
     END
