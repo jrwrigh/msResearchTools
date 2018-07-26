@@ -1,4 +1,4 @@
-# State file created:  2018/07/23 16:50:25
+# State file created:  2018/07/23 17:16:30
 # CFX-19.0
 
 CALCULATOR:
@@ -8,6 +8,125 @@ CALCULATOR:
   Function = areaAve
   Location = /PLANE:diffuserOutlet
   Verbose = Off
+END
+CHART:Chart 1
+  Chart Axes = Both
+  Chart Axes Font = Tahoma, 10, False, False, False, False
+  Chart Axes Titles Font = Tahoma, 10, True, False, False, False
+  Chart Grid Line Width = 1
+  Chart Horizontal Grid = On
+  Chart Legend = On
+  Chart Legend Font = Tahoma, 8, False, False, False, False
+  Chart Legend Inside = Outside Chart
+  Chart Legend Justification = Center
+  Chart Legend Position = Bottom
+  Chart Legend Width Height = 0.2 , 0.4
+  Chart Legend X Justification = Right
+  Chart Legend XY Position = 0.73 , 0.275
+  Chart Legend Y Justification = Center
+  Chart Line Width = 2
+  Chart Lines Order = Series 1,Chart Line 1
+  Chart Minor Grid = Off
+  Chart Minor Grid Line Width = 1
+  Chart Print Base Height = 700
+  Chart Print Base Width = 700
+  Chart Symbol Size = 4
+  Chart Text Colour = White
+  Chart Title = Title
+  Chart Title Font = Tahoma, 12, True, False, False, False
+  Chart Title Visibility = On
+  Chart Type = XY
+  Chart Vertical Grid = On
+  Chart Viewport Colour = Yellow
+  Chart X Axis Automatic Number Formatting = On
+  Chart X Axis Label = X Axis <units>
+  Chart X Axis Number Format = %10.3e
+  Chart Y Axis Automatic Number Formatting = On
+  Chart Y Axis Label = Y Axis <units>
+  Chart Y Axis Number Format = %10.3e
+  Default Chart X Variable = r
+  Default Chart Y Variable = Velocity
+  Default Difference Line Calculation = From Points
+  Default Histogram Y Axis Weighting = None
+  Default Time Chart Variable = Pressure
+  Default Time Chart X Expression = Time
+  Default Time Variable Absolute Value = Off
+  Default Time Variable Boundary Values = Conservative
+  Default X Variable Absolute Value = Off
+  Default X Variable Boundary Values = Conservative
+  Default Y Variable Absolute Value = Off
+  Default Y Variable Boundary Values = Conservative
+  FFT Full Input Range = On
+  FFT Max = 0.0
+  FFT Min = 0.0
+  FFT Subtract Mean = Off
+  FFT Window Type = Hanning
+  FFT X Function = Frequency
+  FFT Y Function = Power Spectral Density
+  Histogram Automatic Divisions = Automatic
+  Histogram Divisions = -1.0,1.0
+  Histogram Divisions Count = 10
+  Histogram Y Axis Value = Count
+  Is FFT Chart = Off
+  Max X = 1.0
+  Max Y = 1.0
+  Min X = -1.0
+  Min Y = -1.0
+  Time Chart Keep Single Case = False
+  Use Data For X Axis Labels = On
+  Use Data For Y Axis Labels = On
+  X Axis Automatic Range = On
+  X Axis Inverted = Off
+  X Axis Logarithmic Scaling = Off
+  Y Axis Automatic Range = On
+  Y Axis Inverted = Off
+  Y Axis Logarithmic Scaling = Off
+  CHART SERIES:Series 1
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = Regular
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Location = /LINE:Line 1
+    Monitor Data Source = Case
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case AR1.30_phi4_structured_002
+    Operating Point Data Source = File
+    Series Name = Series 1
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 1
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case AR1.30_phi4_structured_002
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = Series 1
+      Use Automatic Line Naming = On
+    END
+  END
+  OBJECT REPORT OPTIONS:
+    Automatic Item = None
+    Generation = Manual
+  END
 END
 COMMENT:User Data
   Comment Exists = True
@@ -220,13 +339,15 @@ DATA READER:
       Apply Reflection = false
       Apply Rotation = true
       Apply Translation = false
+      Axis = X
       Axis From File = Custom
       Background Mesh Density = 2000
       Background Mesh Generation Method = Quasi Orthogonal
       Blade Aligned Variable Available = false
-      Create Additional Turbo Variables = false
-      Do Cylindrical Initialization = False
-      Domain Type = Normal
+      Components to Initialize = Diffuser
+      Create Additional Turbo Variables = true
+      Do Cylindrical Initialization = true
+      Domain Type = Turbo Component
       Full Circle = Off
       Hub Curve Mode = From Turbo Region
       Inlet Curve Mode = From Turbo Region
@@ -245,8 +366,8 @@ BOUNDARY:Outlet
       Principal Axis = Z
       Reflection Plane Option = From Plane
       Rotation Angle = 0 [degree]
-      Rotation Axis From = 0.0, 0.0, 0.0
-      Rotation Axis To = 1.0, 0.0, 0.0
+      Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+      Rotation Axis To = 1 [mm], 0 [mm], 0 [mm]
       Rotation Axis Type = Principal Axis
       Shroud Curve Mode = From Turbo Region
       TBR User Theta Correction = 0.0
@@ -418,7 +539,7 @@ DEFAULT LEGEND:Default Legend View 1
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /VECTOR:velocityInlet
+  Legend Plot = /LINE:Line 1
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -441,7 +562,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /VECTOR:velocityInlet
+  Legend Plot = /LINE:Line 1
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -464,7 +585,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /VECTOR:velocityInlet
+  Legend Plot = /LINE:Line 1
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -487,7 +608,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /VECTOR:velocityInlet
+  Legend Plot = /LINE:Line 1
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -528,6 +649,7 @@ LIBRARY:
       diffuserOutletPosition = 410 [mm]
       inletStaticTemperature = 300 [K]
       outletStaticPressure = 101312 [Pa]
+      radiusInlet = 25.4 [mm]
       sstep = Sequence Step
       staticPressureRecovery = (areaAve(Pressure)@Outlet - \
 areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet^2 *.5 *\
@@ -538,9 +660,49 @@ areaAve(Density)@diffuserInlet)
       t = Time
       thetaVelocity = r*angularVelocity
       varKineticEnergy = Density * Velocity ^2 * 0.5
+      varr = sqrt(X^2 + Y^2)
       yPlusAvg = areaAve(Yplus)@REGION:WALLS
       yPlusMax = maxVal(Yplus)@REGION:WALLS
     END
+  END
+END
+LINE:Line 1
+  Apply Instancing Transform = On
+  Colour = 1, 1, 0
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Line Samples = 200
+  Line Type = Sample
+  Line Width = 2
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Option = Two Points
+  Point 1 = 0 [mm], 0 [mm], 0 [mm]
+  Point 2 = 50.8 [mm], 0 [mm], 0 [mm]
+  Range = Global
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
   END
 END
 MASS FLOW CALC OPTION ON PHYSICAL SURFACES:
@@ -762,7 +924,7 @@ END
 REPORT:
   Report Items = /TITLE PAGE,/REPORT/FILE INFORMATION OPTIONS,/REPORT/MESH \
 STATISTICS OPTIONS,/REPORT/PHYSICS SUMMARY OPTIONS,/REPORT/SOLUTION SUMMARY \
-OPTIONS,/COMMENT:User Data
+OPTIONS,/COMMENT:User Data,/CHART:Chart 1
   FILE INFORMATION OPTIONS:
     Include In Report = true
     This Exists = true
@@ -977,10 +1139,16 @@ END
 SCALAR VARIABLE:Static Entropy
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:Streamline Number on velocityInletSTREAMLINES
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Temperature
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Thermal Conductivity
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Time on velocityInletSTREAMLINES
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Total Density
@@ -1038,6 +1206,9 @@ SCALAR VARIABLE:Turbulence Kinetic Energy.Gradient Y
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Turbulence Kinetic Energy.Gradient Z
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Axial
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity u
@@ -1199,6 +1370,86 @@ END
 SCALAR VARIABLE:Z
   Boundary Values = Conservative
 END
+STREAMLINE:velocityInletSTREAMLINES
+  Absolute Tolerance = 0.0 [mm]
+  Add Sample Vertex Normals = Off
+  Apply Instancing Transform = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Use Plot Variable
+  Colour Scale = Linear
+  Colour Variable = Velocity
+  Colour Variable Boundary Values = Conservative
+  Cross Periodics = On
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Draw Streams = On
+  Draw Symbols = Off
+  Grid Tolerance = 0.01
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Width = 1
+  Location List = Inlet
+  Locator Sampling Method = Equally Spaced
+  Max = 0.0 [mm s^-1]
+  Maximum Number of Items = 25
+  Min = 0.0 [mm s^-1]
+  Number of Samples = 100
+  Number of Sides = 8
+  Random Seed = 1
+  Range = Global
+  Reduction Factor = 1.0
+  Reduction or Max Number = Max Number
+  Sample Spacing = 0.1
+  Sampling Accuracy = High
+  Sampling Aspect Ratio = 1
+  Sampling Grid Angle = 0 [degree]
+  Seed Point Type = Equally Spaced Samples
+  Simplify Geometry = Off
+  Specular Lighting = On
+  Stream Drawing Mode = Line
+  Stream Initial Direction = 0 , 0 , 0
+  Stream Size = 1.0
+  Stream Symbol = Ball
+  Streamline Direction = Forward
+  Streamline Maximum Periods = 20
+  Streamline Maximum Segments = 10000
+  Streamline Maximum Time = 0.0 [s]
+  Streamline Solver Type = RungeKutta2
+  Streamline Type = 3D Streamline
+  Streamline Width = 2
+  Surface Drawing = Smooth Shading
+  Surface Streamline Direction = Forward and Backward
+  Symbol Size = 1.0
+  Symbol Start Time = 10.0 [s]
+  Symbol Stop Time = -10.0 [s]
+  Symbol Time Interval = 1.0 [s]
+  Tolerance Mode = Grid Relative
+  Transparency = 0.0
+  Variable = Velocity
+  Variable Boundary Values = Conservative
+  Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 SYMBOL CONTROL:
   Symbol Size = 1
 END
@@ -1295,6 +1546,15 @@ UNIT SYSTEM:
   Preferred Units System = Newton millimeter
   Update Units to Preferred = Off
 END
+USER SCALAR VARIABLE:r
+  Boundary Values = Conservative
+  Calculate Global Range = Off
+  Component Index = 1
+  Expression = varr
+  Recipe = Expression
+  Variable to Copy = Pressure
+  Variable to Gradient = Pressure
+END
 VECTOR VARIABLE:Density.Gradient
   Boundary Values = Conservative
 END
@@ -1343,7 +1603,7 @@ END
 VECTOR VARIABLE:Wall Shear
   Boundary Values = Conservative
 END
-VECTOR:velocityInlet
+VECTOR:velocityInletVECTORS
   Add Sample Vertex Normals = On
   Apply Instancing Transform = On
   Colour = 0.75, 0.75, 0.75
@@ -1385,7 +1645,7 @@ VECTOR:velocityInlet
   Transparency = 0.0
   Variable = Velocity
   Variable Boundary Values = Hybrid
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -1404,7 +1664,7 @@ VECTOR:velocityInlet
     Z = 0.0 [m]
   END
 END
-VECTOR:velocityYZ
+VECTOR:velocityYZVECTORS
   Add Sample Vertex Normals = On
   Apply Instancing Transform = On
   Colour = 0.75, 0.75, 0.75
@@ -1446,7 +1706,7 @@ VECTOR:velocityYZ
   Transparency = 0.0
   Variable = Velocity
   Variable Boundary Values = Hybrid
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -1465,6 +1725,33 @@ VECTOR:velocityYZ
     Z = 0.0 [mm]
   END
 END
+VIEW:Turbo Initialisation View
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = true
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Scene = false
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = false
+  Light Angle = 50, 110
+  Object Visibility List = /WIREFRAME:Wireframe,/COMPHIGHLIGHT:Diffuser
+  Projection = Orthographic
+  Ruler Visibility = true
+  Standard View = Isometric Y
+  Valid Case = All Cases
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = 0,0
+    Pivot Point = 0,0,0.813266
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0.279848,-0.364705,-0.115917,0.880476
+    Scale = 2.12936
+    Send To Viewer = True
+  END
+END
 VIEW:View 1
   Angular Coord Shift = 0.0
   Auto Center = false
@@ -1477,18 +1764,18 @@ VIEW:View 1
   Highlight Type = Surface Mesh
   Is A Figure = false
   Light Angle = 50, 110
-  Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/\
-VECTOR:velocityInlet,/VECTOR:velocityYZ,/WIREFRAME:Wireframe
+  Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/LINE:Line 1,/\
+WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = 0.046758,0.0178409
-    Pivot Point = 0,1.06171e-007,0.814648
+    Pan = -0.0162148,-0.0714741
+    Pivot Point = 0,0,0.813266
     Rotation = -90, 0, 0
-    Rotation Quaternion = 0.0931839,0.238341,0.0620288,0.964709
-    Scale = 1.89037
+    Rotation Quaternion = 0.00458778,0.980006,0.0227529,0.197604
+    Scale = 2.85037
     Send To Viewer = True
   END
 END
