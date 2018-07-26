@@ -1,7 +1,7 @@
 ic_unload_tetin
 #==============Parameters
 # Meta
-set {mesh_option} 2
+set {mesh_option} 3
 
 
 #                                                   c3
@@ -241,6 +241,138 @@ if {$mesh_option == 2} {
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
     ic_hex_set_mesh 25 102 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+
+    # TODO: need to convert pre-mesh to .uns mesh
+    #       need to export mesh to .cfx5 file format
+    #       need to setup adjustment parameters for pre-mesh settings
+
+}
+
+### For octohedral o-grid instead of square o-grid
+if {$mesh_option == 3} {
+    # Make Initial block
+    ic_hex_unload_blocking 
+    ic_hex_initialize_blocking {surface srf.00.4 surface srf.00.3 surface srf.00.2 surface srf.00.1 surface srf.00 surface srf.00.5} BODY 0 101
+    ic_hex_unblank_blocks 
+    ic_hex_multi_grid_level 0
+    ic_hex_projection_limit 0
+    ic_hex_default_bunching_law default 2.0
+    ic_hex_floating_grid off
+    ic_hex_transfinite_degree 1
+    ic_hex_unstruct_face_type one_tri
+    ic_hex_set_unstruct_face_method uniform_quad
+    ic_hex_set_n_tetra_smoothing_steps 20
+    ic_hex_error_messages off_minor
+
+    # Split Block apart
+        # Major splits (for the diameter transitions)
+    ic_hex_mark_blocks unmark
+    ic_hex_mark_blocks unmark
+    ic_undo_group_begin 
+    ic_hex_undo_major_start split_grid
+    ic_hex_split_grid 26 42 0.187383 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_undo_major_end split_grid
+    ic_undo_group_end 
+    ic_undo_group_begin 
+    ic_hex_undo_major_start split_grid
+    ic_hex_split_grid 74 42 0.0848017 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_undo_major_end split_grid
+
+        # Splits down the middle
+    ic_hex_mark_blocks unmark
+    ic_hex_mark_blocks superblock 28
+    ic_hex_mark_blocks superblock 27
+    ic_hex_mark_blocks superblock 13
+    ic_hex_undo_major_start split_grid
+    ic_hex_split_grid 25 26 GEOM.19 m GEOM BODY SHELL LUMP INLET OUTLET WALLS marked
+    ic_hex_undo_major_end split_grid
+    ic_undo_group_end 
+    ic_undo_group_begin 
+    ic_hex_mark_blocks unmark
+    ic_hex_mark_blocks superblock 13
+    ic_hex_mark_blocks superblock 27
+    ic_hex_mark_blocks superblock 28
+    ic_hex_mark_blocks superblock 29
+    ic_hex_mark_blocks superblock 30
+    ic_hex_mark_blocks superblock 31
+    ic_hex_undo_major_start split_grid
+    ic_hex_split_grid 22 26 GEOM.19 m GEOM BODY SHELL LUMP INLET OUTLET WALLS marked
+    ic_hex_undo_major_end split_grid
+
+    # Associate block edges with curves
+    ic_hex_set_edge_projection 25 109 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 127 25 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 21 127 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 21 103 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 103 22 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 22 139 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 139 26 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 109 26 0 1 srf.00.1e12
+    ic_undo_group_end 
+    ic_hex_find_comp_curve srf.00.1e10
+    ic_undo_group_begin 
+    ic_hex_set_edge_projection 70 110 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 128 70 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 69 128 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 69 104 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 104 73 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 73 140 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 140 74 0 1 srf.00.1e10
+    ic_hex_set_edge_projection 110 74 0 1 srf.00.1e10
+    ic_undo_group_end 
+    ic_hex_find_comp_curve srf.00.4e23
+    ic_undo_group_begin 
+    ic_hex_set_edge_projection 111 90 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 86 111 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 129 86 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 85 129 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 85 105 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 105 89 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 89 141 0 1 srf.00.4e23
+    ic_hex_set_edge_projection 141 90 0 1 srf.00.4e23
+    ic_undo_group_end 
+    ic_hex_find_comp_curve srf.00.3e19
+    ic_undo_group_begin 
+    ic_hex_set_edge_projection 41 112 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 130 41 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 37 130 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 37 106 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 106 38 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 38 142 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 142 42 0 1 srf.00.3e19
+    ic_hex_set_edge_projection 112 42 0 1 srf.00.3e19
+    ic_undo_group_end 
+
+    # Snap verticies to curves
+    ic_hex_project_to_surface INLET SHELL GEOM OUTLET LUMP BODY WALLS
+
+    # select blocks for O-Grid
+    ic_hex_mark_blocks superblock 13
+    ic_hex_mark_blocks superblock 27
+    ic_hex_mark_blocks superblock 28
+    ic_hex_mark_blocks superblock 29
+    ic_hex_mark_blocks superblock 30
+    ic_hex_mark_blocks superblock 31
+    ic_hex_mark_blocks superblock 32
+    ic_hex_mark_blocks superblock 33
+    ic_hex_mark_blocks superblock 34
+    ic_hex_mark_blocks superblock 35
+    ic_hex_mark_blocks superblock 36
+    ic_hex_mark_blocks superblock 37
+
+    # select faces for O-Grid
+    ic_hex_mark_blocks face_neighbors corners { 25 127 109 133 } { 22 139 103 133 } { 21 127 103 133 } { 26 139 109 133 } { 41 130 112 136 } { 37 130 106 136 } { 42 142 112 136 } { 38 142 106 136 }
+
+    # create O-Grid
+    ic_hex_ogrid 1 m GEOM BODY SHELL LUMP INLET OUTLET WALLS -version 50
+    ic_hex_mark_blocks unmark
+
+    # adjust O-Grid scale
+    ic_hex_rescale_ogrid 3 0 $ogrid_separation_space m GEOM BODY SHELL LUMP INLET OUTLET WALLS abs
+
+    # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
+    # set edge mesh criteria
+    ic_hex_set_mesh 25 163 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
     # TODO: need to convert pre-mesh to .uns mesh
     #       need to export mesh to .cfx5 file format
