@@ -1,7 +1,7 @@
 ic_unload_tetin
 #==============Parameters
 # Meta
-set {mesh_option} 0
+set {mesh_option} 2
 
 
 #                                                   c3
@@ -23,28 +23,41 @@ set {mesh_option} 0
 # multiplies by inlet diameter for in_len
 set {in_len_multi}  3
 set {out_len_multi} 12 
-set {in_r} 50.8
-set {out_r} 57.92091
+set {in_r} 25.4
+set {out_r} 28.9604
 set {dif_ang} 4.0 
 set {trans_r} 20
 
 #### Meshing 
+## FOR O-GRID MESHING
+set {ogrid_separation_space} 10
+    # Absolute size change of separation edge
+set {ogrid_separation_layern} 80
+    # number of layers in the separation space
+set {ogrid_init_spacing} 0.00164
+    # value of initial height layer
+set {orgid_separation_rate} 1.2
+    # expotential rate at which the layer size increases
+
+##FOR TET & O-GRID MESH
+set {global_ref} 3
     # global reference size (not used as reference in this script)
-set {global_ref} 5
+set {global_max_abs} 4
     # absolute global size
-set {global_max_abs} 6
-    # number of prism layers
-set {prsm_numlayer} 20
-    # prism layer expansion rule
-set {prsm_law} exponential
-    # prism layer growth rate
-set {prsm_growthratio} 1.1
-    # first layer height of prism
-set {prsm_initheight} .05
+set {walls_max_abs} 3
     # absolute maximum element size on wall
-set {walls_max_abs} 5
-    # expansion rate for volume element mesh
 set {vol_expanratio} 1.1
+    # expansion rate for volume element mesh
+
+##FOR TET MESH ONLY
+set {prsm_numlayer} 20
+    # number of prism layers
+set {prsm_law} exponential
+    # prism layer expansion rule
+set {prsm_growthratio} 1.1
+    # prism layer growth rate
+set {prsm_initheight} .05
+    # first layer height of prism
 
 # Calculation of Parameters
 
@@ -135,7 +148,7 @@ if {$mesh_option == 1} {
     }
 
 ### For block instead of unstructured tet mesh
-elseif {$mesh_option == 2} {
+if {$mesh_option == 2} {
     # Make Initial block
     ic_hex_unload_blocking 
     ic_hex_initialize_blocking {surface srf.00.4 surface srf.00.3 surface srf.00.2 surface srf.00.1 surface srf.00 surface srf.00.5} BODY 0 101
@@ -220,13 +233,14 @@ elseif {$mesh_option == 2} {
     ic_hex_ogrid 1 m GEOM BODY SHELL LUMP INLET OUTLET WALLS -version 50
     ic_hex_mark_blocks unmark
 
+
     # adjust O-Grid scale
-    ic_hex_rescale_ogrid 3 0 20 m GEOM BODY SHELL LUMP INLET OUTLET WALLS abs
+    ic_hex_rescale_ogrid 3 0 $ogrid_separation_space m GEOM BODY SHELL LUMP INLET OUTLET WALLS abs
 
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
-    ic_hex_set_mesh 25 102 n 80 h1rel 0.00164041994751 h2rel 0.0 r1 1.2 r2 2 lmax 0 exp1 copy_to_parallel unlocked
+    ic_hex_set_mesh 25 102 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
     # TODO: need to convert pre-mesh to .uns mesh
     #       need to export mesh to .cfx5 file format
