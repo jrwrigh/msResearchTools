@@ -36,7 +36,7 @@ set {ogrid_separation_space} 10
 set {ogrid_separation_layern} 80
     # number of layers in the separation space
 set {ogrid_init_spacing} 0.00164
-    # value of initial height layer
+    # value of initial height layer relative to separation_space
 set {orgid_separation_rate} 1.2
     # expotential rate at which the layer size increases
 
