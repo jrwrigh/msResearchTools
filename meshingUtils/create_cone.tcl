@@ -173,12 +173,12 @@ if {$mesh_option == 2} {
     ic_hex_mark_blocks unmark
     ic_undo_group_begin 
     ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 41 42 0.187383 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_split_grid 41 42 curve:srf.00.1e10:0.8795489503190525 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
     ic_hex_undo_major_end split_grid
     ic_undo_group_end 
     ic_undo_group_begin 
     ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 74 42 0.0848017 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_split_grid 74 42 curve:srf.00.4e23:0.8795489503190525 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
     ic_hex_undo_major_end split_grid
 
     # Associate block edges with curves
@@ -254,12 +254,12 @@ if {$mesh_option == 3} {
     ic_hex_mark_blocks unmark
     ic_undo_group_begin 
     ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 41 42 0.187383 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_split_grid 41 42 curve:srf.00.1e10:0.8795489503190525 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
     ic_hex_undo_major_end split_grid
     ic_undo_group_end 
     ic_undo_group_begin 
     ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 74 42 0.0848017 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_split_grid 74 42 curve:srf.00.4e23:0.8795489503190525 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
     ic_hex_undo_major_end split_grid
 
         # Splits down the middle
