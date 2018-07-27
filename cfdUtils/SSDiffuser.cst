@@ -1,7 +1,14 @@
-# State file created:  2018/07/27 08:52:20
+# State file created:  2018/07/27 08:59:53
 # CFX-19.0
 
-
+CALCULATOR:
+  Case Name = Case AR1.30_phi4_Octogrid_002
+  Expression = Pressure
+  Fluid = All Fluids
+  Function = areaAve
+  Location = diffuserOutlet
+  Verbose = Off
+END
 CHART:Chart 1
   Chart Axes = Both
   Chart Axes Font = Tahoma, 10, False, False, False, False
@@ -538,7 +545,7 @@ DEFAULT LEGEND:Default Legend View 1
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /VECTOR:velocityYZVECTORS
+  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -561,7 +568,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:Line 1
+  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -584,7 +591,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:Line 1
+  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -607,7 +614,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:Line 1
+  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -651,7 +658,7 @@ LIBRARY:
       radiusInlet = 25.4 [mm]
       sstep = Sequence Step
       staticPressureRecovery = (areaAve(Pressure)@Outlet - \
-areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet^2 *.5 *\
+areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet *.5 *\
 areaAve(Density)@Inlet)
       staticPressureRecoveryDiffuserInOut = (areaAve(Pressure)@diffuserOutlet -\
  areaAve(Pressure)@diffuserInlet) / (areaAve(Velocity)@diffuserInlet^2 *.5 *\
@@ -1500,6 +1507,60 @@ STREAMLINE:velocityInletSTREAMLINES
     Z = 0.0 [mm]
   END
 END
+SURFACE GROUP:yplusWallsCONTOUR
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Yplus
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = Walls
+  Max = 0.0
+  Min = 0.0
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 SYMBOL CONTROL:
   Symbol Size = 1
 END
@@ -1827,17 +1888,17 @@ VIEW:View 1
   Is A Figure = false
   Light Angle = 50, 110
   Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/LINE:Line 1,/\
-VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
+SURFACE GROUP:yplusWallsCONTOUR,/VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = 0.0997955,0.00319671
+    Pan = 0.112594,0.00215694
     Pivot Point = 0,0,0.813266
     Rotation = -90, 0, 0
-    Rotation Quaternion = -0.00623511,0.980916,0.0313345,0.191777
-    Scale = 3.62211
+    Rotation Quaternion = 0.985633,-0.0197376,0.151501,-0.0719747
+    Scale = 6.20961
     Send To Viewer = True
   END
 END
