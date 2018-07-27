@@ -1,12 +1,12 @@
-# State file created:  2018/07/27 08:59:53
+# State file created:  2018/07/27 16:08:08
 # CFX-19.0
 
 CALCULATOR:
-  Case Name = Case AR1.30_phi4_Octogrid_002
-  Expression = Pressure
+  Case Name = Case 20180727_AR1.30_phi4_octov2_001
+  Expression = Yplus
   Fluid = All Fluids
-  Function = areaAve
-  Location = diffuserOutlet
+  Function = probe
+  Location = Probe Point
   Verbose = Off
 END
 CHART:Chart 1
@@ -107,7 +107,7 @@ CHART:Chart 1
     CHART LINE:Chart Line 1
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case AR1.30_phi4_Octogrid_002
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -134,20 +134,20 @@ COMMENT:User Data
   Heading Level = 1
 END
 DATA READER:
-  Active Case Name = Case AR1.30_phi4_Octogrid_002
+  Active Case Name = Case 20180727_AR1.30_phi4_octov2_001
   Append Results = False
   Apply X Offset = false
   Apply Y Offset = false
   Apply Z Offset = false
   Clear All Objects = False
   Construct Variables From Fourier Coefficients = true
-  Current Case List = Case AR1.30_phi4_Octogrid_002
+  Current Case List = Case 20180727_AR1.30_phi4_octov2_001
   Current Case Name = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180726 First Run/\
-AR1.30_phi4_Octogrid_002.res
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
+20180727_AR1.30_phi4_octov2_001.res
   Current Results File = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180726 First Run/\
-AR1.30_phi4_Octogrid_002.res
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
+20180727_AR1.30_phi4_octov2_001.res
   Current Timestep = -1
   Current Timevalue = 0
   Edit Case Names = false
@@ -173,14 +173,14 @@ AR1.30_phi4_Octogrid_002.res
   Timestep Match Criterion = Same Step
   Timestep Sync Mode = By Time Value
   Timevalue Match Criterion = Same Value
-  CASE:Case AR1.30_phi4_Octogrid_002
+  CASE:Case 20180727_AR1.30_phi4_octov2_001
     Construct Variables From Fourier Coefficients = true
     Current Case Name = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180726 First Run/\
-AR1.30_phi4_Octogrid_002.res
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
+20180727_AR1.30_phi4_octov2_001.res
     Current Results File = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. \
-Grad Research/1. CFD Stuff/2. CFD Runs/20180726 First Run/\
-AR1.30_phi4_Octogrid_002.res
+Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
+20180727_AR1.30_phi4_octov2_001.res
     Current Timestep = -1
     Current Timevalue = 0
     File Angle Units = rad
@@ -545,7 +545,7 @@ DEFAULT LEGEND:Default Legend View 1
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
+  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -568,7 +568,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
+  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -591,7 +591,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
+  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -614,7 +614,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
+  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -642,14 +642,14 @@ END
 LIBRARY:
   CEL:
     EXPRESSIONS:
-      Accumulated Time Step = 239
-      Current Time Step = 239
+      Accumulated Time Step = 285
+      Current Time Step = 285
       Reference Pressure = 1 [atm]
-      Sequence Step = 239
+      Sequence Step = 285
       Time = 0 [s]
       angularVelocity = 800 [s^-1]
       atstep = Accumulated Time Step
-      axialVelocity = 50 [m/s]
+      axialVelocity = 40.157 [m/s]
       ctstep = Current Time Step
       diffuserInletPosition = 152.4 [mm]
       diffuserOutletPosition = 410 [mm]
@@ -1507,6 +1507,60 @@ STREAMLINE:velocityInletSTREAMLINES
     Z = 0.0 [mm]
   END
 END
+SURFACE GROUP:wallshearWallsCONTOUR 1
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Wall Shear
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = Walls
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 SURFACE GROUP:yplusWallsCONTOUR
   Apply Instancing Transform = On
   Apply Texture = Off
@@ -1542,7 +1596,7 @@ SURFACE GROUP:yplusWallsCONTOUR
   Tile Texture = Off
   Transform Texture = Off
   Transparency = 0.0
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -1860,7 +1914,7 @@ VIEW:Turbo Initialisation View
   Highlight Type = Surface Mesh
   Is A Figure = false
   Light Angle = 50, 110
-  Object Visibility List = /WIREFRAME:Wireframe,/COMPHIGHLIGHT:Diffuser
+  Object Visibility List = /WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = true
   Standard View = Isometric Y
@@ -1888,17 +1942,18 @@ VIEW:View 1
   Is A Figure = false
   Light Angle = 50, 110
   Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/LINE:Line 1,/\
-SURFACE GROUP:yplusWallsCONTOUR,/VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
+SURFACE GROUP:wallshearWallsCONTOUR 1,/VECTOR:velocityYZVECTORS,/\
+WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = 0.112594,0.00215694
+    Pan = 0.396785,0.00533632
     Pivot Point = 0,0,0.813266
     Rotation = -90, 0, 0
-    Rotation Quaternion = 0.985633,-0.0197376,0.151501,-0.0719747
-    Scale = 6.20961
+    Rotation Quaternion = -0.0873306,0.921606,0.0595157,0.373445
+    Scale = 4.17275
     Send To Viewer = True
   END
 END
