@@ -226,10 +226,6 @@ if {$mesh_option == 2} {
     # set edge mesh criteria
     ic_hex_set_mesh 37 109 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
-    # TODO: need to convert pre-mesh to .uns mesh
-    #       need to export mesh to .cfx5 file format
-    #       need to setup adjustment parameters for pre-mesh settings
-
 }
 
 ### For octohedral o-grid instead of square o-grid
@@ -347,8 +343,5 @@ if {$mesh_option == 3} {
     # set edge mesh criteria
     ic_hex_set_mesh 37 181 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
-    # TODO: need to convert pre-mesh to .uns mesh
-    #       need to export mesh to .cfx5 file format
-    #       need to setup adjustment parameters for pre-mesh settings
 
 }
