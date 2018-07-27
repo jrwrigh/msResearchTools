@@ -1,4 +1,4 @@
-# State file created:  2018/07/27 16:08:08
+# State file created:  2018/07/27 17:00:27
 # CFX-19.0
 
 CALCULATOR:
@@ -8,125 +8,6 @@ CALCULATOR:
   Function = probe
   Location = Probe Point
   Verbose = Off
-END
-CHART:Chart 1
-  Chart Axes = Both
-  Chart Axes Font = Tahoma, 10, False, False, False, False
-  Chart Axes Titles Font = Tahoma, 10, True, False, False, False
-  Chart Grid Line Width = 1
-  Chart Horizontal Grid = On
-  Chart Legend = On
-  Chart Legend Font = Tahoma, 8, False, False, False, False
-  Chart Legend Inside = Outside Chart
-  Chart Legend Justification = Center
-  Chart Legend Position = Bottom
-  Chart Legend Width Height = 0.2 , 0.4
-  Chart Legend X Justification = Right
-  Chart Legend XY Position = 0.73 , 0.275
-  Chart Legend Y Justification = Center
-  Chart Line Width = 2
-  Chart Lines Order = Series 1,Chart Line 1
-  Chart Minor Grid = Off
-  Chart Minor Grid Line Width = 1
-  Chart Print Base Height = 700
-  Chart Print Base Width = 700
-  Chart Symbol Size = 4
-  Chart Text Colour = White
-  Chart Title = Title
-  Chart Title Font = Tahoma, 12, True, False, False, False
-  Chart Title Visibility = On
-  Chart Type = XY
-  Chart Vertical Grid = On
-  Chart Viewport Colour = Yellow
-  Chart X Axis Automatic Number Formatting = On
-  Chart X Axis Label = X Axis <units>
-  Chart X Axis Number Format = %10.3e
-  Chart Y Axis Automatic Number Formatting = On
-  Chart Y Axis Label = Y Axis <units>
-  Chart Y Axis Number Format = %10.3e
-  Default Chart X Variable = r
-  Default Chart Y Variable = Velocity
-  Default Difference Line Calculation = From Points
-  Default Histogram Y Axis Weighting = None
-  Default Time Chart Variable = Pressure
-  Default Time Chart X Expression = Time
-  Default Time Variable Absolute Value = Off
-  Default Time Variable Boundary Values = Conservative
-  Default X Variable Absolute Value = Off
-  Default X Variable Boundary Values = Conservative
-  Default Y Variable Absolute Value = Off
-  Default Y Variable Boundary Values = Conservative
-  FFT Full Input Range = On
-  FFT Max = 0.0
-  FFT Min = 0.0
-  FFT Subtract Mean = Off
-  FFT Window Type = Hanning
-  FFT X Function = Frequency
-  FFT Y Function = Power Spectral Density
-  Histogram Automatic Divisions = Automatic
-  Histogram Divisions = -1.0,1.0
-  Histogram Divisions Count = 10
-  Histogram Y Axis Value = Count
-  Is FFT Chart = Off
-  Max X = 1.0
-  Max Y = 1.0
-  Min X = -1.0
-  Min Y = -1.0
-  Time Chart Keep Single Case = False
-  Use Data For X Axis Labels = On
-  Use Data For Y Axis Labels = On
-  X Axis Automatic Range = On
-  X Axis Inverted = Off
-  X Axis Logarithmic Scaling = Off
-  Y Axis Automatic Range = On
-  Y Axis Inverted = Off
-  Y Axis Logarithmic Scaling = Off
-  CHART SERIES:Series 1
-    Chart Line Custom Data Selection = Off
-    Chart Series Type = Regular
-    Chart X Variable = Chart Count
-    Chart Y Variable = Density
-    Histogram Y Axis Weighting = None
-    Location = Line 1
-    Monitor Data Source = Case
-    Monitor Data X Variable Absolute Value = Off
-    Monitor Data Y Variable Absolute Value = Off
-    Operating Point Data Case = Case AR1.30_phi4_structured_002
-    Operating Point Data Source = File
-    Series Name = Series 1
-    Time Chart Expression = Time
-    Time Chart Type = Point
-    Time Chart Variable = Density
-    Time Chart X Expression = Time
-    Time Variable Absolute Value = Off
-    Time Variable Boundary Values = Conservative
-    X Variable Absolute Value = Off
-    X Variable Boundary Values = Conservative
-    Y Variable Absolute Value = Off
-    Y Variable Boundary Values = Conservative
-    CHART LINE:Chart Line 1
-      Auto Chart Line Colour = On
-      Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
-      Category Values = 0
-      Chart FFT Line Type = Bars
-      Chart Line Colour = 1.0, 0.0, 0.0
-      Chart Line Style = Automatic
-      Chart Line Type = Lines
-      Chart Line Visibility = On
-      Chart Symbol Colour = 0.0, 1.0, 0.0
-      Chart Symbol Style = Automatic
-      Fill Area = On
-      Fill Area Options = Automatic
-      Is Valid = True
-      Line Name = Series 1
-      Use Automatic Line Naming = On
-    END
-  END
-  OBJECT REPORT OPTIONS:
-    Automatic Item = None
-    Generation = Manual
-  END
 END
 COMMENT:User Data
   Comment Exists = True
@@ -568,7 +449,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
+  Legend Plot = /LINE:diffuserInletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -591,7 +472,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
+  Legend Plot = /LINE:diffuserInletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -614,7 +495,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
+  Legend Plot = /LINE:diffuserInletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -651,7 +532,9 @@ LIBRARY:
       atstep = Accumulated Time Step
       axialVelocity = 40.157 [m/s]
       ctstep = Current Time Step
+      diffuserInletPLANEPosition = 152.4 [mm]
       diffuserInletPosition = 152.4 [mm]
+      diffuserOutletPLANEPosition = 410 [mm]
       diffuserOutletPosition = 410 [mm]
       inletStaticTemperature = 300 [K]
       outletStaticPressure = 101312 [Pa]
@@ -660,9 +543,10 @@ LIBRARY:
       staticPressureRecovery = (areaAve(Pressure)@Outlet - \
 areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet *.5 *\
 areaAve(Density)@Inlet)
-      staticPressureRecoveryDiffuserInOut = (areaAve(Pressure)@diffuserOutlet -\
- areaAve(Pressure)@diffuserInlet) / (areaAve(Velocity)@diffuserInlet^2 *.5 *\
-areaAve(Density)@diffuserInlet)
+      staticPressureRecoveryDiffuserInOut = \
+(areaAve(Pressure)@diffuserOutletPLANE - areaAve(Pressure)@diffuserInletPLANE) / \
+(areaAve(Velocity)@diffuserInletPLANE^2 *.5 *\
+areaAve(Density)@diffuserInletPLANE)
       t = Time
       thetaVelocity = r*angularVelocity
       varKineticEnergy = Density * Velocity ^2 * 0.5
@@ -672,7 +556,46 @@ areaAve(Density)@diffuserInlet)
     END
   END
 END
-LINE:Line 1
+LINE:diffuserInletRadialLINE
+  Apply Instancing Transform = On
+  Colour = 1, 1, 0
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Line Samples = 200
+  Line Type = Sample
+  Line Width = 2
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Option = Two Points
+  Point 1 = 0 [mm], 0 [mm], 304 [mm]
+  Point 2 = 25.5 [mm], 0 [mm], 304 [mm]
+  Range = Global
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+LINE:inletRadialLINE
   Apply Instancing Transform = On
   Colour = 1, 1, 0
   Colour Map = Default Colour Map
@@ -690,7 +613,7 @@ LINE:Line 1
   Min = 0.0 [MPa]
   Option = Two Points
   Point 1 = 0 [mm], 0 [mm], 0 [mm]
-  Point 2 = 50.8 [mm], 0 [mm], 0 [mm]
+  Point 2 = 25.5 [mm], 0 [mm], 0 [mm]
   Range = Global
   Visibility = On
   OBJECT VIEW TRANSFORM:
@@ -714,7 +637,7 @@ END
 MASS FLOW CALC OPTION ON PHYSICAL SURFACES:
   Option = Interpolated
 END
-PLANE:YZ
+PLANE:YZPLANE
   Apply Instancing Transform = On
   Apply Texture = Off
   Blend Texture = On
@@ -785,7 +708,7 @@ PLANE:YZ
     Z = 0.0 [mm]
   END
 END
-PLANE:diffuserInlet
+PLANE:diffuserInletPLANE
   Apply Instancing Transform = On
   Apply Texture = Off
   Blend Texture = On
@@ -837,7 +760,7 @@ PLANE:diffuserInlet
   Visibility = Off
   X = 0.0 [mm]
   Y = 0.0 [mm]
-  Z = diffuserInletPosition
+  Z = diffuserInletPLANEPosition
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -856,7 +779,7 @@ PLANE:diffuserInlet
     Z = 0.0 [mm]
   END
 END
-PLANE:diffuserOutlet
+PLANE:diffuserOutletPLANE
   Apply Instancing Transform = On
   Apply Texture = Off
   Blend Texture = On
@@ -908,7 +831,7 @@ PLANE:diffuserOutlet
   Visibility = Off
   X = 0.0 [m]
   Y = 0.0 [m]
-  Z = diffuserOutletPosition
+  Z = diffuserOutletPLANEPosition
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -930,7 +853,7 @@ END
 REPORT:
   Report Items = /TITLE PAGE,/REPORT/FILE INFORMATION OPTIONS,/REPORT/MESH \
 STATISTICS OPTIONS,/REPORT/PHYSICS SUMMARY OPTIONS,/REPORT/SOLUTION SUMMARY \
-OPTIONS,/COMMENT:User Data,/CHART:Chart 1
+OPTIONS,/COMMENT:User Data
   FILE INFORMATION OPTIONS:
     Include In Report = true
     This Exists = true
@@ -1091,6 +1014,24 @@ END
 SCALAR VARIABLE:Local Speed of Sound
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:M Length
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:M Length Local
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:M Length Normalized
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:M Prime
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:M Prime Local
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:M Prime Normalized
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Mach Number
   Boundary Values = Conservative
 END
@@ -1154,6 +1095,21 @@ END
 SCALAR VARIABLE:Solver Yplus
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:Span
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Span Direction X
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Span Direction Y
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Span Direction Z
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Span Normalized
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Specific Heat Capacity at Constant Pressure
   Boundary Values = Conservative
 END
@@ -1170,6 +1126,18 @@ SCALAR VARIABLE:Static Entropy
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Streamline Number on velocityInletSTREAMLINES
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Streamwise Direction X
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Streamwise Direction Y
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Streamwise Direction Z
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Streamwise Location
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Temperature
@@ -1738,6 +1706,12 @@ END
 VECTOR VARIABLE:Radial Direction
   Boundary Values = Conservative
 END
+VECTOR VARIABLE:Span Direction
+  Boundary Values = Conservative
+END
+VECTOR VARIABLE:Streamwise Direction
+  Boundary Values = Conservative
+END
 VECTOR VARIABLE:Theta Direction
   Boundary Values = Conservative
 END
@@ -1859,7 +1833,7 @@ VECTOR:velocityYZVECTORS
   Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
   Lighting = On
   Line Width = 1
-  Location List = YZ
+  Location List = YZPLANE
   Locator Sampling Method = Vertex
   Max = 0.0 [mm s^-1]
   Maximum Number of Items = 100
@@ -1941,9 +1915,9 @@ VIEW:View 1
   Highlight Type = Surface Mesh
   Is A Figure = false
   Light Angle = 50, 110
-  Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/LINE:Line 1,/\
-SURFACE GROUP:wallshearWallsCONTOUR 1,/VECTOR:velocityYZVECTORS,/\
-WIREFRAME:Wireframe
+  Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/\
+LINE:diffuserInletRadialLINE,/LINE:inletRadialLINE,/SURFACE \
+GROUP:wallshearWallsCONTOUR 1,/VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
