@@ -1,4 +1,4 @@
-# State file created:  2018/07/21 09:51:50
+# State file created:  2018/07/26 22:31:01
 # Build 19.0 2017-12-01T23:36:31.332000
 
 LIBRARY:
@@ -150,7 +150,7 @@ FLOW: Flow Analysis 1
           Velocity r Component = 0 [m s^-1]
           AXIS DEFINITION:
             Option = Coordinate Axis
-            Rotation Axis = Coord 0.1
+            Rotation Axis = Coord 0.3
           END
         END
         TURBULENCE:
@@ -283,13 +283,13 @@ FLOW: Flow Analysis 1
     END
     CONVERGENCE CONTROL:
       Length Scale Option = Conservative
-      Maximum Number of Iterations = 100
+      Maximum Number of Iterations = 500
       Minimum Number of Iterations = 1
       Timescale Control = Auto Timescale
       Timescale Factor = 1.0
     END
     CONVERGENCE CRITERIA:
-      Residual Target = 1.E-4
+      Residual Target = 0.000001
       Residual Type = RMS
     END
     DYNAMIC MODEL CONTROL:
