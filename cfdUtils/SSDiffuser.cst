@@ -1,14 +1,7 @@
-# State file created:  2018/07/23 17:16:30
+# State file created:  2018/07/27 08:52:20
 # CFX-19.0
 
-CALCULATOR:
-  Case Name = Case AR1.30_phi4_structured_002
-  Expression = Pressure
-  Fluid = All Fluids
-  Function = areaAve
-  Location = /PLANE:diffuserOutlet
-  Verbose = Off
-END
+
 CHART:Chart 1
   Chart Axes = Both
   Chart Axes Font = Tahoma, 10, False, False, False, False
@@ -87,7 +80,7 @@ CHART:Chart 1
     Chart X Variable = Chart Count
     Chart Y Variable = Density
     Histogram Y Axis Weighting = None
-    Location = /LINE:Line 1
+    Location = Line 1
     Monitor Data Source = Case
     Monitor Data X Variable Absolute Value = Off
     Monitor Data Y Variable Absolute Value = Off
@@ -107,7 +100,7 @@ CHART:Chart 1
     CHART LINE:Chart Line 1
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case AR1.30_phi4_structured_002
+      Case Name = Case AR1.30_phi4_Octogrid_002
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -134,16 +127,20 @@ COMMENT:User Data
   Heading Level = 1
 END
 DATA READER:
-  Active Case Name = Case AR1.30_phi4_structured_002
+  Active Case Name = Case AR1.30_phi4_Octogrid_002
   Append Results = False
   Apply X Offset = false
   Apply Y Offset = false
   Apply Z Offset = false
   Clear All Objects = False
   Construct Variables From Fourier Coefficients = true
-  Current Case List = Case AR1.30_phi4_structured_002
-  Current Case Name = C:/Users/jrwrigh/AR1.30_phi4_structured_002.res
-  Current Results File = C:/Users/jrwrigh/AR1.30_phi4_structured_002.res
+  Current Case List = Case AR1.30_phi4_Octogrid_002
+  Current Case Name = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
+Research/1. CFD Stuff/2. CFD Runs/20180726 First Run/\
+AR1.30_phi4_Octogrid_002.res
+  Current Results File = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
+Research/1. CFD Stuff/2. CFD Runs/20180726 First Run/\
+AR1.30_phi4_Octogrid_002.res
   Current Timestep = -1
   Current Timevalue = 0
   Edit Case Names = false
@@ -169,10 +166,14 @@ DATA READER:
   Timestep Match Criterion = Same Step
   Timestep Sync Mode = By Time Value
   Timevalue Match Criterion = Same Value
-  CASE:Case AR1.30_phi4_structured_002
+  CASE:Case AR1.30_phi4_Octogrid_002
     Construct Variables From Fourier Coefficients = true
-    Current Case Name = C:/Users/jrwrigh/AR1.30_phi4_structured_002.res
-    Current Results File = C:/Users/jrwrigh/AR1.30_phi4_structured_002.res
+    Current Case Name = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
+Research/1. CFD Stuff/2. CFD Runs/20180726 First Run/\
+AR1.30_phi4_Octogrid_002.res
+    Current Results File = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. \
+Grad Research/1. CFD Stuff/2. CFD Runs/20180726 First Run/\
+AR1.30_phi4_Octogrid_002.res
     Current Timestep = -1
     Current Timevalue = 0
     File Angle Units = rad
@@ -339,7 +340,7 @@ DATA READER:
       Apply Reflection = false
       Apply Rotation = true
       Apply Translation = false
-      Axis = X
+      Axis = Z
       Axis From File = Custom
       Background Mesh Density = 2000
       Background Mesh Generation Method = Quasi Orthogonal
@@ -347,12 +348,11 @@ DATA READER:
       Components to Initialize = Diffuser
       Create Additional Turbo Variables = true
       Do Cylindrical Initialization = true
-      Domain Type = Turbo Component
+      Domain Type = Normal
       Full Circle = Off
       Hub Curve Mode = From Turbo Region
       Inlet Curve Mode = From Turbo Region
-      Inlet Region = /DATA READER/CASE:Case AR1.30_phi4_structured_002/\
-BOUNDARY:Inlet
+      Inlet Region = Inlet
       Instance Definition = From File
       Linear Blade Aligned Variable Available = false
       Number of Components in 360 = 1
@@ -361,8 +361,7 @@ BOUNDARY:Inlet
       Number of Passages in 360 = 1
       Number of Passages in Component = 1
       Outlet Curve Mode = From Turbo Region
-      Outlet Region = /DATA READER/CASE:Case AR1.30_phi4_structured_002/\
-BOUNDARY:Outlet
+      Outlet Region = Outlet
       Principal Axis = Z
       Reflection Plane Option = From Plane
       Rotation Angle = 0 [degree]
@@ -539,7 +538,7 @@ DEFAULT LEGEND:Default Legend View 1
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:Line 1
+  Legend Plot = /VECTOR:velocityYZVECTORS
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -636,10 +635,10 @@ END
 LIBRARY:
   CEL:
     EXPRESSIONS:
-      Accumulated Time Step = 37
-      Current Time Step = 37
+      Accumulated Time Step = 239
+      Current Time Step = 239
       Reference Pressure = 1 [atm]
-      Sequence Step = 37
+      Sequence Step = 239
       Time = 0 [s]
       angularVelocity = 800 [s^-1]
       atstep = Accumulated Time Step
@@ -1007,6 +1006,18 @@ END
 SCALAR VARIABLE:Aspect Ratio
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:Axial Direction X
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Axial Direction Y
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Axial Direction Z
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Axial Distance
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Connectivity Number
   Boundary Values = Conservative
 END
@@ -1112,6 +1123,18 @@ END
 SCALAR VARIABLE:Pressure.Gradient Z
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:Radial Direction X
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Radial Direction Y
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Radial Direction Z
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Radius
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Real Partition Number
   Boundary Values = Conservative
 END
@@ -1146,6 +1169,18 @@ SCALAR VARIABLE:Temperature
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Thermal Conductivity
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Theta
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Theta Direction X
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Theta Direction Y
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Theta Direction Z
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Time on velocityInletSTREAMLINES
@@ -1209,6 +1244,21 @@ SCALAR VARIABLE:Turbulence Kinetic Energy.Gradient Z
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity Axial
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Circumferential
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Meridional X
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Meridional Y
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Meridional Z
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Radial
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity u
@@ -1555,6 +1605,9 @@ USER SCALAR VARIABLE:r
   Variable to Copy = Pressure
   Variable to Gradient = Pressure
 END
+VECTOR VARIABLE:Axial Direction
+  Boundary Values = Conservative
+END
 VECTOR VARIABLE:Density.Gradient
   Boundary Values = Conservative
 END
@@ -1567,6 +1620,12 @@ END
 VECTOR VARIABLE:Pressure.Gradient
   Boundary Values = Conservative
 END
+VECTOR VARIABLE:Radial Direction
+  Boundary Values = Conservative
+END
+VECTOR VARIABLE:Theta Direction
+  Boundary Values = Conservative
+END
 VECTOR VARIABLE:Total Enthalpy.Gradient
   Boundary Values = Conservative
 END
@@ -1577,6 +1636,9 @@ VECTOR VARIABLE:Turbulence Kinetic Energy.Gradient
   Boundary Values = Conservative
 END
 VECTOR VARIABLE:Velocity
+  Boundary Values = Conservative
+END
+VECTOR VARIABLE:Velocity Meridional
   Boundary Values = Conservative
 END
 VECTOR VARIABLE:Velocity u.Gradient
@@ -1682,7 +1744,7 @@ VECTOR:velocityYZVECTORS
   Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
   Lighting = On
   Line Width = 1
-  Location List = /PLANE:YZ
+  Location List = YZ
   Locator Sampling Method = Vertex
   Max = 0.0 [mm s^-1]
   Maximum Number of Items = 100
@@ -1706,7 +1768,7 @@ VECTOR:velocityYZVECTORS
   Transparency = 0.0
   Variable = Velocity
   Variable Boundary Values = Hybrid
-  Visibility = Off
+  Visibility = On
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -1765,17 +1827,17 @@ VIEW:View 1
   Is A Figure = false
   Light Angle = 50, 110
   Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/LINE:Line 1,/\
-WIREFRAME:Wireframe
+VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = -0.0162148,-0.0714741
+    Pan = 0.0997955,0.00319671
     Pivot Point = 0,0,0.813266
     Rotation = -90, 0, 0
-    Rotation Quaternion = 0.00458778,0.980006,0.0227529,0.197604
-    Scale = 2.85037
+    Rotation Quaternion = -0.00623511,0.980916,0.0313345,0.191777
+    Scale = 3.62211
     Send To Viewer = True
   END
 END
