@@ -16,12 +16,10 @@ machines=$(uniq -c $PBS_NODEFILE | awk '{print $2"*"$1}' | tr '\n' ,)
 
 echo "$machines \n"
 
-SCRATCH=/local_scratch/$USER
 
 for node in `uniq $PBS_NODEFILE`
 do
-	ssh $node "mkdir -p $SCRATCH"
-	ssh $node "cp $PBS_O_WORKDIR/$DEFFILE $SCRATCH"
+	ssh $node "cp $PBS_O_WORKDIR/$DEFFILE $TMPDIR"
 done
 
 cd $SCRATCH
@@ -31,6 +29,5 @@ cfx5solve -batch -def $DEFFILE -double -par-dist "$machines" -job -output-summar
 
 for node in `uniq $PBS_NODEFILE`
 do
-    ssh $node "cp -r $SCRATCH/* $PBS_O_WORKDIR"
-    ssh $node "rm -rf $SCRATCH"
+    ssh $node "cp -r $TMPDIR/* $PBS_O_WORKDIR"
 done
