@@ -1,9 +1,9 @@
-# State file created:  2018/07/28 09:20:23
+# State file created:  2018/07/28 09:31:29
 # CFX-19.0
 
 CALCULATOR:
   Case Name = Case 20180727_AR1.30_phi4_octov2_001
-  Expression = Yplus
+  Expression = Velocity.Invariant Q
   Function = probe
   Location = Probe Point
   Verbose = Off
@@ -731,13 +731,11 @@ DATA READER:
   Construct Variables From Fourier Coefficients = true
   Current Case List = Case 20180727_AR1.30_phi4_octov2_001
   Current Case Name = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
-20180727_AR1.30_phi4_octov2_001.res
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/300_full.trn
   Current Results File = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
-20180727_AR1.30_phi4_octov2_001.res
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/300_full.trn
   Current Timestep = -1
-  Current Timevalue = 0
+  Current Timevalue = 0.0015
   Edit Case Names = false
   File Angle Units = rad
   File Chemical Amount Units = mol
@@ -764,13 +762,12 @@ Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
   CASE:Case 20180727_AR1.30_phi4_octov2_001
     Construct Variables From Fourier Coefficients = true
     Current Case Name = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
-20180727_AR1.30_phi4_octov2_001.res
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/300_full.trn
     Current Results File = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. \
-Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
-20180727_AR1.30_phi4_octov2_001.res
+Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
+300_full.trn
     Current Timestep = -1
-    Current Timevalue = 0
+    Current Timevalue = 0.0015
     File Angle Units = rad
     File Chemical Amount Units = mol
     File Current Units = A
@@ -1116,7 +1113,7 @@ DEFAULT LEGEND:Default Legend View 1
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR
+  Legend Plot = /SURFACE GROUP:SBESshieldingYZCONTOUR
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1139,7 +1136,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /INTERNAL POINT:Probe Point
+  Legend Plot = /SURFACE GROUP:SBESshieldingYZCONTOUR
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1162,7 +1159,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /INTERNAL POINT:Probe Point
+  Legend Plot = /SURFACE GROUP:SBESshieldingYZCONTOUR
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1185,7 +1182,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /INTERNAL POINT:Probe Point
+  Legend Plot = /SURFACE GROUP:SBESshieldingYZCONTOUR
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1213,11 +1210,11 @@ END
 LIBRARY:
   CEL:
     EXPRESSIONS:
-      Accumulated Time Step = 284
-      Current Time Step = 284
+      Accumulated Time Step = 300
+      Current Time Step = 300
       Reference Pressure = 1 [atm]
-      Sequence Step = 284
-      Time = 0 [s]
+      Sequence Step = 300
+      Time = 0.0015 [s]
       angularVelocity = 800 [s^-1]
       atstep = Accumulated Time Step
       axialVelocity = 40.157 [m/s]
@@ -1678,6 +1675,9 @@ END
 SCALAR VARIABLE:Axial Distance
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:Blending Function for DES model
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Connectivity Number
   Boundary Values = Conservative
 END
@@ -1688,9 +1688,6 @@ SCALAR VARIABLE:Curvature Correction Function fr
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Density
-  Boundary Values = Conservative
-END
-SCALAR VARIABLE:Density.Beta
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Density.Gradient X
@@ -1729,6 +1726,9 @@ END
 SCALAR VARIABLE:Force Z
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:H Energy.Residual
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Heat Flux
   Boundary Values = Conservative
 END
@@ -1736,6 +1736,9 @@ SCALAR VARIABLE:Interpolated Mass Flow
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Isothermal Compressibility
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:K TurbKE.Residual
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Length
@@ -1756,6 +1759,9 @@ END
 SCALAR VARIABLE:Mesh Expansion Factor
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:Mesh Length Scale
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Minimum Face Angle
   Boundary Values = Conservative
 END
@@ -1768,7 +1774,13 @@ END
 SCALAR VARIABLE:Normal Z
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:O TurbFreq.Residual
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Orthogonality Angle
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:P Mass.Residual
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Pressure
@@ -1798,10 +1810,16 @@ END
 SCALAR VARIABLE:Real Partition Number
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:SST Eddy Viscosity
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Second Blending Function for SST model
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Shear Strain Rate
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Shielding Function for SBES or SDES
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Solver Yplus
@@ -1820,6 +1838,24 @@ SCALAR VARIABLE:Static Enthalpy
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Static Entropy
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Statistical Reynolds Stress uu
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Statistical Reynolds Stress uv
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Statistical Reynolds Stress uw
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Statistical Reynolds Stress vv
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Statistical Reynolds Stress vw
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Statistical Reynolds Stress ww
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Temperature
@@ -1846,9 +1882,6 @@ END
 SCALAR VARIABLE:Total Enthalpy
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Total Enthalpy.Beta
-  Boundary Values = Conservative
-END
 SCALAR VARIABLE:Total Enthalpy.Gradient X
   Boundary Values = Conservative
 END
@@ -1870,37 +1903,55 @@ END
 SCALAR VARIABLE:Turbulence Eddy Frequency
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Turbulence Eddy Frequency.Beta
-  Boundary Values = Conservative
-END
-SCALAR VARIABLE:Turbulence Eddy Frequency.Gradient X
-  Boundary Values = Conservative
-END
-SCALAR VARIABLE:Turbulence Eddy Frequency.Gradient Y
-  Boundary Values = Conservative
-END
-SCALAR VARIABLE:Turbulence Eddy Frequency.Gradient Z
-  Boundary Values = Conservative
-END
 SCALAR VARIABLE:Turbulence Kinetic Energy
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Turbulence Kinetic Energy.Beta
+SCALAR VARIABLE:U Mom.Residual
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Turbulence Kinetic Energy.Gradient X
-  Boundary Values = Conservative
-END
-SCALAR VARIABLE:Turbulence Kinetic Energy.Gradient Y
-  Boundary Values = Conservative
-END
-SCALAR VARIABLE:Turbulence Kinetic Energy.Gradient Z
+SCALAR VARIABLE:V Mom.Residual
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity Axial
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity Circumferential
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation uu
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation uu.Trnavg
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation uv
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation uv.Trnavg
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation uw
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation uw.Trnavg
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation vv
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation vv.Trnavg
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation vw
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation vw.Trnavg
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation ww
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity Correlation ww.Trnavg
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity Meridional X
@@ -1918,9 +1969,6 @@ END
 SCALAR VARIABLE:Velocity u
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Velocity u.Beta
-  Boundary Values = Conservative
-END
 SCALAR VARIABLE:Velocity u.Gradient X
   Boundary Values = Conservative
 END
@@ -1930,10 +1978,10 @@ END
 SCALAR VARIABLE:Velocity u.Gradient Z
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Velocity v
+SCALAR VARIABLE:Velocity u.Trnavg
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Velocity v.Beta
+SCALAR VARIABLE:Velocity v
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity v.Gradient X
@@ -1945,10 +1993,10 @@ END
 SCALAR VARIABLE:Velocity v.Gradient Z
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Velocity w
+SCALAR VARIABLE:Velocity v.Trnavg
   Boundary Values = Conservative
 END
-SCALAR VARIABLE:Velocity w.Beta
+SCALAR VARIABLE:Velocity w
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity w.Gradient X
@@ -1958,6 +2006,9 @@ SCALAR VARIABLE:Velocity w.Gradient Y
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity w.Gradient Z
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity w.Trnavg
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Velocity.Absolute Helicity
@@ -2020,6 +2071,24 @@ END
 SCALAR VARIABLE:Velocity.Swirling Vector Z
   Boundary Values = Conservative
 END
+SCALAR VARIABLE:Velocity.Trnavg Axial
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity.Trnavg Circumferential
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity.Trnavg Meridional X
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity.Trnavg Meridional Y
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity.Trnavg Meridional Z
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:Velocity.Trnavg Radial
+  Boundary Values = Conservative
+END
 SCALAR VARIABLE:Volume
   Boundary Values = Conservative
 END
@@ -2027,6 +2096,12 @@ SCALAR VARIABLE:Volume Porosity
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Volume of Finite Volumes
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:W Mom.Residual
+  Boundary Values = Conservative
+END
+SCALAR VARIABLE:WALE Eddy Viscosity
   Boundary Values = Conservative
 END
 SCALAR VARIABLE:Wall Adjacent Temperature
@@ -2073,6 +2148,114 @@ SCALAR VARIABLE:Yplus
 END
 SCALAR VARIABLE:Z
   Boundary Values = Conservative
+END
+SURFACE GROUP:QcriterionYZCONTOUR
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Logarithmic
+  Colour Variable = Velocity.Invariant Q
+  Colour Variable Boundary Values = Conservative
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /PLANE:YZPLANE
+  Max = 1.77882e+07 [s^-2]
+  Min = 1 [s^-2]
+  Range = User Specified
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+SURFACE GROUP:SBESshieldingYZCONTOUR
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Shielding Function for SBES or SDES
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /PLANE:YZPLANE
+  Max = 1.77882e+07
+  Min = 1
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
 END
 SURFACE GROUP:wallshearWallsCONTOUR
   Apply Instancing Transform = On
@@ -2163,7 +2346,7 @@ SURFACE GROUP:yplusWallsCONTOUR
   Tile Texture = Off
   Transform Texture = Off
   Transparency = 0.0
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -2311,12 +2494,6 @@ END
 VECTOR VARIABLE:Total Enthalpy.Gradient
   Boundary Values = Conservative
 END
-VECTOR VARIABLE:Turbulence Eddy Frequency.Gradient
-  Boundary Values = Conservative
-END
-VECTOR VARIABLE:Turbulence Kinetic Energy.Gradient
-  Boundary Values = Conservative
-END
 VECTOR VARIABLE:Velocity
   Boundary Values = Conservative
 END
@@ -2339,6 +2516,12 @@ VECTOR VARIABLE:Velocity.Swirling Normal
   Boundary Values = Conservative
 END
 VECTOR VARIABLE:Velocity.Swirling Vector
+  Boundary Values = Conservative
+END
+VECTOR VARIABLE:Velocity.Trnavg
+  Boundary Values = Conservative
+END
+VECTOR VARIABLE:Velocity.Trnavg Meridional
   Boundary Values = Conservative
 END
 VECTOR VARIABLE:Wall Scale.Gradient
@@ -2450,17 +2633,17 @@ VIEW:View 1
   Object Visibility List = /DATA READER/CASE:Case \
 20180727_AR1.30_phi4_octov2_001/BOUNDARY:Walls,/DEFAULT LEGEND:Default Legend \
 View 1,/LINE:diffuserInletRadialLINE,/LINE:diffuserOutletRadialLINE,/\
-LINE:inletRadialLINE,/SURFACE GROUP:yplusWallsCONTOUR,/WIREFRAME:Wireframe
+LINE:inletRadialLINE,/WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = 0.0813145,0.082101
-    Pivot Point = 0,9.52743e-007,0.483918
+    Pan = -0.0119635,0.000852023
+    Pivot Point = 1.97627e-005,0,0.483007
     Rotation = -90, 0, 0
-    Rotation Quaternion = 0.964775,0.101434,0.241763,-0.0216984
-    Scale = 2.69199
+    Rotation Quaternion = 0.0644099,-0.381729,0.132661,0.912432
+    Scale = 3.7649
     Send To Viewer = True
   END
 END
