@@ -1,4 +1,4 @@
-# State file created:  2018/07/27 17:00:27
+# State file created:  2018/07/27 17:22:23
 # CFX-19.0
 
 CALCULATOR:
@@ -8,6 +8,714 @@ CALCULATOR:
   Function = probe
   Location = Probe Point
   Verbose = Off
+END
+CHART:Convergence Data
+  Chart Axes = Both
+  Chart Axes Font = Tahoma, 10, False, False, False, False
+  Chart Axes Titles Font = Tahoma, 10, True, False, False, False
+  Chart Grid Line Width = 1
+  Chart Horizontal Grid = On
+  Chart Legend = On
+  Chart Legend Font = Tahoma, 8, False, False, False, False
+  Chart Legend Inside = Outside Chart
+  Chart Legend Justification = Center
+  Chart Legend Position = Bottom
+  Chart Legend Width Height = 0.2 , 0.4
+  Chart Legend X Justification = Right
+  Chart Legend XY Position = 0.73 , 0.275
+  Chart Legend Y Justification = Center
+  Chart Line Width = 2
+  Chart Lines Order = Series 1,Chart Line 1,Series 2,Chart Line 2,Series 3,\
+Chart Line 3,Series 4,Chart Line 4
+  Chart Minor Grid = Off
+  Chart Minor Grid Line Width = 1
+  Chart Print Base Height = 700
+  Chart Print Base Width = 700
+  Chart Symbol Size = 4
+  Chart Text Colour = White
+  Chart Title = Convergence Data
+  Chart Title Font = Tahoma, 12, True, False, False, False
+  Chart Title Visibility = On
+  Chart Type = XY
+  Chart Vertical Grid = On
+  Chart Viewport Colour = Yellow
+  Chart X Axis Automatic Number Formatting = On
+  Chart X Axis Label = X Axis <units>
+  Chart X Axis Number Format = %10.3e
+  Chart Y Axis Automatic Number Formatting = Off
+  Chart Y Axis Label = Y Axis <units>
+  Chart Y Axis Number Format = %8.1e
+  Default Chart X Variable = Chart Count
+  Default Chart Y Variable = Pressure
+  Default Difference Line Calculation = From Points
+  Default Histogram Y Axis Weighting = None
+  Default Time Chart Variable = Pressure
+  Default Time Chart X Expression = Time
+  Default Time Variable Absolute Value = Off
+  Default Time Variable Boundary Values = Conservative
+  Default X Variable Absolute Value = Off
+  Default X Variable Boundary Values = Conservative
+  Default Y Variable Absolute Value = Off
+  Default Y Variable Boundary Values = Conservative
+  FFT Full Input Range = On
+  FFT Max = 0.0
+  FFT Min = 0.0
+  FFT Subtract Mean = Off
+  FFT Window Type = Hanning
+  FFT X Function = Frequency
+  FFT Y Function = Power Spectral Density
+  Histogram Automatic Divisions = Automatic
+  Histogram Divisions = -1.0,1.0
+  Histogram Divisions Count = 10
+  Histogram Y Axis Value = Count
+  Is FFT Chart = Off
+  Max X = 1.0
+  Max Y = 1e-1
+  Min X = -1.0
+  Min Y = 1e-7
+  Time Chart Keep Single Case = False
+  Use Data For X Axis Labels = On
+  Use Data For Y Axis Labels = On
+  X Axis Automatic Range = On
+  X Axis Inverted = Off
+  X Axis Logarithmic Scaling = Off
+  Y Axis Automatic Range = Off
+  Y Axis Inverted = Off
+  Y Axis Logarithmic Scaling = On
+  CHART SERIES:Series 1
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = From Monitor Data
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = COMBINED,RESIDUAL,RMS,U-Mom,Momentum and Mass
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = RMS U-Mom
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 1
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = RMS U-Mom
+      Use Automatic Line Naming = On
+    END
+  END
+  CHART SERIES:Series 2
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = From Monitor Data
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = COMBINED,RESIDUAL,RMS,V-Mom,Momentum and Mass
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = RMS V-Mom
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 2
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = RMS V-Mom
+      Use Automatic Line Naming = On
+    END
+  END
+  CHART SERIES:Series 3
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = From Monitor Data
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = COMBINED,RESIDUAL,RMS,W-Mom,Momentum and Mass
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = RMS W-Mom
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 3
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = RMS W-Mom
+      Use Automatic Line Naming = On
+    END
+  END
+  CHART SERIES:Series 4
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = From Monitor Data
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = COMBINED,RESIDUAL,RMS,P-Mass,Momentum and Mass
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = RMS P-Mass
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 4
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = RMS P-Mass
+      Use Automatic Line Naming = On
+    END
+  END
+  OBJECT REPORT OPTIONS:
+    Automatic Item = None
+    Generation = Manual
+  END
+END
+CHART:Convergence Data Imbalances
+  Chart Axes = Both
+  Chart Axes Font = Tahoma, 10, False, False, False, False
+  Chart Axes Titles Font = Tahoma, 10, True, False, False, False
+  Chart Grid Line Width = 1
+  Chart Horizontal Grid = On
+  Chart Legend = On
+  Chart Legend Font = Tahoma, 8, False, False, False, False
+  Chart Legend Inside = Outside Chart
+  Chart Legend Justification = Center
+  Chart Legend Position = Bottom
+  Chart Legend Width Height = 0.2 , 0.4
+  Chart Legend X Justification = Right
+  Chart Legend XY Position = 0.73 , 0.275
+  Chart Legend Y Justification = Center
+  Chart Line Width = 2
+  Chart Lines Order = Series 4,Chart Line 4,Series 1,Chart Line 1,Series 2,\
+Chart Line 2,Series 3,Chart Line 3
+  Chart Minor Grid = Off
+  Chart Minor Grid Line Width = 1
+  Chart Print Base Height = 700
+  Chart Print Base Width = 700
+  Chart Symbol Size = 4
+  Chart Text Colour = White
+  Chart Title = Convergence Data
+  Chart Title Font = Tahoma, 12, True, False, False, False
+  Chart Title Visibility = On
+  Chart Type = XY
+  Chart Vertical Grid = On
+  Chart Viewport Colour = Yellow
+  Chart X Axis Automatic Number Formatting = On
+  Chart X Axis Label = X Axis <units>
+  Chart X Axis Number Format = %10.3e
+  Chart Y Axis Automatic Number Formatting = On
+  Chart Y Axis Label = Y Axis <units>
+  Chart Y Axis Number Format = %8.1e
+  Default Chart X Variable = Chart Count
+  Default Chart Y Variable = Pressure
+  Default Difference Line Calculation = From Points
+  Default Histogram Y Axis Weighting = None
+  Default Time Chart Variable = Pressure
+  Default Time Chart X Expression = Time
+  Default Time Variable Absolute Value = Off
+  Default Time Variable Boundary Values = Conservative
+  Default X Variable Absolute Value = Off
+  Default X Variable Boundary Values = Conservative
+  Default Y Variable Absolute Value = Off
+  Default Y Variable Boundary Values = Conservative
+  FFT Full Input Range = On
+  FFT Max = 0.0
+  FFT Min = 0.0
+  FFT Subtract Mean = Off
+  FFT Window Type = Hanning
+  FFT X Function = Frequency
+  FFT Y Function = Power Spectral Density
+  Histogram Automatic Divisions = Automatic
+  Histogram Divisions = -1.0,1.0
+  Histogram Divisions Count = 10
+  Histogram Y Axis Value = Count
+  Is FFT Chart = Off
+  Max X = 1.0
+  Max Y = 3
+  Min X = -1.0
+  Min Y = -3
+  Time Chart Keep Single Case = False
+  Use Data For X Axis Labels = On
+  Use Data For Y Axis Labels = On
+  X Axis Automatic Range = On
+  X Axis Inverted = Off
+  X Axis Logarithmic Scaling = Off
+  Y Axis Automatic Range = Off
+  Y Axis Inverted = Off
+  Y Axis Logarithmic Scaling = Off
+  CHART SERIES:Series 1
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = From Monitor Data
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = IMBALANCE,Diffuser,U-Mom,Momentum and Mass
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = U-Mom
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 1
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = U-Mom
+      Use Automatic Line Naming = On
+    END
+  END
+  CHART SERIES:Series 2
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = From Monitor Data
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = IMBALANCE,Diffuser,V-Mom,Momentum and Mass
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = V-Mom
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 2
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = V-Mom
+      Use Automatic Line Naming = On
+    END
+  END
+  CHART SERIES:Series 3
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = From Monitor Data
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = IMBALANCE,Diffuser,W-Mom,Momentum and Mass
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = W-Mom
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 3
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = W-Mom
+      Use Automatic Line Naming = On
+    END
+  END
+  CHART SERIES:Series 4
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = From Monitor Data
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = IMBALANCE,Diffuser,P-Mass,Momentum and Mass
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = P-Mass
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 4
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = P-Mass
+      Use Automatic Line Naming = On
+    END
+  END
+  OBJECT REPORT OPTIONS:
+    Automatic Item = None
+    Generation = Manual
+  END
+END
+CHART:RadialThetaVelocityDistribution
+  Chart Axes = Both
+  Chart Axes Font = Tahoma, 10, False, False, False, False
+  Chart Axes Titles Font = Tahoma, 10, True, False, False, False
+  Chart Grid Line Width = 1
+  Chart Horizontal Grid = On
+  Chart Legend = On
+  Chart Legend Font = Tahoma, 8, False, False, False, False
+  Chart Legend Inside = Outside Chart
+  Chart Legend Justification = Center
+  Chart Legend Position = Bottom
+  Chart Legend Width Height = 0.2 , 0.4
+  Chart Legend X Justification = Right
+  Chart Legend XY Position = 0.73 , 0.275
+  Chart Legend Y Justification = Center
+  Chart Line Width = 2
+  Chart Lines Order = Series 1,Chart Line 1,Series 2,Chart Line 2,Series 3,\
+Chart Line 3
+  Chart Minor Grid = Off
+  Chart Minor Grid Line Width = 1
+  Chart Print Base Height = 700
+  Chart Print Base Width = 700
+  Chart Symbol Size = 2
+  Chart Text Colour = White
+  Chart Title = Theta Velocity Distribution
+  Chart Title Font = Tahoma, 12, True, False, False, False
+  Chart Title Visibility = On
+  Chart Type = Scatter
+  Chart Vertical Grid = On
+  Chart Viewport Colour = Yellow
+  Chart X Axis Automatic Number Formatting = On
+  Chart X Axis Label = X Axis <units>
+  Chart X Axis Number Format = %10.3e
+  Chart Y Axis Automatic Number Formatting = On
+  Chart Y Axis Label = Y Axis <units>
+  Chart Y Axis Number Format = %10.3e
+  Default Chart X Variable = r
+  Default Chart Y Variable = Velocity Circumferential
+  Default Difference Line Calculation = From Points
+  Default Histogram Y Axis Weighting = None
+  Default Time Chart Variable = Pressure
+  Default Time Chart X Expression = Time
+  Default Time Variable Absolute Value = Off
+  Default Time Variable Boundary Values = Conservative
+  Default X Variable Absolute Value = Off
+  Default X Variable Boundary Values = Conservative
+  Default Y Variable Absolute Value = Off
+  Default Y Variable Boundary Values = Conservative
+  FFT Full Input Range = On
+  FFT Max = 0.0
+  FFT Min = 0.0
+  FFT Subtract Mean = Off
+  FFT Window Type = Hanning
+  FFT X Function = Frequency
+  FFT Y Function = Power Spectral Density
+  Histogram Automatic Divisions = Automatic
+  Histogram Divisions = -1.0,1.0
+  Histogram Divisions Count = 10
+  Histogram Y Axis Value = Count
+  Is FFT Chart = Off
+  Max X = 1.0
+  Max Y = 1.0
+  Min X = -1.0
+  Min Y = -1.0
+  Time Chart Keep Single Case = False
+  Use Data For X Axis Labels = On
+  Use Data For Y Axis Labels = On
+  X Axis Automatic Range = On
+  X Axis Inverted = Off
+  X Axis Logarithmic Scaling = Off
+  Y Axis Automatic Range = On
+  Y Axis Inverted = Off
+  Y Axis Logarithmic Scaling = Off
+  CHART SERIES:Series 1
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = Regular
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Location = /LINE:inletRadialLINE
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = ACCUMULATED TIMESTEP
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = Domain Inlet Distribution
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 1
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = Domain Inlet Distribution
+      Use Automatic Line Naming = On
+    END
+  END
+  CHART SERIES:Series 2
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = Regular
+    Chart X Variable = Chart Count
+    Histogram Y Axis Weighting = None
+    Location = /LINE:diffuserInletRadialLINE
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = ACCUMULATED TIMESTEP
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = Diffuser Inlet Distribution
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = False
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = False
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = False
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 2
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = Diffuser Inlet Distribution
+      Use Automatic Line Naming = On
+    END
+  END
+  CHART SERIES:Series 3
+    Chart Line Custom Data Selection = Off
+    Chart Series Type = Regular
+    Chart X Variable = Chart Count
+    Chart Y Variable = Density
+    Histogram Y Axis Weighting = None
+    Location = /LINE:diffuserOutletRadialLINE
+    Monitor Data Source = Case
+    Monitor Data X Variable = ACCUMULATED TIMESTEP
+    Monitor Data X Variable Absolute Value = Off
+    Monitor Data Y Variable = ACCUMULATED TIMESTEP
+    Monitor Data Y Variable Absolute Value = Off
+    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Source = File
+    Series Name = Diffuser Outlet Distribution
+    Time Chart Expression = Time
+    Time Chart Type = Point
+    Time Chart Variable = Density
+    Time Chart X Expression = Time
+    Time Variable Absolute Value = Off
+    Time Variable Boundary Values = Conservative
+    X Variable Absolute Value = Off
+    X Variable Boundary Values = Conservative
+    Y Variable Absolute Value = Off
+    Y Variable Boundary Values = Conservative
+    CHART LINE:Chart Line 3
+      Auto Chart Line Colour = On
+      Auto Chart Symbol Colour = On
+      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Category Values = 0
+      Chart FFT Line Type = Bars
+      Chart Line Colour = 1.0, 0.0, 0.0
+      Chart Line Style = Automatic
+      Chart Line Type = Lines
+      Chart Line Visibility = On
+      Chart Symbol Colour = 0.0, 1.0, 0.0
+      Chart Symbol Style = Automatic
+      Fill Area = On
+      Fill Area Options = Automatic
+      Is Valid = True
+      Line Name = Diffuser Outlet Distribution
+      Use Automatic Line Naming = On
+    END
+  END
+  OBJECT REPORT OPTIONS:
+    Automatic Item = None
+    Generation = Manual
+  END
 END
 COMMENT:User Data
   Comment Exists = True
@@ -143,7 +851,7 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
       Apply Instancing Transform = On
       Apply Texture = Off
       Blend Texture = On
-      Colour = 0.2, 0.5, 1
+      Colour = 0.678431, 0.678431, 0.678431
       Colour Map = Default Colour Map
       Colour Mode = Constant
       Colour Scale = Linear
@@ -164,15 +872,15 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
       Specular Lighting = On
       Surface Drawing = Smooth Shading
       Texture Angle = 0
-      Texture Direction = 0.0, 1.0, 0.0
+      Texture Direction = 0 , 1 , 0
       Texture Material = Metal
-      Texture Position = 0.0, 0.0
-      Texture Scale = 1.0
+      Texture Position = 0 , 0
+      Texture Scale = 1
       Texture Type = Predefined
       Tile Texture = Off
       Transform Texture = Off
       Transparency = 0.602
-      Visibility = Off
+      Visibility = On
       OBJECT VIEW TRANSFORM:
         Apply Reflection = Off
         Apply Rotation = Off
@@ -426,7 +1134,7 @@ DEFAULT LEGEND:Default Legend View 1
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
+  Legend Plot = /VECTOR:velocityYZVECTORS
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -449,7 +1157,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:diffuserInletRadialLINE
+  Legend Plot = /LINE:diffuserOutletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -472,7 +1180,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:diffuserInletRadialLINE
+  Legend Plot = /LINE:diffuserOutletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -495,7 +1203,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:diffuserInletRadialLINE
+  Legend Plot = /LINE:diffuserOutletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -575,6 +1283,45 @@ LINE:diffuserInletRadialLINE
   Option = Two Points
   Point 1 = 0 [mm], 0 [mm], 304 [mm]
   Point 2 = 25.5 [mm], 0 [mm], 304 [mm]
+  Range = Global
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+LINE:diffuserOutletRadialLINE
+  Apply Instancing Transform = On
+  Colour = 1, 1, 0
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Line Samples = 200
+  Line Type = Sample
+  Line Width = 2
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Option = Two Points
+  Point 1 = 0 [mm], 0 [mm], 357 [mm]
+  Point 2 = 29 [mm], 0 [mm], 357 [mm]
   Range = Global
   Visibility = On
   OBJECT VIEW TRANSFORM:
@@ -853,7 +1600,8 @@ END
 REPORT:
   Report Items = /TITLE PAGE,/REPORT/FILE INFORMATION OPTIONS,/REPORT/MESH \
 STATISTICS OPTIONS,/REPORT/PHYSICS SUMMARY OPTIONS,/REPORT/SOLUTION SUMMARY \
-OPTIONS,/COMMENT:User Data
+OPTIONS,/COMMENT:User Data,/CHART:RadialThetaVelocityDistribution,/\
+CHART:Convergence Data,/CHART:Convergence Data Imbalances
   FILE INFORMATION OPTIONS:
     Include In Report = true
     This Exists = true
@@ -1475,7 +2223,7 @@ STREAMLINE:velocityInletSTREAMLINES
     Z = 0.0 [mm]
   END
 END
-SURFACE GROUP:wallshearWallsCONTOUR 1
+SURFACE GROUP:wallshearWallsCONTOUR
   Apply Instancing Transform = On
   Apply Texture = Off
   Blend Texture = On
@@ -1510,7 +2258,7 @@ SURFACE GROUP:wallshearWallsCONTOUR 1
   Tile Texture = Off
   Transform Texture = Off
   Transparency = 0.0
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -1915,19 +2663,20 @@ VIEW:View 1
   Highlight Type = Surface Mesh
   Is A Figure = false
   Light Angle = 50, 110
-  Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/\
-LINE:diffuserInletRadialLINE,/LINE:inletRadialLINE,/SURFACE \
-GROUP:wallshearWallsCONTOUR 1,/VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
+  Object Visibility List = /DATA READER/CASE:Case \
+20180727_AR1.30_phi4_octov2_001/BOUNDARY:Walls,/DEFAULT LEGEND:Default Legend \
+View 1,/LINE:diffuserInletRadialLINE,/LINE:diffuserOutletRadialLINE,/\
+LINE:inletRadialLINE,/VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = 0.396785,0.00533632
-    Pivot Point = 0,0,0.813266
+    Pan = 0.0188461,0.119031
+    Pivot Point = 0,9.52743e-007,0.483918
     Rotation = -90, 0, 0
-    Rotation Quaternion = -0.0873306,0.921606,0.0595157,0.373445
-    Scale = 4.17275
+    Rotation Quaternion = -4.32978e-017,0.707107,0.707107,4.32978e-017
+    Scale = 30.1077
     Send To Viewer = True
   END
 END
