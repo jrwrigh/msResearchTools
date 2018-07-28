@@ -1,4 +1,4 @@
-# State file created:  2018/07/27 17:00:27
+# State file created:  2018/07/27 17:22:23
 # CFX-19.0
 
 CALCULATOR:
@@ -851,7 +851,7 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
       Apply Instancing Transform = On
       Apply Texture = Off
       Blend Texture = On
-      Colour = 0.2, 0.5, 1
+      Colour = 0.678431, 0.678431, 0.678431
       Colour Map = Default Colour Map
       Colour Mode = Constant
       Colour Scale = Linear
@@ -872,15 +872,15 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2/\
       Specular Lighting = On
       Surface Drawing = Smooth Shading
       Texture Angle = 0
-      Texture Direction = 0.0, 1.0, 0.0
+      Texture Direction = 0 , 1 , 0
       Texture Material = Metal
-      Texture Position = 0.0, 0.0
-      Texture Scale = 1.0
+      Texture Position = 0 , 0
+      Texture Scale = 1
       Texture Type = Predefined
       Tile Texture = Off
       Transform Texture = Off
       Transparency = 0.602
-      Visibility = Off
+      Visibility = On
       OBJECT VIEW TRANSFORM:
         Apply Reflection = Off
         Apply Rotation = Off
@@ -1134,7 +1134,7 @@ DEFAULT LEGEND:Default Legend View 1
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR 1
+  Legend Plot = /VECTOR:velocityYZVECTORS
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1157,7 +1157,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:diffuserInletRadialLINE
+  Legend Plot = /LINE:diffuserOutletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1180,7 +1180,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:diffuserInletRadialLINE
+  Legend Plot = /LINE:diffuserOutletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1203,7 +1203,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /LINE:diffuserInletRadialLINE
+  Legend Plot = /LINE:diffuserOutletRadialLINE
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1283,6 +1283,45 @@ LINE:diffuserInletRadialLINE
   Option = Two Points
   Point 1 = 0 [mm], 0 [mm], 304 [mm]
   Point 2 = 25.5 [mm], 0 [mm], 304 [mm]
+  Range = Global
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+LINE:diffuserOutletRadialLINE
+  Apply Instancing Transform = On
+  Colour = 1, 1, 0
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Line Samples = 200
+  Line Type = Sample
+  Line Width = 2
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Option = Two Points
+  Point 1 = 0 [mm], 0 [mm], 357 [mm]
+  Point 2 = 29 [mm], 0 [mm], 357 [mm]
   Range = Global
   Visibility = On
   OBJECT VIEW TRANSFORM:
@@ -1561,7 +1600,8 @@ END
 REPORT:
   Report Items = /TITLE PAGE,/REPORT/FILE INFORMATION OPTIONS,/REPORT/MESH \
 STATISTICS OPTIONS,/REPORT/PHYSICS SUMMARY OPTIONS,/REPORT/SOLUTION SUMMARY \
-OPTIONS,/COMMENT:User Data
+OPTIONS,/COMMENT:User Data,/CHART:RadialThetaVelocityDistribution,/\
+CHART:Convergence Data,/CHART:Convergence Data Imbalances
   FILE INFORMATION OPTIONS:
     Include In Report = true
     This Exists = true
@@ -2183,7 +2223,7 @@ STREAMLINE:velocityInletSTREAMLINES
     Z = 0.0 [mm]
   END
 END
-SURFACE GROUP:wallshearWallsCONTOUR 1
+SURFACE GROUP:wallshearWallsCONTOUR
   Apply Instancing Transform = On
   Apply Texture = Off
   Blend Texture = On
@@ -2218,7 +2258,7 @@ SURFACE GROUP:wallshearWallsCONTOUR 1
   Tile Texture = Off
   Transform Texture = Off
   Transparency = 0.0
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -2623,19 +2663,20 @@ VIEW:View 1
   Highlight Type = Surface Mesh
   Is A Figure = false
   Light Angle = 50, 110
-  Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/\
-LINE:diffuserInletRadialLINE,/LINE:inletRadialLINE,/SURFACE \
-GROUP:wallshearWallsCONTOUR 1,/VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
+  Object Visibility List = /DATA READER/CASE:Case \
+20180727_AR1.30_phi4_octov2_001/BOUNDARY:Walls,/DEFAULT LEGEND:Default Legend \
+View 1,/LINE:diffuserInletRadialLINE,/LINE:diffuserOutletRadialLINE,/\
+LINE:inletRadialLINE,/VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = 0.396785,0.00533632
-    Pivot Point = 0,0,0.813266
+    Pan = 0.0188461,0.119031
+    Pivot Point = 0,9.52743e-007,0.483918
     Rotation = -90, 0, 0
-    Rotation Quaternion = -0.0873306,0.921606,0.0595157,0.373445
-    Scale = 4.17275
+    Rotation Quaternion = -4.32978e-017,0.707107,0.707107,4.32978e-017
+    Scale = 30.1077
     Send To Viewer = True
   END
 END
