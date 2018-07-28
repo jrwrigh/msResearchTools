@@ -1,0 +1,321 @@
+# State file created:  2018/07/27 18:21:55
+# Build 19.0 2017-12-01T23:36:31.332000
+
+LIBRARY:
+  CEL:
+    EXPRESSIONS:
+      angularVelocity = 800 [s^-1]
+      axialVelocity = 40.157 [m/s]
+      inletStaticTemperature = 300 [K]
+      outletStaticPressure = 101312 [Pa]
+      staticPressureRecovery = (areaAve(Pressure)@Outlet - \
+        areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet *.5 \
+        *areaAve(Density)@Inlet)
+      thetaVelocity = r*angularVelocity
+      varKineticEnergy = Density * Velocity ^2 * 0.5
+      yPlusAvg = areaAve(Yplus)@REGION:WALLS
+      yPlusMax = maxVal(Yplus)@REGION:WALLS
+    END
+  END
+  MATERIAL: Air Ideal Gas
+    Material Description = Air Ideal Gas (constant Cp)
+    Material Group = Air Data, Calorically Perfect Ideal Gases
+    Option = Pure Substance
+    Thermodynamic State = Gas
+    PROPERTIES:
+      Option = General Material
+      EQUATION OF STATE:
+        Molar Mass = 28.96 [kg kmol^-1]
+        Option = Ideal Gas
+      END
+      SPECIFIC HEAT CAPACITY:
+        Option = Value
+        Specific Heat Capacity = 1.0044E+03 [J kg^-1 K^-1]
+        Specific Heat Type = Constant Pressure
+      END
+      REFERENCE STATE:
+        Option = Specified Point
+        Reference Pressure = 1 [atm]
+        Reference Specific Enthalpy = 0. [J/kg]
+        Reference Specific Entropy = 0. [J/kg/K]
+        Reference Temperature = 25 [C]
+      END
+      DYNAMIC VISCOSITY:
+        Dynamic Viscosity = 1.831E-05 [kg m^-1 s^-1]
+        Option = Value
+      END
+      THERMAL CONDUCTIVITY:
+        Option = Value
+        Thermal Conductivity = 2.61E-2 [W m^-1 K^-1]
+      END
+      ABSORPTION COEFFICIENT:
+        Absorption Coefficient = 0.01 [m^-1]
+        Option = Value
+      END
+      SCATTERING COEFFICIENT:
+        Option = Value
+        Scattering Coefficient = 0.0 [m^-1]
+      END
+      REFRACTIVE INDEX:
+        Option = Value
+        Refractive Index = 1.0 [m m^-1]
+      END
+    END
+  END
+  MATERIAL: Air at 25 C
+    Material Description = Air at 25 C and 1 atm (dry)
+    Material Group = Air Data, Constant Property Gases
+    Option = Pure Substance
+    Thermodynamic State = Gas
+    PROPERTIES:
+      Option = General Material
+      EQUATION OF STATE:
+        Density = 1.185 [kg m^-3]
+        Molar Mass = 28.96 [kg kmol^-1]
+        Option = Value
+      END
+      SPECIFIC HEAT CAPACITY:
+        Option = Value
+        Specific Heat Capacity = 1.0044E+03 [J kg^-1 K^-1]
+        Specific Heat Type = Constant Pressure
+      END
+      REFERENCE STATE:
+        Option = Specified Point
+        Reference Pressure = 1 [atm]
+        Reference Specific Enthalpy = 0. [J/kg]
+        Reference Specific Entropy = 0. [J/kg/K]
+        Reference Temperature = 25 [C]
+      END
+      DYNAMIC VISCOSITY:
+        Dynamic Viscosity = 1.831E-05 [kg m^-1 s^-1]
+        Option = Value
+      END
+      THERMAL CONDUCTIVITY:
+        Option = Value
+        Thermal Conductivity = 2.61E-02 [W m^-1 K^-1]
+      END
+      ABSORPTION COEFFICIENT:
+        Absorption Coefficient = 0.01 [m^-1]
+        Option = Value
+      END
+      SCATTERING COEFFICIENT:
+        Option = Value
+        Scattering Coefficient = 0.0 [m^-1]
+      END
+      REFRACTIVE INDEX:
+        Option = Value
+        Refractive Index = 1.0 [m m^-1]
+      END
+      THERMAL EXPANSIVITY:
+        Option = Value
+        Thermal Expansivity = 0.003356 [K^-1]
+      END
+    END
+  END
+END
+FLOW: Flow Analysis 1
+  SOLUTION UNITS:
+    Angle Units = [rad]
+    Length Units = [m]
+    Mass Units = [kg]
+    Solid Angle Units = [sr]
+    Temperature Units = [K]
+    Time Units = [s]
+  END
+  ANALYSIS TYPE:
+    Option = Transient
+    EXTERNAL SOLVER COUPLING:
+      Option = None
+    END
+    INITIAL TIME:
+      Option = Automatic with Value
+      Time = 0 [s]
+    END
+    TIME DURATION:
+      Option = Total Time
+      Total Time = 0.2 [s]
+    END
+    TIME STEPS:
+      First Update Time = 0.0 [s]
+      Initial Timestep = 5e-6 [s]
+      Option = Adaptive
+      Timestep Update Frequency = 1
+      TIMESTEP ADAPTION:
+        Courant Number = 1
+        Maximum Timestep = 5e-5 [s]
+        Minimum Timestep = 1e-6 [s]
+        Option = RMS Courant Number
+      END
+    END
+  END
+  DOMAIN: Diffuser
+    Coord Frame = Coord 0
+    Domain Type = Fluid
+    Location = BODY
+    BOUNDARY: Inlet
+      Boundary Type = INLET
+      Location = INLET
+      BOUNDARY CONDITIONS:
+        FLOW REGIME:
+          Option = Subsonic
+        END
+        HEAT TRANSFER:
+          Option = Static Temperature
+          Static Temperature = inletStaticTemperature
+        END
+        MASS AND MOMENTUM:
+          Option = Cylindrical Velocity Components
+          Velocity Axial Component = axialVelocity
+          Velocity Theta Component = thetaVelocity
+          Velocity r Component = 0 [m s^-1]
+          AXIS DEFINITION:
+            Option = Coordinate Axis
+            Rotation Axis = Coord 0.3
+          END
+        END
+        TURBULENCE:
+          Option = Medium Intensity and Eddy Viscosity Ratio
+        END
+      END
+    END
+    BOUNDARY: Outlet
+      Boundary Type = OUTLET
+      Location = OUTLET
+      BOUNDARY CONDITIONS:
+        FLOW REGIME:
+          Option = Subsonic
+        END
+        MASS AND MOMENTUM:
+          Option = Average Static Pressure
+          Pressure Profile Blend = 0.05
+          Relative Pressure = outletStaticPressure
+        END
+        PRESSURE AVERAGING:
+          Option = Average Over Whole Outlet
+        END
+      END
+    END
+    BOUNDARY: Walls
+      Boundary Type = WALL
+      Location = WALLS
+      BOUNDARY CONDITIONS:
+        HEAT TRANSFER:
+          Option = Adiabatic
+        END
+        MASS AND MOMENTUM:
+          Option = No Slip Wall
+        END
+        WALL ROUGHNESS:
+          Option = Smooth Wall
+        END
+      END
+    END
+    DOMAIN MODELS:
+      BUOYANCY MODEL:
+        Option = Non Buoyant
+      END
+      DOMAIN MOTION:
+        Option = Stationary
+      END
+      MESH DEFORMATION:
+        Option = None
+      END
+      REFERENCE PRESSURE:
+        Reference Pressure = 1 [atm]
+      END
+    END
+    FLUID DEFINITION: Fluid 1
+      Material = Air Ideal Gas
+      Option = Material Library
+      MORPHOLOGY:
+        Option = Continuous Fluid
+      END
+    END
+    FLUID MODELS:
+      COMBUSTION MODEL:
+        Option = None
+      END
+      HEAT TRANSFER MODEL:
+        Include Viscous Work Term = True
+        Option = Total Energy
+      END
+      THERMAL RADIATION MODEL:
+        Option = None
+      END
+      TURBULENCE MODEL:
+        Option = SBES SST
+        CURVATURE CORRECTION:
+          Curvature Correction Coefficient = 1.0
+          Option = Production Correction
+        END
+      END
+      TURBULENT WALL FUNCTIONS:
+        High Speed Model = Off
+        Option = Automatic
+      END
+    END
+  END
+  OUTPUT CONTROL:
+    MONITOR OBJECTS:
+      MONITOR BALANCES:
+        Option = Full
+      END
+      MONITOR FORCES:
+        Option = Full
+      END
+      MONITOR PARTICLES:
+        Option = Full
+      END
+      MONITOR POINT: mpStaticPressureRecovery
+        Coord Frame = Coord 0
+        Expression Value = staticPressureRecovery
+        Option = Expression
+      END
+      MONITOR POINT: mpYPlusAvg
+        Coord Frame = Coord 0
+        Expression Value = yPlusAvg
+        Option = Expression
+      END
+      MONITOR POINT: mpYPlusMax
+        Coord Frame = Coord 0
+        Expression Value = yPlusMax
+        Option = Expression
+      END
+      MONITOR RESIDUALS:
+        Option = Full
+      END
+      MONITOR TOTALS:
+        Option = Full
+      END
+    END
+    RESULTS:
+      File Compression Level = Default
+      Option = Standard
+    END
+  END
+  SOLVER CONTROL:
+    Turbulence Numerics = First Order
+    ADVECTION SCHEME:
+      Bounded CDS = On
+      Option = Central Difference
+    END
+    CONVERGENCE CONTROL:
+      Maximum Number of Coefficient Loops = 10
+      Minimum Number of Coefficient Loops = 1
+      Timescale Control = Coefficient Loops
+    END
+    CONVERGENCE CRITERIA:
+      Residual Target = 0.000001
+      Residual Type = RMS
+    END
+    TRANSIENT SCHEME:
+      Option = Second Order Backward Euler
+      TIMESTEP INITIALISATION:
+        Option = Automatic
+      END
+    END
+  END
+END
+COMMAND FILE:
+  Version = 19.0
+END
