@@ -1,11 +1,11 @@
-# State file created:  2018/07/26 22:31:01
+# State file created:  2018/07/27 11:29:45
 # Build 19.0 2017-12-01T23:36:31.332000
 
 LIBRARY:
   CEL:
     EXPRESSIONS:
       angularVelocity = 800 [s^-1]
-      axialVelocity = 50 [m/s]
+      axialVelocity = 40.157 [m/s]
       inletStaticTemperature = 300 [K]
       outletStaticPressure = 101312 [Pa]
       staticPressureRecovery = (areaAve(Pressure)@Outlet - \

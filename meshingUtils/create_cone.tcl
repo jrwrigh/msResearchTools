@@ -21,8 +21,8 @@ set {mesh_option} 4
 
 
 #### Geometry
-# multiplies by inlet diameter for in_len
 set {in_len_multi}  3
+    # multiplies by inlet diameter for in_len
 set {out_len_multi} 12 
 set {in_r} 25.4
 set {out_r} 28.9604
