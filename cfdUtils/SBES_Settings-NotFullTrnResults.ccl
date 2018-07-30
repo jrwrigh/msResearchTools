@@ -1,4 +1,4 @@
-# State file created:  2018/07/27 11:29:45
+# State file created:  2018/07/30 10:47:17
 # Build 19.0 2017-12-01T23:36:31.332000
 
 LIBRARY:
@@ -123,9 +123,29 @@ FLOW: Flow Analysis 1
     Time Units = [s]
   END
   ANALYSIS TYPE:
-    Option = Steady State
+    Option = Transient
     EXTERNAL SOLVER COUPLING:
       Option = None
+    END
+    INITIAL TIME:
+      Option = Automatic with Value
+      Time = 0 [s]
+    END
+    TIME DURATION:
+      Option = Total Time
+      Total Time = 0.17 [s]
+    END
+    TIME STEPS:
+      First Update Time = 0.002 [s]
+      Initial Timestep = 5e-6 [s]
+      Option = Adaptive
+      Timestep Update Frequency = 10
+      TIMESTEP ADAPTION:
+        Courant Number = 1
+        Maximum Timestep = 5e-5 [s]
+        Minimum Timestep = 1e-6 [s]
+        Option = RMS Courant Number
+      END
     END
   END
   DOMAIN: Diffuser
@@ -223,13 +243,10 @@ FLOW: Flow Analysis 1
         Option = None
       END
       TURBULENCE MODEL:
-        Option = SST
+        Option = SBES SST
         CURVATURE CORRECTION:
           Curvature Correction Coefficient = 1.0
           Option = Production Correction
-        END
-        REATTACHMENT MODIFICATION:
-          Option = Reattachment Production
         END
       END
       TURBULENT WALL FUNCTIONS:
@@ -275,25 +292,48 @@ FLOW: Flow Analysis 1
       File Compression Level = Default
       Option = Standard
     END
+    TRANSIENT RESULTS: Transient Results 1
+      File Compression Level = Low Speed Most Compression
+      Include Mesh = On
+      Option = Selected Variables
+      Output Equation Residuals = All
+      Output Variables List = Courant Number,Density,Eddy \
+        Viscosity,Pressure,Shear Strain Rate,Solver Yplus,Static \
+        Enthalpy,Static Entropy,Temperature,Total Enthalpy,Total \
+        Pressure,Total Temperature,Turbulence Eddy Dissipation,Turbulence \
+        Eddy Frequency,Turbulence Kinetic Energy,Velocity,Volume of Finite \
+        Volumes,Vorticity,Wall Distance,Wall Shear,Yplus,Velocity u,Velocity \
+        v,Velocity w,Vorticity X,Vorticity Y,Vorticity Z,Wall Shear X,Wall \
+        Shear Y,Wall Shear Z,Velocity Correlation,Velocity Correlation \
+        uu,Velocity Correlation uv,Velocity Correlation uw,Velocity \
+        Correlation vv,Velocity Correlation vw,Velocity Correlation ww,Mach \
+        Number,Dynamic Viscosity,Absolute Pressure
+      OUTPUT FREQUENCY:
+        Option = Timestep Interval
+        Timestep Interval = 300
+      END
+    END
   END
   SOLVER CONTROL:
-    Turbulence Numerics = High Resolution
+    Turbulence Numerics = First Order
     ADVECTION SCHEME:
-      Option = High Resolution
+      Bounded CDS = On
+      Option = Central Difference
     END
     CONVERGENCE CONTROL:
-      Length Scale Option = Conservative
-      Maximum Number of Iterations = 500
-      Minimum Number of Iterations = 1
-      Timescale Control = Auto Timescale
-      Timescale Factor = 1.0
+      Maximum Number of Coefficient Loops = 10
+      Minimum Number of Coefficient Loops = 1
+      Timescale Control = Coefficient Loops
     END
     CONVERGENCE CRITERIA:
       Residual Target = 0.000001
       Residual Type = RMS
     END
-    DYNAMIC MODEL CONTROL:
-      Global Dynamic Model Control = On
+    TRANSIENT SCHEME:
+      Option = Second Order Backward Euler
+      TIMESTEP INITIALISATION:
+        Option = Automatic
+      END
     END
   END
 END

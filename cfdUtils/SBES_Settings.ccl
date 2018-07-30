@@ -7,7 +7,7 @@ LIBRARY:
       angularVelocity = 800 [s^-1]
       axialVelocity = 40.157 [m/s]
       inletStaticTemperature = 300 [K]
-      outletStaticPressure = 101312 [Pa]
+      outletRelativeStaticPressure = 0 [Pa]
       staticPressureRecovery = (areaAve(Pressure)@Outlet - \
         areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet *.5 \
         *areaAve(Density)@Inlet)
@@ -188,7 +188,7 @@ FLOW: Flow Analysis 1
         MASS AND MOMENTUM:
           Option = Average Static Pressure
           Pressure Profile Blend = 0.05
-          Relative Pressure = outletStaticPressure
+          Relative Pressure = outletRelativeStaticPressure
         END
         PRESSURE AVERAGING:
           Option = Average Over Whole Outlet
