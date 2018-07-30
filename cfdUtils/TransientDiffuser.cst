@@ -1,11 +1,9 @@
-# State file created:  2018/07/28 09:31:29
+# State file created:  2018/07/29 10:03:57
 # CFX-19.0
 
 CALCULATOR:
-  Case Name = Case 20180727_AR1.30_phi4_octov2_001
-  Expression = Velocity.Invariant Q
-  Function = probe
-  Location = Probe Point
+  Case Name = Case 2100_full
+  Function = area
   Verbose = Off
 END
 CHART:Convergence Data
@@ -108,7 +106,7 @@ Chart Line 3,Series 4,Chart Line 4
     CHART LINE:Chart Line 1
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -151,7 +149,7 @@ Chart Line 3,Series 4,Chart Line 4
     CHART LINE:Chart Line 2
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -194,7 +192,7 @@ Chart Line 3,Series 4,Chart Line 4
     CHART LINE:Chart Line 3
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -237,7 +235,7 @@ Chart Line 3,Series 4,Chart Line 4
     CHART LINE:Chart Line 4
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -358,7 +356,7 @@ Chart Line 2,Series 3,Chart Line 3
     CHART LINE:Chart Line 1
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -401,7 +399,7 @@ Chart Line 2,Series 3,Chart Line 3
     CHART LINE:Chart Line 2
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -444,7 +442,7 @@ Chart Line 2,Series 3,Chart Line 3
     CHART LINE:Chart Line 3
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -487,7 +485,7 @@ Chart Line 2,Series 3,Chart Line 3
     CHART LINE:Chart Line 4
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -593,7 +591,7 @@ Chart Line 3
     Monitor Data X Variable Absolute Value = Off
     Monitor Data Y Variable = ACCUMULATED TIMESTEP
     Monitor Data Y Variable Absolute Value = Off
-    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Case = Case 900_full
     Operating Point Data Source = File
     Series Name = Domain Inlet Distribution
     Time Chart Expression = Time
@@ -609,7 +607,7 @@ Chart Line 3
     CHART LINE:Chart Line 1
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -629,6 +627,7 @@ Chart Line 3
     Chart Line Custom Data Selection = Off
     Chart Series Type = Regular
     Chart X Variable = Chart Count
+    Chart Y Variable = Density
     Histogram Y Axis Weighting = None
     Location = /LINE:diffuserInletRadialLINE
     Monitor Data Source = Case
@@ -636,22 +635,23 @@ Chart Line 3
     Monitor Data X Variable Absolute Value = Off
     Monitor Data Y Variable = ACCUMULATED TIMESTEP
     Monitor Data Y Variable Absolute Value = Off
-    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Case = Case 900_full
     Operating Point Data Source = File
     Series Name = Diffuser Inlet Distribution
     Time Chart Expression = Time
     Time Chart Type = Point
+    Time Chart Variable = Density
     Time Chart X Expression = Time
-    Time Variable Absolute Value = False
+    Time Variable Absolute Value = Off
     Time Variable Boundary Values = Conservative
-    X Variable Absolute Value = False
+    X Variable Absolute Value = Off
     X Variable Boundary Values = Conservative
-    Y Variable Absolute Value = False
+    Y Variable Absolute Value = Off
     Y Variable Boundary Values = Conservative
     CHART LINE:Chart Line 2
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -679,7 +679,7 @@ Chart Line 3
     Monitor Data X Variable Absolute Value = Off
     Monitor Data Y Variable = ACCUMULATED TIMESTEP
     Monitor Data Y Variable Absolute Value = Off
-    Operating Point Data Case = Case 20180727_AR1.30_phi4_octov2_001
+    Operating Point Data Case = Case 900_full
     Operating Point Data Source = File
     Series Name = Diffuser Outlet Distribution
     Time Chart Expression = Time
@@ -695,7 +695,7 @@ Chart Line 3
     CHART LINE:Chart Line 3
       Auto Chart Line Colour = On
       Auto Chart Symbol Colour = On
-      Case Name = Case 20180727_AR1.30_phi4_octov2_001
+      Case Name = Case 2100_full
       Category Values = 0
       Chart FFT Line Type = Bars
       Chart Line Colour = 1.0, 0.0, 0.0
@@ -716,26 +716,40 @@ Chart Line 3
     Generation = Manual
   END
 END
+CLIP PLANE:Clip Plane 1
+  Flip Normal = Off
+  Normal = 1 , 0 , 0
+  Option = YZ Plane
+  Point = 0 [mm], 0 [mm], 0 [mm]
+  Point 1 = 0 [mm], 0 [mm], 0 [mm]
+  Point 2 = 1 [mm], 0 [mm], 0 [mm]
+  Point 3 = 0 [mm], 1 [mm], 0 [mm]
+  X = 0.0 [mm]
+  Y = 0.0 [mm]
+  Z = 0.0 [mm]
+END
 COMMENT:User Data
   Comment Exists = True
   Comment Heading = User Data
   Heading Level = 1
 END
 DATA READER:
-  Active Case Name = Case 20180727_AR1.30_phi4_octov2_001
+  Active Case Name = Case 2100_full
   Append Results = False
   Apply X Offset = false
   Apply Y Offset = false
   Apply Z Offset = false
   Clear All Objects = False
   Construct Variables From Fourier Coefficients = true
-  Current Case List = Case 20180727_AR1.30_phi4_octov2_001
+  Current Case List = Case 2100_full
   Current Case Name = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/300_full.trn
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
+2100_full.trn
   Current Results File = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/300_full.trn
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
+2100_full.trn
   Current Timestep = -1
-  Current Timevalue = 0.0015
+  Current Timevalue = 0.0286968
   Edit Case Names = false
   File Angle Units = rad
   File Chemical Amount Units = mol
@@ -759,15 +773,16 @@ Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/300_full.trn
   Timestep Match Criterion = Same Step
   Timestep Sync Mode = By Time Value
   Timevalue Match Criterion = Same Value
-  CASE:Case 20180727_AR1.30_phi4_octov2_001
+  CASE:Case 2100_full
     Construct Variables From Fourier Coefficients = true
     Current Case Name = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad \
-Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/300_full.trn
+Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
+2100_full.trn
     Current Results File = C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. \
 Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
-300_full.trn
+2100_full.trn
     Current Timestep = -1
-    Current Timevalue = 0.0015
+    Current Timevalue = 0.0286968
     File Angle Units = rad
     File Chemical Amount Units = mol
     File Current Units = A
@@ -809,7 +824,7 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
       Tile Texture = Off
       Transform Texture = Off
       Transparency = 0.0
-      Visibility = false
+      Visibility = Off
     END
     BOUNDARY:Outlet
       Apply Instancing Transform = On
@@ -847,7 +862,7 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
       Apply Instancing Transform = On
       Apply Texture = Off
       Blend Texture = On
-      Colour = 0.678431, 0.678431, 0.678431
+      Colour = 0.580392, 0.580392, 0.580392
       Colour Map = Default Colour Map
       Colour Mode = Constant
       Colour Scale = Linear
@@ -875,8 +890,25 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
       Texture Type = Predefined
       Tile Texture = Off
       Transform Texture = Off
-      Transparency = 0.602
-      Visibility = On
+      Transparency = 0.6
+      Visibility = Off
+      OBJECT VIEW TRANSFORM:
+        Apply Reflection = Off
+        Apply Rotation = Off
+        Apply Scale = Off
+        Apply Translation = Off
+        Principal Axis = Z
+        Reflection Plane Option = XY Plane
+        Rotation Angle = 0.0 [degree]
+        Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+        Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+        Rotation Axis Type = Principal Axis
+        Scale Vector = 1 , 1 , 1
+        Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+        X = 0.0 [mm]
+        Y = 0.0 [mm]
+        Z = 0.0 [mm]
+      END
     END
     COMPOSITE:Assembly
       Apply Instancing Transform = On
@@ -915,7 +947,7 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
       Apply Reflection = false
       Apply Rotation = true
       Apply Translation = false
-      Axis = Z
+      Axis = X
       Axis From File = Custom
       Background Mesh Density = 2000
       Background Mesh Generation Method = Quasi Orthogonal
@@ -927,7 +959,7 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
       Full Circle = Off
       Hub Curve Mode = From Turbo Region
       Inlet Curve Mode = From Turbo Region
-      Inlet Region = Inlet
+      Inlet Region = /DATA READER/CASE:Case 2100_full/BOUNDARY:Inlet
       Instance Definition = From File
       Linear Blade Aligned Variable Available = false
       Number of Components in 360 = 1
@@ -936,7 +968,7 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
       Number of Passages in 360 = 1
       Number of Passages in Component = 1
       Outlet Curve Mode = From Turbo Region
-      Outlet Region = Outlet
+      Outlet Region = /DATA READER/CASE:Case 2100_full/BOUNDARY:Outlet
       Principal Axis = Z
       Reflection Plane Option = From Plane
       Rotation Angle = 0 [degree]
@@ -1084,6 +1116,13 @@ Grad Research/1. CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/\
       Visibility = false
     END
   END
+  CASE COMPARISON:
+    Absolute Value of Difference = false
+    Mode Is Active = false
+    Same Mesh Detection Mode = Auto Detect
+    Synchronize Camera on Activate = true
+    Synchronize Visibility on Activate = true
+  END
 END
 DEFAULT INSTANCE TRANSFORM:Default Transform
   Angle Definition Method = Instances in 360
@@ -1107,14 +1146,176 @@ DEFAULT INSTANCE TRANSFORM:Default Transform
   Y = 0.0
   Z = 0.0
 END
-DEFAULT LEGEND:Default Legend View 1
-  Colour = 0, 0, 0
+DEFAULT LEGEND:Default Legend CourantNumberBooleanYZ
+  Colour = 1, 1, 1
   Font = Sans Serif
-  Legend Aspect = 0.07
-  Legend Format = %10.3e
-  Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:SBESshieldingYZCONTOUR
-  Legend Position = 0.02, 0.15
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /SURFACE GROUP:CourantNumberYZCONTOUR CourantNumberBooleanYZ
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = CourantNumberBooleanYZ
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
+DEFAULT LEGEND:Default Legend CourantNumberYZ
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /SURFACE GROUP:CourantNumberYZCONTOUR CourantNumberYZ
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = CourantNumberYZ
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
+DEFAULT LEGEND:Default Legend LESCourantNumberYZ
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /SURFACE GROUP:LESCourantNumberYZCONTOUR LESCourantNumberYZ
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = LESCourantNumberYZ
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
+DEFAULT LEGEND:Default Legend QCriterionIsosurface
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = QCriterionIsosurface
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
+DEFAULT LEGEND:Default Legend QCriterionIsosurface AngleView
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface \
+AngleView
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = QCriterionIsosurface AngleView
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
+DEFAULT LEGEND:Default Legend SBESshieldingIsosurface
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = SBESshieldingIsosurface
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
+DEFAULT LEGEND:Default Legend VelocityVectorsYZ Boundary Layer
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = VelocityVectorsYZ Boundary Layer
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
+DEFAULT LEGEND:Default Legend View 1
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /VECTOR:velocityYZVECTORS
+  Legend Position = 0.02 , 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
   Legend Size = 0.6
@@ -1125,10 +1326,10 @@ DEFAULT LEGEND:Default Legend View 1
   Legend Y Justification = Top
   Related Object = View 1
   Show Legend Units = On
-  Text Colour Mode = Default
-  Text Height = 0.024
-  Text Rotation = 0
-  Visibility = true
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = Off
 END
 DEFAULT LEGEND:Default Legend View 2
   Colour = 0, 0, 0
@@ -1136,7 +1337,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:SBESshieldingYZCONTOUR
+  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1159,7 +1360,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:SBESshieldingYZCONTOUR
+  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1182,7 +1383,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /SURFACE GROUP:SBESshieldingYZCONTOUR
+  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1199,6 +1400,52 @@ DEFAULT LEGEND:Default Legend View 4
   Text Rotation = 0
   Visibility = true
 END
+DEFAULT LEGEND:Default Legend WallShearWalls
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /SURFACE GROUP:wallshearWallsCONTOUR WallShearWalls
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = WallShearWalls
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
+DEFAULT LEGEND:Default Legend YPlusWalls
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /SURFACE GROUP:yplusWallsCONTOUR YPlusWalls
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = YPlusWalls
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
 DEFORMATION INFO:
   Deformation Scale = 1
 END
@@ -1207,14 +1454,299 @@ FILE PROCESSING:
   Processing Mode = None
   Supress File Replacement Warnings = false
 END
+ISOSURFACE:QcriterionISOSURFACE
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Velocity Axial
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0 [mm s^-1]
+  Min = 0.0 [mm s^-1]
+  Range = Local
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Value = 1e+05 [s^-2]
+  Variable = Velocity.Invariant Q
+  Variable Boundary Values = Conservative
+  Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Velocity Axial
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0 [mm s^-1]
+  Min = 0.0 [mm s^-1]
+  Range = Local
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Value = QCriterionISOSURFACEValue
+  Variable = Velocity.Invariant Q
+  Variable Boundary Values = Conservative
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface AngleView
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Velocity Axial
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0 [mm s^-1]
+  Min = 0.0 [mm s^-1]
+  Range = Local
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Value = QCriterionISOSURFACEValue
+  Variable = Velocity.Invariant Q
+  Variable Boundary Values = Conservative
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+ISOSURFACE:SBESshieldingISOSURFACE
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 1, 0.419608, 0.207843
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Shielding Function for SBES or SDES
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0
+  Min = 0.0
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0
+  Value = 0.1
+  Variable = Shielding Function for SBES or SDES
+  Variable Boundary Values = Hybrid
+  Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+ISOSURFACE:SBESshieldingISOSURFACE SBESshieldingIsosurface
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 1, 0.419608, 0.207843
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Shielding Function for SBES or SDES
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0
+  Min = 0.0
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0
+  Value = 0.1
+  Variable = Shielding Function for SBES or SDES
+  Variable Boundary Values = Hybrid
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 LIBRARY:
   CEL:
     EXPRESSIONS:
-      Accumulated Time Step = 300
-      Current Time Step = 300
+      Accumulated Time Step = 2100
+      CourantNumberBooleanVar = if(Courant Number>1, 0, 1)
+      Current Time Step = 2100
+      EddyViscoityRatioVar = Eddy Viscosity/Dynamic Viscosity
+      LESCourantNumberVar = if(Shielding Function for SBES or SDES<0.2, \
+Courant Number, 0)
+      QCriterionISOSURFACEValue = 1e5 [s^-2]
       Reference Pressure = 1 [atm]
-      Sequence Step = 300
-      Time = 0.0015 [s]
+      Sequence Step = 2100
+      Time = 0.0286968 [s]
       angularVelocity = 800 [s^-1]
       atstep = Accumulated Time Step
       axialVelocity = 40.157 [m/s]
@@ -1263,7 +1795,7 @@ LINE:diffuserInletRadialLINE
   Point 1 = 0 [mm], 0 [mm], 304 [mm]
   Point 2 = 25.5 [mm], 0 [mm], 304 [mm]
   Range = Global
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -1302,7 +1834,7 @@ LINE:diffuserOutletRadialLINE
   Point 1 = 0 [mm], 0 [mm], 357 [mm]
   Point 2 = 29 [mm], 0 [mm], 357 [mm]
   Range = Global
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -1341,7 +1873,7 @@ LINE:inletRadialLINE
   Point 1 = 0 [mm], 0 [mm], 0 [mm]
   Point 2 = 25.5 [mm], 0 [mm], 0 [mm]
   Range = Global
-  Visibility = On
+  Visibility = Off
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -1364,6 +1896,290 @@ MASS FLOW CALC OPTION ON PHYSICAL SURFACES:
   Option = Interpolated
 END
 PLANE:YZPLANE
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Bound Radius = 0.5 [m]
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Direction 1 Bound = 1.0 [m]
+  Direction 1 Orientation = 0 [degree]
+  Direction 1 Points = 10
+  Direction 2 Bound = 1.0 [m]
+  Direction 2 Points = 10
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Invert Plane Bound = Off
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Normal = 1 , 0 , 0
+  Option = YZ Plane
+  Plane Bound = None
+  Plane Type = Slice
+  Point = 0 [mm], 0 [mm], 0 [mm]
+  Point 1 = 0 [mm], 0 [mm], 0 [mm]
+  Point 2 = 1 [mm], 0 [mm], 0 [mm]
+  Point 3 = 0 [mm], 1 [mm], 0 [mm]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  X = 0.0 [mm]
+  Y = 0.0 [mm]
+  Z = 0.0 [mm]
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+PLANE:YZPLANE CourantNumberBooleanYZ
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Bound Radius = 0.5 [m]
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Direction 1 Bound = 1.0 [m]
+  Direction 1 Orientation = 0 [degree]
+  Direction 1 Points = 10
+  Direction 2 Bound = 1.0 [m]
+  Direction 2 Points = 10
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Invert Plane Bound = Off
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Normal = 1 , 0 , 0
+  Option = YZ Plane
+  Plane Bound = None
+  Plane Type = Slice
+  Point = 0 [mm], 0 [mm], 0 [mm]
+  Point 1 = 0 [mm], 0 [mm], 0 [mm]
+  Point 2 = 1 [mm], 0 [mm], 0 [mm]
+  Point 3 = 0 [mm], 1 [mm], 0 [mm]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  X = 0.0 [mm]
+  Y = 0.0 [mm]
+  Z = 0.0 [mm]
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+PLANE:YZPLANE CourantNumberYZ
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Bound Radius = 0.5 [m]
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Direction 1 Bound = 1.0 [m]
+  Direction 1 Orientation = 0 [degree]
+  Direction 1 Points = 10
+  Direction 2 Bound = 1.0 [m]
+  Direction 2 Points = 10
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Invert Plane Bound = Off
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Normal = 1 , 0 , 0
+  Option = YZ Plane
+  Plane Bound = None
+  Plane Type = Slice
+  Point = 0 [mm], 0 [mm], 0 [mm]
+  Point 1 = 0 [mm], 0 [mm], 0 [mm]
+  Point 2 = 1 [mm], 0 [mm], 0 [mm]
+  Point 3 = 0 [mm], 1 [mm], 0 [mm]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  X = 0.0 [mm]
+  Y = 0.0 [mm]
+  Z = 0.0 [mm]
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+PLANE:YZPLANE LESCourantNumberYZ
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Bound Radius = 0.5 [m]
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Direction 1 Bound = 1.0 [m]
+  Direction 1 Orientation = 0 [degree]
+  Direction 1 Points = 10
+  Direction 2 Bound = 1.0 [m]
+  Direction 2 Points = 10
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Invert Plane Bound = Off
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Normal = 1 , 0 , 0
+  Option = YZ Plane
+  Plane Bound = None
+  Plane Type = Slice
+  Point = 0 [mm], 0 [mm], 0 [mm]
+  Point 1 = 0 [mm], 0 [mm], 0 [mm]
+  Point 2 = 1 [mm], 0 [mm], 0 [mm]
+  Point 3 = 0 [mm], 1 [mm], 0 [mm]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  X = 0.0 [mm]
+  Y = 0.0 [mm]
+  Z = 0.0 [mm]
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+PLANE:YZPLANE VelocityVectorsYZ Boundary Layer
   Apply Instancing Transform = On
   Apply Texture = Off
   Blend Texture = On
@@ -1580,7 +2396,11 @@ REPORT:
   Report Items = /TITLE PAGE,/REPORT/FILE INFORMATION OPTIONS,/REPORT/MESH \
 STATISTICS OPTIONS,/REPORT/PHYSICS SUMMARY OPTIONS,/REPORT/SOLUTION SUMMARY \
 OPTIONS,/COMMENT:User Data,/CHART:RadialThetaVelocityDistribution,/\
-CHART:Convergence Data,/CHART:Convergence Data Imbalances
+CHART:Convergence Data,/CHART:Convergence Data Imbalances,/\
+VIEW:QCriterionIsosurface,/VIEW:QCriterionIsosurface AngleView,/\
+VIEW:SBESshieldingIsosurface,/VIEW:YPlusWalls,/VIEW:WallShearWalls,/\
+VIEW:CourantNumberBooleanYZ,/VIEW:LESCourantNumberYZ,/VIEW:CourantNumberYZ,/\
+VIEW:VelocityVectorsYZ Boundary Layer
   FILE INFORMATION OPTIONS:
     Include In Report = true
     This Exists = true
@@ -1643,7 +2463,7 @@ CHART:Convergence Data,/CHART:Convergence Data Imbalances
     END
   END
   SOLUTION SUMMARY OPTIONS:
-    Include In Report = false
+    Include In Report = true
     Show Boundary Flow Summary = true
     Show Force and Torque Summary = false
     Show Forces = true
@@ -2149,6 +2969,276 @@ END
 SCALAR VARIABLE:Z
   Boundary Values = Conservative
 END
+SURFACE GROUP:CourantNumberYZCONTOUR
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Courant Number
+  Colour Variable Boundary Values = Conservative
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /PLANE:YZPLANE
+  Max = 1.77882e+07
+  Min = 1
+  Range = Local
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+SURFACE GROUP:CourantNumberYZCONTOUR CourantNumberBooleanYZ
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = CourantNumberBoolean
+  Colour Variable Boundary Values = Conservative
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /PLANE:YZPLANE CourantNumberBooleanYZ
+  Max = 1.77882e+07
+  Min = 1
+  Range = Local
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+SURFACE GROUP:CourantNumberYZCONTOUR CourantNumberYZ
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Courant Number
+  Colour Variable Boundary Values = Conservative
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /PLANE:YZPLANE CourantNumberYZ
+  Max = 1.77882e+07
+  Min = 1
+  Range = Local
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+SURFACE GROUP:LESCourantNumberYZCONTOUR
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = LESCourantNumber
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /PLANE:YZPLANE
+  Max = 1.77882e+07
+  Min = 1
+  Range = Local
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+SURFACE GROUP:LESCourantNumberYZCONTOUR LESCourantNumberYZ
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = LESCourantNumber
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /PLANE:YZPLANE LESCourantNumberYZ
+  Max = 1.77882e+07
+  Min = 1
+  Range = Local
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 SURFACE GROUP:QcriterionYZCONTOUR
   Apply Instancing Transform = On
   Apply Texture = Off
@@ -2257,6 +3347,60 @@ SURFACE GROUP:SBESshieldingYZCONTOUR
     Z = 0.0 [mm]
   END
 END
+SURFACE GROUP:Walls SBESshieldingIsosurface
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.580392, 0.580392, 0.580392
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DATA READER/CASE:Case 2100_full/DOMAIN:Diffuser
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /DATA READER/CASE:Case 2100_full/BOUNDARY:Walls
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.6
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 SURFACE GROUP:wallshearWallsCONTOUR
   Apply Instancing Transform = On
   Apply Texture = Off
@@ -2311,6 +3455,60 @@ SURFACE GROUP:wallshearWallsCONTOUR
     Z = 0.0 [mm]
   END
 END
+SURFACE GROUP:wallshearWallsCONTOUR WallShearWalls
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Wall Shear
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = Walls
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 SURFACE GROUP:yplusWallsCONTOUR
   Apply Instancing Transform = On
   Apply Texture = Off
@@ -2347,6 +3545,60 @@ SURFACE GROUP:yplusWallsCONTOUR
   Transform Texture = Off
   Transparency = 0.0
   Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+SURFACE GROUP:yplusWallsCONTOUR YPlusWalls
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Yplus
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = Walls
+  Max = 0.0
+  Min = 0.0
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = On
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -2461,6 +3713,54 @@ UNIT SYSTEM:
   Preferred Units System = Newton millimeter
   Update Units to Preferred = Off
 END
+USER SCALAR VARIABLE:Courant Number.Gradient X
+  Boundary Values = Conservative
+  Calculate Global Range = No
+  Component Index = 1
+  Recipe = Vector Component
+  Variable = Courant Number.Gradient
+END
+USER SCALAR VARIABLE:Courant Number.Gradient Y
+  Boundary Values = Conservative
+  Calculate Global Range = No
+  Component Index = 2
+  Recipe = Vector Component
+  Variable = Courant Number.Gradient
+END
+USER SCALAR VARIABLE:Courant Number.Gradient Z
+  Boundary Values = Conservative
+  Calculate Global Range = No
+  Component Index = 3
+  Recipe = Vector Component
+  Variable = Courant Number.Gradient
+END
+USER SCALAR VARIABLE:CourantNumberBoolean
+  Boundary Values = Conservative
+  Calculate Global Range = Off
+  Component Index = 1
+  Expression = CourantNumberBooleanVar
+  Recipe = Expression
+  Variable to Copy = Pressure
+  Variable to Gradient = Pressure
+END
+USER SCALAR VARIABLE:EddyViscosityRatio
+  Boundary Values = Conservative
+  Calculate Global Range = Off
+  Component Index = 1
+  Expression = EddyViscoityRatioVar
+  Recipe = Expression
+  Variable to Copy = Pressure
+  Variable to Gradient = Pressure
+END
+USER SCALAR VARIABLE:LESCourantNumber
+  Boundary Values = Conservative
+  Calculate Global Range = Off
+  Component Index = 1
+  Expression = LESCourantNumberVar
+  Recipe = Expression
+  Variable to Copy = Pressure
+  Variable to Gradient = Pressure
+END
 USER SCALAR VARIABLE:r
   Boundary Values = Conservative
   Calculate Global Range = Off
@@ -2469,6 +3769,12 @@ USER SCALAR VARIABLE:r
   Recipe = Expression
   Variable to Copy = Pressure
   Variable to Gradient = Pressure
+END
+USER VECTOR VARIABLE:Courant Number.Gradient
+  Boundary Values = Conservative
+  Calculate Global Range = No
+  Recipe = Gradient
+  Variable to Gradient = Courant Number
 END
 VECTOR VARIABLE:Axial Direction
   Boundary Values = Conservative
@@ -2572,7 +3878,7 @@ VECTOR:velocityYZVECTORS
   Transparency = 0.0
   Variable = Velocity
   Variable Boundary Values = Hybrid
-  Visibility = Off
+  Visibility = On
   OBJECT VIEW TRANSFORM:
     Apply Reflection = Off
     Apply Rotation = Off
@@ -2589,6 +3895,251 @@ VECTOR:velocityYZVECTORS
     X = 0.0 [mm]
     Y = 0.0 [mm]
     Z = 0.0 [mm]
+  END
+END
+VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
+  Add Sample Vertex Normals = On
+  Apply Instancing Transform = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Use Plot Variable
+  Colour Scale = Linear
+  Colour Variable = Velocity
+  Colour Variable Boundary Values = Hybrid
+  Coord Frame = Global
+  Culling Mode = No Culling
+  Direction = X
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Width = 1
+  Location List = YZPLANE VelocityVectorsYZ Boundary Layer
+  Locator Sampling Method = Vertex
+  Max = 0.0 [mm s^-1]
+  Maximum Number of Items = 100
+  Min = 0.0 [mm s^-1]
+  Normalized = Off
+  Number of Samples = 100
+  Projection Type = Tangential
+  Random Seed = 1
+  Range = Global
+  Reduction Factor = 1.0
+  Reduction or Max Number = Reduction
+  Sample Spacing = 0.1
+  Sampling Accuracy = High
+  Sampling Aspect Ratio = 1
+  Sampling Grid Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Surface Sampling = Off
+  Symbol = Line Arrow
+  Symbol Size = 0.05
+  Transparency = 0.0
+  Variable = Velocity
+  Variable Boundary Values = Hybrid
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+VIEW:CourantNumberBooleanYZ
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 0
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /SURFACE GROUP:CourantNumberYZCONTOUR \
+CourantNumberBooleanYZ,/PLANE:YZPLANE CourantNumberBooleanYZ
+  Object Visibility List = /DEFAULT LEGEND:Default Legend \
+CourantNumberBooleanYZ,/SURFACE GROUP:CourantNumberYZCONTOUR \
+CourantNumberBooleanYZ,/WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = -0.00847807,0
+    Pivot Point = 0,0,0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0,-0.707107,0,0.707107
+    Scale = 3.61563
+    Send To Viewer = True
+  END
+END
+VIEW:CourantNumberYZ
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 0
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /SURFACE GROUP:CourantNumberYZCONTOUR CourantNumberYZ,/\
+PLANE:YZPLANE CourantNumberYZ
+  Object Visibility List = /DEFAULT LEGEND:Default Legend CourantNumberYZ,/\
+SURFACE GROUP:CourantNumberYZCONTOUR CourantNumberYZ,/WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = -0.00847807,0
+    Pivot Point = 0,0,0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0,-0.707107,0,0.707107
+    Scale = 3.61563
+    Send To Viewer = True
+  END
+END
+VIEW:LESCourantNumberYZ
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 0
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /SURFACE GROUP:LESCourantNumberYZCONTOUR \
+LESCourantNumberYZ,/PLANE:YZPLANE LESCourantNumberYZ
+  Object Visibility List = /DEFAULT LEGEND:Default Legend LESCourantNumberYZ,/\
+SURFACE GROUP:LESCourantNumberYZCONTOUR LESCourantNumberYZ,/WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = -0.00847807,0
+    Pivot Point = 0,0,0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0,-0.707107,0,0.707107
+    Scale = 3.61563
+    Send To Viewer = True
+  END
+END
+VIEW:QCriterionIsosurface
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 1
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface,/\
+SURFACE GROUP:yplusWallsCONTOUR QCriterionIsosurface
+  Object Visibility List = /DEFAULT LEGEND:Default Legend QCriterionIsosurface,\
+/ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface,/WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = -0.000535878, -0.0308129
+    Pivot Point = 0, 0, 0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0.0103942, -0.684351, -0.00745429, 0.729041
+    Scale = 3.64894
+    Send To Viewer = True
+  END
+END
+VIEW:QCriterionIsosurface AngleView
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 1
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface \
+AngleView,/SURFACE GROUP:yplusWallsCONTOUR QCriterionIsosurface AngleView
+  Object Visibility List = /DEFAULT LEGEND:Default Legend QCriterionIsosurface \
+AngleView,/ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface AngleView,/\
+WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = 0.0198291, 0.00327659
+    Pivot Point = 0, 0, 0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0.0109016, -0.0602531, 0.00161619, 0.998123
+    Scale = 22.9125
+    Send To Viewer = True
+  END
+END
+VIEW:SBESshieldingIsosurface
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 1
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /SURFACE GROUP:Walls SBESshieldingIsosurface,/\
+ISOSURFACE:SBESshieldingISOSURFACE SBESshieldingIsosurface
+  Object Visibility List = /DEFAULT LEGEND:Default Legend \
+SBESshieldingIsosurface,/ISOSURFACE:SBESshieldingISOSURFACE \
+SBESshieldingIsosurface,/SURFACE GROUP:Walls SBESshieldingIsosurface,/\
+WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = 0.00479142, -0.0272102
+    Pivot Point = 0, 0, 0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0.0221477, -0.255925, 0.07035, 0.963878
+    Scale = 6.68199
+    Send To Viewer = True
   END
 END
 VIEW:Turbo Initialisation View
@@ -2618,32 +4169,62 @@ VIEW:Turbo Initialisation View
     Send To Viewer = True
   END
 END
+VIEW:VelocityVectorsYZ Boundary Layer
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 0
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary \
+Layer,/PLANE:YZPLANE VelocityVectorsYZ Boundary Layer
+  Object Visibility List = /DEFAULT LEGEND:Default Legend VelocityVectorsYZ \
+Boundary Layer,/VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer,/\
+WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = -0.179782, 0.0225909
+    Pivot Point = 0, 0, 0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0, -0.707107, 0, 0.707107
+    Scale = 259.328
+    Send To Viewer = True
+  END
+END
 VIEW:View 1
   Angular Coord Shift = 0.0
   Auto Center = false
   Axis Visibility = On
   Border Visibility = false
   Camera Mode = User Specified
-  Clip Scene = false
+  Clip Plane = Clip Plane 1
+  Clip Scene = 0
   Coord Transform = Cartesian
   Hide Difference Case = false
   Highlight Type = Surface Mesh
   Is A Figure = false
   Light Angle = 50, 110
-  Object Visibility List = /DATA READER/CASE:Case \
-20180727_AR1.30_phi4_octov2_001/BOUNDARY:Walls,/DEFAULT LEGEND:Default Legend \
-View 1,/LINE:diffuserInletRadialLINE,/LINE:diffuserOutletRadialLINE,/\
-LINE:inletRadialLINE,/WIREFRAME:Wireframe
+  Object Visibility List = /DEFAULT LEGEND:Default Legend View 1,/\
+VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
   Projection = Orthographic
   Ruler Visibility = On
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = -0.0119635,0.000852023
-    Pivot Point = 1.97627e-005,0,0.483007
+    Pan = -0.179782,0.0225909
+    Pivot Point = 0,0,0.483007
     Rotation = -90, 0, 0
-    Rotation Quaternion = 0.0644099,-0.381729,0.132661,0.912432
-    Scale = 3.7649
+    Rotation Quaternion = 0,-0.707107,0,0.707107
+    Scale = 259.328
     Send To Viewer = True
   END
 END
@@ -2728,10 +4309,68 @@ WIREFRAME:Wireframe
     Send To Viewer = True
   END
 END
+VIEW:WallShearWalls
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 0
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /SURFACE GROUP:wallshearWallsCONTOUR WallShearWalls
+  Object Visibility List = /DEFAULT LEGEND:Default Legend WallShearWalls,/\
+SURFACE GROUP:wallshearWallsCONTOUR WallShearWalls,/WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = -0.0158517, -0.00189108
+    Pivot Point = 0, 0, 0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0.0563449, -0.990516, -0.0496972, -0.115
+    Scale = 11.6044
+    Send To Viewer = True
+  END
+END
+VIEW:YPlusWalls
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 0
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /SURFACE GROUP:yplusWallsCONTOUR YPlusWalls
+  Object Visibility List = /DEFAULT LEGEND:Default Legend YPlusWalls,/SURFACE \
+GROUP:yplusWallsCONTOUR YPlusWalls,/WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = -0.0158517, -0.00189108
+    Pivot Point = 0, 0, 0.483007
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0.0563449, -0.990516, -0.0496972, -0.115
+    Scale = 11.6044
+    Send To Viewer = True
+  END
+END
 VIEWPORT MANAGER:
-  Background Colour = 0.42, 0.55, 0.871
+  Background Colour = 0,0,0
   Background Colour 2 = 1,1,1
-  Background Colour Type = Top-Bottom Gradient
+  Background Colour Type = Solid
   Background Image = Mountains
   Background Image Mapping = Flat
   Background Image Type = Predefined
