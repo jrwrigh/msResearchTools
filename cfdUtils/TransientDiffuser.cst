@@ -1,9 +1,12 @@
-# State file created:  2018/07/29 10:03:57
+# State file created:  2018/07/30 11:41:45
 # CFX-19.0
 
 CALCULATOR:
   Case Name = Case 2100_full
-  Function = area
+  Expression = Absolute Pressure
+  Fluid = All Fluids
+  Function = areaAve
+  Location = /PLANE:diffuserInletPLANE
   Verbose = Off
 END
 CHART:Convergence Data
@@ -731,6 +734,10 @@ END
 COMMENT:User Data
   Comment Exists = True
   Comment Heading = User Data
+  Comment Text = <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://\
+www.w3.org/TR/REC-html40/strict.dtd"><p style="-qt-paragraph-type:empty; margin-\
+top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-\
+indent:0; text-indent:0px;"><br /></p>
   Heading Level = 1
 END
 DATA READER:
@@ -1268,7 +1275,7 @@ DEFAULT LEGEND:Default Legend SBESshieldingIsosurface
   Legend Aspect = 0.05
   Legend Format = %9.2e
   Legend Orientation = Horizontal
-  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
+  Legend Plot = /ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface
   Legend Position = 0.02 , 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1308,6 +1315,29 @@ DEFAULT LEGEND:Default Legend VelocityVectorsYZ Boundary Layer
   Text Rotation = 30
   Visibility = On
 END
+DEFAULT LEGEND:Default Legend VelocityVectorsYZ Diffuser
+  Colour = 1, 1, 1
+  Font = Sans Serif
+  Legend Aspect = 0.05
+  Legend Format = %9.2e
+  Legend Orientation = Horizontal
+  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Diffuser
+  Legend Position = 0.02 , 0.15
+  Legend Resolution = 256
+  Legend Shading = Smooth
+  Legend Size = 0.6
+  Legend Ticks = 5
+  Legend Title = Legend
+  Legend Title Mode = Variable and Location
+  Legend X Justification = Left
+  Legend Y Justification = Top
+  Related Object = VelocityVectorsYZ Diffuser
+  Show Legend Units = On
+  Text Colour Mode = User Specified
+  Text Height = 0.02
+  Text Rotation = 30
+  Visibility = On
+END
 DEFAULT LEGEND:Default Legend View 1
   Colour = 1, 1, 1
   Font = Sans Serif
@@ -1337,7 +1367,7 @@ DEFAULT LEGEND:Default Legend View 2
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
+  Legend Plot = /ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1360,7 +1390,7 @@ DEFAULT LEGEND:Default Legend View 3
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
+  Legend Plot = /ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1383,7 +1413,7 @@ DEFAULT LEGEND:Default Legend View 4
   Legend Aspect = 0.07
   Legend Format = %10.3e
   Legend Orientation = Vertical
-  Legend Plot = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
+  Legend Plot = /ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface
   Legend Position = 0.02, 0.15
   Legend Resolution = 256
   Legend Shading = Smooth
@@ -1520,7 +1550,7 @@ ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface
   Colour Scale = Linear
   Colour Variable = Velocity Axial
   Colour Variable Boundary Values = Hybrid
-  Culling Mode = No Culling
+  Culling Mode = Back Faces
   Domain List = /DOMAIN GROUP:All Domains
   Draw Faces = On
   Draw Lines = Off
@@ -1556,11 +1586,11 @@ ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface
     Principal Axis = Z
     Reflection Plane Option = XY Plane
     Rotation Angle = 0.0 [degree]
-    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
-    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis From = 0 [m], 0 [m], 0 [m]
+    Rotation Axis To = 0 [m], 0 [m], 0 [m]
     Rotation Axis Type = Principal Axis
     Scale Vector = 1 , 1 , 1
-    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    Translation Vector = 0 [m], 0 [m], 0 [m]
     X = 0.0 [mm]
     Y = 0.0 [mm]
     Z = 0.0 [mm]
@@ -1576,7 +1606,7 @@ ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface AngleView
   Colour Scale = Linear
   Colour Variable = Velocity Axial
   Colour Variable Boundary Values = Hybrid
-  Culling Mode = No Culling
+  Culling Mode = Back Faces
   Domain List = /DOMAIN GROUP:All Domains
   Draw Faces = On
   Draw Lines = Off
@@ -1612,11 +1642,11 @@ ISOSURFACE:QcriterionISOSURFACE QCriterionIsosurface AngleView
     Principal Axis = Z
     Reflection Plane Option = XY Plane
     Rotation Angle = 0.0 [degree]
-    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
-    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis From = 0 [m], 0 [m], 0 [m]
+    Rotation Axis To = 0 [m], 0 [m], 0 [m]
     Rotation Axis Type = Principal Axis
     Scale Vector = 1 , 1 , 1
-    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    Translation Vector = 0 [m], 0 [m], 0 [m]
     X = 0.0 [mm]
     Y = 0.0 [mm]
     Z = 0.0 [mm]
@@ -1745,22 +1775,35 @@ LIBRARY:
 Courant Number, 0)
       QCriterionISOSURFACEValue = 1e5 [s^-2]
       Reference Pressure = 1 [atm]
+      ReynoldsNumberAverageDiffuserInlet = \
+(areaAve(Velocity)@diffuserInletPLANE*diffuserDiameter*\
+areaAve(Density)@diffuserInletPLANE )/areaAve(Dynamic \
+Viscosity)@diffuserInletPLANE
+      ReynoldsNumberAverageDiffuserInletAxial = (areaAve(Velocity \
+Axial)@diffuserInletPLANE*diffuserDiameter*areaAve(Density)@diffuserInletPLANE )/\
+areaAve(Dynamic Viscosity)@diffuserInletPLANE
+      ReynoldsNumberAverageDomainInlet = (areaAve(Velocity)@Inlet*\
+diffuserDiameter*areaAve(Density)@Inlet )/areaAve(Dynamic Viscosity)@Inlet
+      ReynoldsNumberAverageDomainInletAxial = (areaAve(Velocity Axial)@Inlet*\
+diffuserDiameter*areaAve(Density)@Inlet )/areaAve(Dynamic Viscosity)@Inlet
       Sequence Step = 2100
       Time = 0.0286968 [s]
       angularVelocity = 800 [s^-1]
       atstep = Accumulated Time Step
       axialVelocity = 40.157 [m/s]
       ctstep = Current Time Step
+      diffuserDiameter = diffuserRadius*2
       diffuserInletPLANEPosition = 152.4 [mm]
       diffuserInletPosition = 152.4 [mm]
       diffuserOutletPLANEPosition = 410 [mm]
       diffuserOutletPosition = 410 [mm]
+      diffuserRadius = 25.4 [mm]
       inletStaticTemperature = 300 [K]
       outletStaticPressure = 101312 [Pa]
       radiusInlet = 25.4 [mm]
       sstep = Sequence Step
       staticPressureRecovery = (areaAve(Pressure)@Outlet - \
-areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet *.5 *\
+areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet^2 *.5 *\
 areaAve(Density)@Inlet)
       staticPressureRecoveryDiffuserInOut = \
 (areaAve(Pressure)@diffuserOutletPLANE - areaAve(Pressure)@diffuserInletPLANE) / \
@@ -2250,6 +2293,77 @@ PLANE:YZPLANE VelocityVectorsYZ Boundary Layer
     Z = 0.0 [mm]
   END
 END
+PLANE:YZPLANE VelocityVectorsYZ Diffuser
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Bound Radius = 0.5 [m]
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Constant
+  Colour Scale = Linear
+  Colour Variable = Pressure
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Direction 1 Bound = 1.0 [m]
+  Direction 1 Orientation = 0 [degree]
+  Direction 1 Points = 10
+  Direction 2 Bound = 1.0 [m]
+  Direction 2 Points = 10
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Invert Plane Bound = Off
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Max = 0.0 [MPa]
+  Min = 0.0 [MPa]
+  Normal = 1 , 0 , 0
+  Option = YZ Plane
+  Plane Bound = None
+  Plane Type = Slice
+  Point = 0 [mm], 0 [mm], 0 [mm]
+  Point 1 = 0 [mm], 0 [mm], 0 [mm]
+  Point 2 = 1 [mm], 0 [mm], 0 [mm]
+  Point 3 = 0 [mm], 1 [mm], 0 [mm]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  X = 0.0 [mm]
+  Y = 0.0 [mm]
+  Z = 0.0 [mm]
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 PLANE:diffuserInletPLANE
   Apply Instancing Transform = On
   Apply Texture = Off
@@ -2393,32 +2507,33 @@ PLANE:diffuserOutletPLANE
   END
 END
 REPORT:
+  Excluded Report Items = /COMMENT:User Data
   Report Items = /TITLE PAGE,/REPORT/FILE INFORMATION OPTIONS,/REPORT/MESH \
 STATISTICS OPTIONS,/REPORT/PHYSICS SUMMARY OPTIONS,/REPORT/SOLUTION SUMMARY \
-OPTIONS,/COMMENT:User Data,/CHART:RadialThetaVelocityDistribution,/\
-CHART:Convergence Data,/CHART:Convergence Data Imbalances,/\
+OPTIONS,/COMMENT:User Data,/TABLE:Results,/CHART:RadialThetaVelocityDistribution,\
+/CHART:Convergence Data,/CHART:Convergence Data Imbalances,/\
 VIEW:QCriterionIsosurface,/VIEW:QCriterionIsosurface AngleView,/\
 VIEW:SBESshieldingIsosurface,/VIEW:YPlusWalls,/VIEW:WallShearWalls,/\
 VIEW:CourantNumberBooleanYZ,/VIEW:LESCourantNumberYZ,/VIEW:CourantNumberYZ,/\
-VIEW:VelocityVectorsYZ Boundary Layer
+VIEW:VelocityVectorsYZ Boundary Layer,/VIEW:VelocityVectorsYZ Diffuser
   FILE INFORMATION OPTIONS:
     Include In Report = true
     This Exists = true
   END
   MESH STATISTICS OPTIONS:
     Include In Report = true
-    Show Connectivity Number = false
-    Show Edge Length Ratio = false
-    Show Element Volume Ratio = false
-    Show Max Face Angle = false
-    Show Min Face Angle = false
-    Show Number of Elements = true
-    Show Number of Hexahedra = false
-    Show Number of Nodes = true
-    Show Number of Polyhedra = false
-    Show Number of Pyramids = false
-    Show Number of Tetrahedra = false
-    Show Number of Wedges = false
+    Show Connectivity Number = On
+    Show Edge Length Ratio = On
+    Show Element Volume Ratio = On
+    Show Max Face Angle = On
+    Show Min Face Angle = On
+    Show Number of Elements = On
+    Show Number of Hexahedra = On
+    Show Number of Nodes = On
+    Show Number of Polyhedra = On
+    Show Number of Pyramids = On
+    Show Number of Tetrahedra = On
+    Show Number of Wedges = On
     This Exists = true
   END
   PHYSICS SUMMARY OPTIONS:
@@ -2437,8 +2552,8 @@ VIEW:VelocityVectorsYZ Boundary Layer
       Custom Figure Size Height = 384
       Custom Figure Size Width = 512
       Figure Image Type = png
-      Figure Size = 512 x 384
-      Fit Views = false
+      Figure Size = 2048 x 1536
+      Fit Views = On
       This Exists = true
     END
   END
@@ -2457,8 +2572,8 @@ VIEW:VelocityVectorsYZ Boundary Layer
       Custom Figure Size Height = 384
       Custom Figure Size Width = 512
       Figure Image Type = png
-      Figure Size = 512 x 384
-      Fit Views = false
+      Figure Size = 2048 x 1536
+      Fit Views = On
       This Exists = true
     END
   END
@@ -3293,6 +3408,60 @@ SURFACE GROUP:QcriterionYZCONTOUR
     Z = 0.0 [mm]
   END
 END
+SURFACE GROUP:QcriterionYZCONTOUR 1
+  Apply Instancing Transform = On
+  Apply Texture = Off
+  Blend Texture = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Variable
+  Colour Scale = Linear
+  Colour Variable = Velocity
+  Colour Variable Boundary Values = Hybrid
+  Culling Mode = No Culling
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Colour = 0, 0, 0
+  Line Colour Mode = Default
+  Line Width = 1
+  Location List = /PLANE:YZPLANE
+  Max = 1.77882e+07 [mm s^-1]
+  Min = 1 [mm s^-1]
+  Range = Global
+  Render Edge Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Draw As Lines
+  Texture Angle = 0
+  Texture Direction = 0 , 1 , 0
+  Texture Material = Metal
+  Texture Position = 0 , 0
+  Texture Scale = 1
+  Texture Type = Predefined
+  Tile Texture = Off
+  Transform Texture = Off
+  Transparency = 0.0
+  Visibility = Off
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
 SURFACE GROUP:SBESshieldingYZCONTOUR
   Apply Instancing Transform = On
   Apply Texture = Off
@@ -3701,6 +3870,96 @@ SYSTEM COLOUR MAP:Zebra
   Colour Map Storage Type = System
   Colour Map Type = Zebra
 END
+TABLE:Results
+  Export Table Only = True
+  Table Exists = True
+  Table Export Format = State
+  Table Export HTML Border Width = 1
+  Table Export HTML Caption Position = Bottom
+  Table Export HTML Cell Padding = 5
+  Table Export HTML Cell Spacing = 1
+  Table Export Lines = All
+  Table Export Separator = Tab
+  Table Export Trailing Separators = True
+  TABLE CELLS:
+    A1 = "Inlet Conditions", True, False, False, Center, False, 1, Font Name, \
+1|3, %10.3e, True, 55ff00, 000000, True
+    A10 = "Avg Y-Plus", True, False, False, Left, False, 0, Font Name, 1|1, \
+%10.3e, True, ffffff, 000000, True
+    A11 = "=yPlusAvg", False, False, False, Left, False, 0, Font Name, 1|1, \
+%10.3e, True, ffffff, 000000, True
+    A13 = "Result Information", True, False, False, Center, False, 1, Font \
+Name, 1|6, %10.3e, True, ff0000, 000000, True
+    A14 = "Static Pressure Recovery - Domain", True, False, False, Left, False,\
+ 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    A15 = "=staticPressureRecovery", False, False, False, Left, False, 0, Font \
+Name, 1|1, %10.3e, True, ffffff, 000000, True
+    A2 = "Axial Velocity", True, False, False, Left, False, 0, Font Name, 1|1, \
+%10.3e, True, ffffff, 000000, True
+    A3 = "=axialVelocity", False, False, False, Left, False, 0, Font Name, 1|1,\
+ %10.3e, True, ffffff, 000000, True
+    A5 = "Transient Information", True, False, False, Center, False, 1, Font \
+Name, 1|6, %10.3e, True, ffff00, 000000, True
+    A6 = "Time", True, False, False, Left, False, 0, Font Name, 1|1, %10.3e, \
+True, ffffff, 000000, True
+    A7 = "=Time", False, False, False, Left, False, 0, Font Name, 1|1, %10.3e, \
+True, ffffff, 000000, True
+    A9 = "Solve Information", True, False, False, Center, False, 1, Font Name, \
+1|2, %10.3e, True, ffaa00, 000000, True
+    B10 = "Max Y-Plus", True, False, False, Left, False, 0, Font Name, 1|1, \
+%10.3e, True, ffffff, 000000, True
+    B11 = "=yPlusMax", False, False, False, Left, False, 0, Font Name, 1|1, \
+%10.3e, True, ffffff, 000000, True
+    B14 = "Static Pressure Recovery - Diffuser", True, False, False, Left, \
+False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    B15 = "=staticPressureRecoveryDiffuserInOut", False, False, False, Left, \
+False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    B2 = "Angular Velocity", True, False, False, Left, False, 0, Font Name, \
+1|1, %10.3e, True, ffffff, 000000, True
+    B3 = "=angularVelocity", False, False, False, Left, False, 0, Font Name, \
+1|1, %10.3e, True, ffffff, 000000, True
+    B6 = "Time Step", True, False, False, Left, False, 0, Font Name, 1|1, \
+%10.3e, True, ffffff, 000000, True
+    B7 = "=atstep", False, False, False, Left, False, 0, Font Name, 1|1, \
+%10.3e, True, ffffff, 000000, True
+    C14 = "Re Diff Inlet", True, False, False, Left, False, 0, Font Name, 1|1, \
+%10.3e, True, ffffff, 000000, True
+    C15 = "=ReynoldsNumberAverageDiffuserInlet", False, False, False, Left, \
+False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    C2 = "Inlet Static Temperature", True, False, False, Left, False, 0, Font \
+Name, 1|1, %10.3e, True, ffffff, 000000, True
+    C3 = "=inletStaticTemperature", False, False, False, Left, False, 0, Font \
+Name, 1|1, %10.3e, True, ffffff, 000000, True
+    C6 = "Avg Courant Number", True, False, False, Left, False, 0, Font Name, \
+1|1, %10.3e, True, ffffff, 000000, True
+    C7 = "=volumeAve(Courant Number)@Diffuser", False, False, False, Left, \
+False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    D14 = "Re Domain Inlet", True, False, False, Left, False, 0, Font Name, \
+1|1, %10.3e, True, ffffff, 000000, True
+    D15 = "=ReynoldsNumberAverageDomainInlet", False, False, False, Left, \
+False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    D6 = "Max Courant Number", True, False, False, Left, False, 0, Font Name, \
+1|1, %10.3e, True, ffffff, 000000, True
+    D7 = "=maxVal(Courant Number)@Diffuser", False, False, False, Left, False, \
+0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    E14 = "Re Diff Inlet - Axial", True, False, False, Left, False, 0, Font \
+Name, 1|1, %10.3e, True, ffffff, 000000, True
+    E15 = "=ReynoldsNumberAverageDiffuserInletAxial", False, False, False, \
+Left, False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    E6 = "Avg LES Courant Number", True, False, False, Left, False, 0, Font \
+Name, 1|1, %10.3e, True, ffffff, 000000, True
+    E7 = "=volumeAve(LESCourantNumber)@Diffuser", False, False, False, Left, \
+False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    F14 = "Re Domain Inlet - Axial", True, False, False, Left, False, 0, Font \
+Name, 1|1, %10.3e, True, ffffff, 000000, True
+    F15 = "=ReynoldsNumberAverageDomainInletAxial", False, False, False, Left, \
+False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+    F6 = "Max LES Courant Number", True, False, False, Left, False, 0, Font \
+Name, 1|1, %10.3e, True, ffffff, 000000, True
+    F7 = "=maxVal(LESCourantNumber)@Diffuser", False, False, False, Left, \
+False, 0, Font Name, 1|1, %10.3e, True, ffffff, 000000, True
+  END
+END
 TITLE PAGE:
   Include ANSYS Logo = true
   Include Custom Logo = false
@@ -3710,7 +3969,7 @@ TITLE PAGE:
   Title Page Exists = true
 END
 UNIT SYSTEM:
-  Preferred Units System = Newton millimeter
+  Preferred Units System = SI
   Update Units to Preferred = Off
 END
 USER SCALAR VARIABLE:Courant Number.Gradient X
@@ -3854,12 +4113,12 @@ VECTOR:velocityYZVECTORS
   Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
   Lighting = On
   Line Width = 1
-  Location List = YZPLANE
+  Location List = /PLANE:YZPLANE
   Locator Sampling Method = Vertex
   Max = 0.0 [mm s^-1]
   Maximum Number of Items = 100
   Min = 0.0 [mm s^-1]
-  Normalized = Off
+  Normalized = On
   Number of Samples = 100
   Projection Type = Tangential
   Random Seed = 1
@@ -3921,6 +4180,67 @@ VECTOR:velocityYZVECTORS VelocityVectorsYZ Boundary Layer
   Maximum Number of Items = 100
   Min = 0.0 [mm s^-1]
   Normalized = Off
+  Number of Samples = 100
+  Projection Type = Tangential
+  Random Seed = 1
+  Range = Global
+  Reduction Factor = 1.0
+  Reduction or Max Number = Reduction
+  Sample Spacing = 0.1
+  Sampling Accuracy = High
+  Sampling Aspect Ratio = 1
+  Sampling Grid Angle = 0 [degree]
+  Specular Lighting = On
+  Surface Drawing = Smooth Shading
+  Surface Sampling = Off
+  Symbol = Line Arrow
+  Symbol Size = 0.05
+  Transparency = 0.0
+  Variable = Velocity
+  Variable Boundary Values = Hybrid
+  Visibility = On
+  OBJECT VIEW TRANSFORM:
+    Apply Reflection = Off
+    Apply Rotation = Off
+    Apply Scale = Off
+    Apply Translation = Off
+    Principal Axis = Z
+    Reflection Plane Option = XY Plane
+    Rotation Angle = 0.0 [degree]
+    Rotation Axis From = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis To = 0 [mm], 0 [mm], 0 [mm]
+    Rotation Axis Type = Principal Axis
+    Scale Vector = 1 , 1 , 1
+    Translation Vector = 0 [mm], 0 [mm], 0 [mm]
+    X = 0.0 [mm]
+    Y = 0.0 [mm]
+    Z = 0.0 [mm]
+  END
+END
+VECTOR:velocityYZVECTORS VelocityVectorsYZ Diffuser
+  Add Sample Vertex Normals = On
+  Apply Instancing Transform = On
+  Colour = 0.75, 0.75, 0.75
+  Colour Map = Default Colour Map
+  Colour Mode = Use Plot Variable
+  Colour Scale = Linear
+  Colour Variable = Velocity
+  Colour Variable Boundary Values = Hybrid
+  Coord Frame = Global
+  Culling Mode = No Culling
+  Direction = X
+  Domain List = /DOMAIN GROUP:All Domains
+  Draw Faces = On
+  Draw Lines = Off
+  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+  Lighting = On
+  Line Width = 1
+  Location List = /PLANE:YZPLANE VelocityVectorsYZ Diffuser
+  Locator Sampling Method = Vertex
+  Max = 0.0 [mm s^-1]
+  Maximum Number of Items = 100
+  Min = 0.0 [mm s^-1]
+  Normalized = On
   Number of Samples = 100
   Projection Type = Tangential
   Random Seed = 1
@@ -4071,10 +4391,10 @@ SURFACE GROUP:yplusWallsCONTOUR QCriterionIsosurface
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = -0.000535878, -0.0308129
-    Pivot Point = 0, 0, 0.483007
+    Pan = -0.000535878,-0.0308129
+    Pivot Point = 0,0,0.483007
     Rotation = -90, 0, 0
-    Rotation Quaternion = 0.0103942, -0.684351, -0.00745429, 0.729041
+    Rotation Quaternion = 0.0103942,-0.684351,-0.00745429,0.729041
     Scale = 3.64894
     Send To Viewer = True
   END
@@ -4102,11 +4422,11 @@ WIREFRAME:Wireframe
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = 0.0198291, 0.00327659
+    Pan = 0.00823374, 0.00062694
     Pivot Point = 0, 0, 0.483007
     Rotation = -90, 0, 0
-    Rotation Quaternion = 0.0109016, -0.0602531, 0.00161619, 0.998123
-    Scale = 22.9125
+    Rotation Quaternion = 0.0227525, -0.0823381, 0.0416495, 0.995475
+    Scale = 18.085
     Send To Viewer = True
   END
 END
@@ -4200,6 +4520,37 @@ WIREFRAME:Wireframe
     Send To Viewer = True
   END
 END
+VIEW:VelocityVectorsYZ Diffuser
+  Angular Coord Shift = 0.0
+  Auto Center = false
+  Axis Visibility = On
+  Border Visibility = false
+  Camera Mode = User Specified
+  Clip Plane = Clip Plane 1
+  Clip Scene = 0
+  Coord Transform = Cartesian
+  Hide Difference Case = false
+  Highlight Type = Surface Mesh
+  Is A Figure = true
+  Light Angle = 50, 110
+  Local Object List = /VECTOR:velocityYZVECTORS VelocityVectorsYZ Diffuser,/\
+PLANE:YZPLANE VelocityVectorsYZ Diffuser
+  Object Visibility List = /DEFAULT LEGEND:Default Legend VelocityVectorsYZ \
+Diffuser,/VECTOR:velocityYZVECTORS VelocityVectorsYZ Diffuser,/\
+WIREFRAME:Wireframe
+  Projection = Orthographic
+  Ruler Visibility = On
+  Standard View = Isometric Y
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pan = -0.158528, -0.00391898
+    Pivot Point = 0, -3.37139e-007, 0.484215
+    Rotation = -90, 0, 0
+    Rotation Quaternion = 0, -0.707107, 0, 0.707107
+    Scale = 19.7608
+    Send To Viewer = True
+  END
+END
 VIEW:View 1
   Angular Coord Shift = 0.0
   Auto Center = false
@@ -4220,11 +4571,11 @@ VECTOR:velocityYZVECTORS,/WIREFRAME:Wireframe
   Standard View = Isometric Y
   CAMERA:
     Option = Pivot Point and Quaternion
-    Pan = -0.179782,0.0225909
-    Pivot Point = 0,0,0.483007
+    Pan = -0.17687,-0.0214024
+    Pivot Point = 0,-3.37139e-007,0.484215
     Rotation = -90, 0, 0
     Rotation Quaternion = 0,-0.707107,0,0.707107
-    Scale = 259.328
+    Scale = 3.42467
     Send To Viewer = True
   END
 END
@@ -4380,7 +4731,7 @@ VIEWPORT MANAGER:
   Maximized Viewport = -1
   Synchronize Camera = false
   Synchronize Visibility = true
-  View Length Units = mm
+  View Length Units = m
   Viewport 1 View = View 1
   Viewport 2 View = View 2
   Viewport 3 View = View 3
