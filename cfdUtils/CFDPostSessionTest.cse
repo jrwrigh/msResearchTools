@@ -1,0 +1,111 @@
+# Session file started:  2018/07/30 11:59:46
+# CFX-19.0
+
+# To avoid unnecessary file pre-processing and modifications, include
+# COMMAND FILE at the top of your session file.
+# If it is not included, the file is assumed to be older and will be
+# modified for backward compatibility.
+COMMAND FILE:
+  CFX Post Version = 19.0
+END
+
+DATA READER:
+  Clear All Objects = false
+  Append Results = false
+  Edit Case Names = false
+  Multi Configuration File Load Option = Last Case
+  Open in New View = true
+  Keep Camera Position = true
+  Load Particle Tracks = true
+  Multi Configuration File Load Option = Last Case
+  Construct Variables From Fourier Coefficients = true
+  Open to Compare = false
+  Files to Compare =
+END
+
+DATA READER:
+  Domains to Load=
+END
+
+>load filename=C:/Users/jrwrigh/odrive/Google Drive -Clemson/1. Grad Research/1. \
+CFD Stuff/2. CFD Runs/20180727_AR1.30_phi4_octov2_SBES/2100_full.trn, \
+force_reload=true
+
+VIEW:Turbo Initialisation View
+  Object Visibility List = /WIREFRAME:Wireframe
+  Is A Figure = false
+END
+
+# Setting Single View: /VIEW:Turbo Initialisation View
+VIEWPORT MANAGER:
+  Viewport Layout = No Split
+  Maximized Viewport = -1
+END
+>setViewportView cmd=set, view=/VIEW:Turbo Initialisation View, viewport=1
+
+VIEW:Turbo Initialisation View
+  Object Visibility List = /WIREFRAME:Wireframe
+  Is A Figure = false
+END
+
+# Setting Single View: /VIEW:Turbo Initialisation View
+VIEWPORT MANAGER:
+  Viewport Layout = No Split
+  Maximized Viewport = -1
+END
+>setViewportView cmd=set, view=/VIEW:Turbo Initialisation View, viewport=1
+
+VIEWPORT MANAGER:
+  Synchronize Visibility = false
+END
+
+> turbo setup_cyl
+DATA READER:
+  CASE:Case 2100_full
+    DOMAIN:Diffuser
+      Axis = X
+      Axis From File = Custom
+      Principal Axis = Z
+      Rotation Axis From = 0 [m], 0 [m], 0 [m]
+      Rotation Axis To = 1 [m], 0 [m], 0 [m]
+      Rotation Axis Type = Principal Axis
+    END
+  END
+END
+> turbo update_theta
+
+> turbo more_vars
+
+>readstate filename=C:/Users/jrwrigh/gitRepos/msResearchTools/cfdUtils/\
+TransientDiffuser.cst, mode=append, load=false, keepexpressions=true
+
+REPORT:
+  PUBLISH:
+    OUTPUT SETTINGS:
+      Chart Image Type = png
+      Chart Size = Same As Figure
+      Custom Chart Size Height = 384
+      Custom Chart Size Width = 512
+      Custom Figure Size Height = 384
+      Custom Figure Size Width = 512
+      Figure Image Type = png
+      Figure Size = 2048 x 1536
+      Fit Views = Off
+    END
+  END
+END
+
+REPORT:
+  PUBLISH:
+    Generate 3D Viewer Files = On
+    Report Format = HTML
+    Report Path = ./Report.htm
+    Save Images In Separate Folder = On
+
+  END
+END
+>report save
+
+
+# Session file stopped:  2018/07/30 12:22:24
+
