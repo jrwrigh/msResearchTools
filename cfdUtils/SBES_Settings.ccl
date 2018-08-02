@@ -1,16 +1,20 @@
-# State file created:  2018/07/27 18:21:55
+# State file created:  2018/08/02 17:31:24
 # Build 19.0 2017-12-01T23:36:31.332000
 
 LIBRARY:
   CEL:
     EXPRESSIONS:
-      angularVelocity = 800 [s^-1]
+      angularVelocity = 916.7 [s^-1]
       axialVelocity = 40.157 [m/s]
+      courantNumberAvg = volumeAve(Courant Number )@Diffuser
       inletStaticTemperature = 300 [K]
       outletRelativeStaticPressure = 0 [Pa]
       staticPressureRecovery = (areaAve(Pressure)@Outlet - \
-        areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet *.5 \
+        areaAve(Pressure)@Inlet) / (areaAve(Velocity)@Inlet^2 *.5 \
         *areaAve(Density)@Inlet)
+      staticPressureRecoverytrnavg = (areaAve(Pressure.Trnavg)@Outlet - \
+        areaAve(Pressure.Trnavg)@Inlet) / (areaAve(Velocity.Trnavg)@Inlet^2 \
+        *.5 *areaAve(Density.Trnavg)@Inlet)
       thetaVelocity = r*angularVelocity
       varKineticEnergy = Density * Velocity ^2 * 0.5
       yPlusAvg = areaAve(Yplus)@REGION:WALLS
@@ -133,7 +137,7 @@ FLOW: Flow Analysis 1
     END
     TIME DURATION:
       Option = Total Time
-      Total Time = 0.2 [s]
+      Total Time = 0.1 [s]
     END
     TIME STEPS:
       First Update Time = 0.0 [s]
@@ -143,8 +147,8 @@ FLOW: Flow Analysis 1
       TIMESTEP ADAPTION:
         Courant Number = 1
         Maximum Timestep = 5e-5 [s]
-        Minimum Timestep = 1e-6 [s]
-        Option = RMS Courant Number
+        Minimum Timestep = 5e-6 [s]
+        Option = MAX Courant Number
       END
     END
   END
@@ -256,6 +260,17 @@ FLOW: Flow Analysis 1
     END
   END
   OUTPUT CONTROL:
+    BACKUP DATA RETENTION:
+      Option = Delete Old Files
+    END
+    BACKUP RESULTS: Backup Results 1
+      File Compression Level = Best Speed Least Compression
+      Option = Standard
+      OUTPUT FREQUENCY:
+        Elapsed Time Interval = 2 [h]
+        Option = Elapsed Time Interval
+      END
+    END
     MONITOR OBJECTS:
       MONITOR BALANCES:
         Option = Full
@@ -265,6 +280,11 @@ FLOW: Flow Analysis 1
       END
       MONITOR PARTICLES:
         Option = Full
+      END
+      MONITOR POINT: mpCourantNumberAvg
+        Coord Frame = Coord 0
+        Expression Value = courantNumberAvg
+        Option = Expression
       END
       MONITOR POINT: mpStaticPressureRecovery
         Coord Frame = Coord 0
@@ -291,6 +311,29 @@ FLOW: Flow Analysis 1
     RESULTS:
       File Compression Level = Default
       Option = Standard
+      Output Equation Residuals = All
+    END
+    TRANSIENT RESULTS: Transient Results 1
+      File Compression Level = Default
+      Option = Standard
+      OUTPUT FREQUENCY:
+        Option = Time Interval
+        Time Interval = 0.01 [s]
+      END
+    END
+    TRANSIENT STATISTICS: TrnAverages
+      Option = Arithmetic Average
+      Output Variables List = Absolute Pressure,Courant \
+        Number,Density,Dynamic Viscosity,Eddy Viscosity,Mach \
+        Number,Pressure,Shear Strain Rate,Temperature,Total \
+        Pressure,Velocity,Velocity Correlation,Vorticity,Wall \
+        Shear,Yplus,Vorticity X,Vorticity Z,Vorticity Y,Velocity Correlation \
+        uu,Velocity Correlation uv,Velocity Correlation uw,Velocity \
+        Correlation vv,Velocity Correlation vw,Velocity Correlation ww
+    END
+    TRANSIENT STATISTICS: TrnRMS
+      Option = Root Mean Square
+      Output Variables List = Eddy Viscosity,Mach Number,Pressure,Velocity
     END
   END
   SOLVER CONTROL:
@@ -305,7 +348,7 @@ FLOW: Flow Analysis 1
       Timescale Control = Coefficient Loops
     END
     CONVERGENCE CRITERIA:
-      Residual Target = 0.000001
+      Residual Target = 1e-05
       Residual Type = RMS
     END
     TRANSIENT SCHEME:
