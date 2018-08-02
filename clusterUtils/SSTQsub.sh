@@ -22,7 +22,7 @@ do
 	ssh $node "cp $PBS_O_WORKDIR/$DEFFILE $TMPDIR"
 done
 
-cd $SCRATCH
+cd $TMPDIR
 
 cfx5solve -batch -def $DEFFILE -double -par-dist "$machines" -job -output-summary-option 3 -verbose
 
