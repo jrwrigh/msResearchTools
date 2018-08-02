@@ -1,4 +1,4 @@
-# State file created:  2018/07/27 11:29:45
+# State file created:  2018/08/01 09:49:40
 # Build 19.0 2017-12-01T23:36:31.332000
 
 LIBRARY:
@@ -154,7 +154,7 @@ FLOW: Flow Analysis 1
           END
         END
         TURBULENCE:
-          Option = Medium Intensity and Eddy Viscosity Ratio
+          Option = High Intensity and Eddy Viscosity Ratio
         END
       END
     END

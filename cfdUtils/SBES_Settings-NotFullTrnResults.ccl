@@ -174,7 +174,7 @@ FLOW: Flow Analysis 1
           END
         END
         TURBULENCE:
-          Option = Medium Intensity and Eddy Viscosity Ratio
+          Option = High Intensity and Eddy Viscosity Ratio
         END
       END
     END
