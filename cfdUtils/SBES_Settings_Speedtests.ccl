@@ -1,4 +1,4 @@
-# State file created:  2018/08/02 17:36:57
+# State file created:  2018/08/02 17:50:01
 # Build 19.0 2017-12-01T23:36:31.332000
 
 LIBRARY:
@@ -137,7 +137,7 @@ FLOW: Flow Analysis 1
     END
     TIME DURATION:
       Option = Total Time
-      Total Time = 0.001 [s]
+      Total Time = 0.0001 [s]
     END
     TIME STEPS:
       Option = Timesteps
