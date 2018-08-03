@@ -36,7 +36,7 @@ set {in_r} 25.4
 set {out_r} 28.9604
 set {dif_ang} 4.0 
 set {trans_r} 20
-set {out_expan_r_multi} 60
+set {out_expan_r_multi} 2
     # multiplies by inlet diameter
 
 #### Meshing 
@@ -84,7 +84,7 @@ set {prsm_initheight} .05
 
 set {in_len} [expr $in_len_multi * $in_r * 2]
 set {out_len} [expr $out_len_multi * $in_r * 2]
-set {out_expan_r} [expr $out_expan_r * $in_r]
+set {out_expan_r} [expr $out_expan_r_multi * $in_r]
 
 set {prsm_totheight} [expr $prsm_initheight * ( (1-pow($prsm_growthratio , $prsm_numlayer)) / (1-$prsm_growthratio) )]
 
