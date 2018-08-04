@@ -1,0 +1,10 @@
+/file/read-case McD13_4S3_SST.cas
+
+/solve/initialize/hyb-initialization
+
+/solve/iterate 1
+
+/file/write-data McD13_4S3_SST_test.dat
+
+/exit
+yes
