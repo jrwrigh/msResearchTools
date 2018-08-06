@@ -3,6 +3,8 @@
 #PBS -l select=2:ncpus=28:mpiprocs=28:mem=32gb:phase=16
 #PBS -l walltime=72:00:00
 #PBS -j oe
+#PBS -m abe
+#PBS -M jrwrigh@g.clemson.edu
 
 module purge
 module add ansys/19.0
