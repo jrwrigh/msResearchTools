@@ -11,13 +11,22 @@ while getopts ":s" options;do
     esac
 done
 
+if [[ $justssh -eq 1 ]]
+then
+    echo -e 'Scipt will SSH to head node working directory only\n'
+else 
+    echo -e 'Script wil SSH and open CFX Monitor\n'
+fi
+
+
 ARG=${@:$OPTIND:1}
 
+echo "ARG is: $ARG"
 
-if [ -n $ARG ]; then
-    jobid=$(qstat -u $USER | grep -o "[0-9]\{7\}\.pbs02")
-else
+if [[ -n $ARG ]]; then
     jobid=$ARG
+else
+    jobid=$(qstat -u $USER | grep -o "[0-9]\{7\}\.pbs02")
 fi
 
 echo "Job ID is: $jobid"
@@ -33,10 +42,10 @@ do
 done
 
 
-if [[$justssh -eq 0]]
+if [[ $justssh -eq 0 ]]
 then
 
-echo "Monitoring CFX job in " $correctnode
+echo "Monitoring CFX job in $correctnode"
 
 ssh -X $correctnode <<-EOF
 module load ansys/19.0
@@ -49,6 +58,6 @@ cfx5solve -monitor "\$dir"
 EOF
 
 else
-    echo "SSH to" $correctnode
+    echo "SSH to working directory in $correctnode"
 ssh -t $correctnode "cd /local_scratch/pbs.$jobid; bash -l"
 fi
