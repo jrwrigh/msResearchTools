@@ -1,4 +1,4 @@
-# State file created:  2018/08/02 17:31:24
+# State file created:  2018/08/06 11:41:46
 # Build 19.0 2017-12-01T23:36:31.332000
 
 LIBRARY:
@@ -350,6 +350,10 @@ FLOW: Flow Analysis 1
     CONVERGENCE CRITERIA:
       Residual Target = 1e-05
       Residual Type = RMS
+    END
+    ELAPSED WALL CLOCK TIME:
+      Elapsed Time = 71 [h]
+      Option = Maximum Run Time
     END
     TRANSIENT SCHEME:
       Option = Second Order Backward Euler
