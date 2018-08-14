@@ -153,6 +153,9 @@ ic_set_meshing_params variable 0 tgrid_n_ortho_layers 0 tgrid_fix_first_layer 0 
 ic_geo_set_family_params WALLS prism 1 emax $walls_max_abs
 
 #### Create mesh
+##
+###### NOT VALIDATED!!!!!!!
+##
 if {$mesh_option == 1} {
     ic_set_global geo_cad 0.3 toler
 
@@ -183,6 +186,9 @@ if {$mesh_option == 1} {
     }
 
 ### For block instead of unstructured tet mesh
+##
+###### NOT VALIDATED!!!!!!!
+##
 if {$mesh_option == 2} {
     # Make Initial block
     ic_hex_unload_blocking 
@@ -259,6 +265,9 @@ if {$mesh_option == 2} {
 }
 
 ### For octohedral o-grid instead of square o-grid
+##
+###### NOT VALIDATED!!!!!!!
+##
 if {$mesh_option == 3} {
     # Make Initial block
     ic_hex_unload_blocking 
@@ -376,6 +385,9 @@ if {$mesh_option == 3} {
 }
 
 ### For octogrid with refined inlet area
+##
+###### NOT VALIDATED!!!!!!!
+##
 if {$mesh_option == 4} {
     # Make Initial block
     ic_hex_unload_blocking 
