@@ -101,16 +101,16 @@ ic_boco_set_part_color GEOM
 ic_empty_tetin
 ic_point {} GEOM pnt.00 0,0,0
 ic_point {} GEOM pnt.01 0,$in_r,0
-ic_point {} GEOM pnt.02 $in_len,$in_r,0
-ic_point {} GEOM pnt.03 $in_len,[expr $in_r + $trans_r],0
-ic_point {} GEOM pnt.05 $05_i,$05_j,0
+ic_point {} GEOM pnt.02 0,$in_r,$in_len
+ic_point {} GEOM pnt.03 0,[expr $in_r + $trans_r],$in_len
+ic_point {} GEOM pnt.05 0,$05_j,$05_i
 # make arc curve and associated point
 ic_curve arc_ctr_rad GEOM crv.06 "pnt.03 pnt.02 pnt.05 $trans_r 0 $dif_ang"
 ic_point curve_end GEOM pnt.04 {crv.06 ymax}
-ic_point {} GEOM pnt.06 $05_i,$out_expan_r,0
-ic_point {} GEOM pnt.07 $07_i,$07_j,0
-ic_point {} GEOM pnt.08 $07_i,0,0
-ic_point {} GEOM pnt.09 $05_i,0,0
+ic_point {} GEOM pnt.06 0,$out_expan_r,$05_i
+ic_point {} GEOM pnt.07 0,$07_j,$07_i
+ic_point {} GEOM pnt.08 0,0,$07_i
+ic_point {} GEOM pnt.09 0,0,$05_i
 # making Curves
 ic_curve point GEOM crv.00 {pnt.00 pnt.01}
 ic_curve point GEOM crv.01 {pnt.01 pnt.02}
