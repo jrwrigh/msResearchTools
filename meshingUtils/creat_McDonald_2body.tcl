@@ -120,26 +120,22 @@ ic_curve point GEOM crv.04 {pnt.06 pnt.07}
 ic_curve point GEOM crv.05 {pnt.07 pnt.08}
 ic_curve point GEOM crv.06 {pnt.05 pnt.09}
 # make revolved surfaces
-ic_geo_cre_srf_rev GEOM srf.00 {crv.00 crv.01 crv.06 crv.02 crv.07} pnt.00 {1 0 0} 0 360 c 1
-ic_geo_cre_srf_rev GEOM srf.00 {crv.07 crv.03 crv.04 crv.05} pnt.00 {1 0 0} 0 360 c 1
-ic_geo_new_family BODY
-ic_boco_set_part_color BODY
-ic_geo_create_body {srf.00.1 srf.00.5 srf.00.4 srf.00.3 srf.00.2 srf.00 srf.06} {} BODY
-
-# Rotationing the part to be axial with Z
-# ic_move_geometry surface names {srf.00.6 } rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
-# ic_move_geometry curve names {crv.06 crv.00 crv.01 crv.02 crv.03 crv.04 crv.05 srf.00.1e11 srf.00.1e13 srf.00.2e16 srf.00.3e20 srf.00.4e24 srf.00.5e28} rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
-# ic_move_geometry body names BODY.0 rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
-# ic_move_geometry point names {pnt.03 GEOM.22 GEOM.24 GEOM.28 GEOM.31 GEOM.33 GEOM.37 GEOM.41 GEOM.47} rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
-
+ic_geo_cre_srf_rev GEOM srf.00 {crv.00 crv.01 crv.06 crv.02 crv.07} pnt.00 {0 0 1} 0 360 c 1
+ic_geo_cre_srf_rev GEOM srf.00 {crv.07 crv.03 crv.04 crv.05} pnt.08 {0 0 1} 0 360 c 1
+ic_geo_new_family DIFFUSER
+ic_boco_set_part_color DIFFUSER
+ic_geo_create_body {srf.00 srf.00.1 srf.00.2 srf.00.3 srf.01} {} DIFFUSER
+ic_geo_new_family PLENUM
+ic_boco_set_part_color PLENUM
+ic_geo_create_body {srf.00.5 srf.00.6 srf.00.7 srf.00.8} {} PLENUM
 
 
 #Creating parts for the surfaces
 ic_geo_set_part surface srf.00 INLET 0
 ic_delete_empty_parts 
-ic_geo_set_part surface {srf.00.1 srf.00.6 srf.00.5 srf.00.4} WALLS 0
+ic_geo_set_part surface {srf.00.1 srf.00.2 srf.00.3} WALLS 0
 ic_delete_empty_parts 
-ic_geo_set_part surface {srf.00.3 srf.00.2} OUTLET 0
+ic_geo_set_part surface {srf.00.6 srf.00.7 srf.00.8} OUTLET 0
 ic_delete_empty_parts 
 
 
