@@ -2,7 +2,7 @@ ic_unload_tetin
 # v0.2.0
 #==============Parameters
 # Meta
-set {mesh_option} 0
+set {mesh_option} 1
 
 
 
@@ -158,232 +158,80 @@ ic_geo_set_family_params WALLS prism 1 emax $walls_max_abs
 ##
 if {$mesh_option == 1} {
     ######### DIFFUSER BODY
-
-    # Split Block apart
-        # Major splits (for the diameter transitions)
-    ic_hex_mark_blocks unmark
-    ic_hex_mark_blocks unmark
-    ic_undo_group_begin 
-    ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 41 42 curve:srf.00.1e10:0.8795489503190525 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
-    ic_hex_undo_major_end split_grid
-    ic_undo_group_end 
-    ic_undo_group_begin 
-    ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 74 42 curve:srf.00.4e23:0.8795489503190525 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
-    ic_hex_undo_major_end split_grid
-
-        # Splits down the middle
-    ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 37 41 GEOM.19 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
-    ic_hex_undo_major_end split_grid
-    ic_undo_group_end 
-    ic_undo_group_begin 
-    ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 25 41 GEOM.19 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
-    ic_hex_undo_major_end split_grid
-
-    # Associate block edges with curves
-    ic_hex_set_edge_projection 37 102 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 126 37 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 21 126 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 21 101 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 101 25 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 25 128 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 128 41 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 102 41 0 1 srf.00.1e12
-    ic_undo_group_end 
-    ic_hex_find_comp_curve srf.00.1e10
-    ic_undo_group_begin 
-    ic_hex_set_edge_projection 70 106 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 131 70 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 69 131 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 69 105 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 105 73 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 73 133 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 133 74 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 106 74 0 1 srf.00.1e10
-    ic_undo_group_end 
-    ic_hex_find_comp_curve srf.00.4e23
-    ic_undo_group_begin 
-    ic_hex_set_edge_projection 86 110 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 136 86 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 85 136 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 85 109 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 89 138 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 109 89 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 138 90 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 110 90 0 1 srf.00.4e23
-    ic_undo_group_end 
-    ic_hex_find_comp_curve srf.00.3e19
-    ic_undo_group_begin 
-    ic_hex_set_edge_projection 38 114 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 141 38 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 22 141 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 22 113 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 113 26 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 26 143 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 114 42 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 143 42 0 1 srf.00.3e19
-
-
-    # Snap verticies to curves
-    ic_hex_project_to_surface INLET SHELL GEOM OUTLET LUMP BODY WALLS
-
-    # select blocks for O-Grid
-    ic_hex_mark_blocks superblock 13
-    ic_hex_mark_blocks superblock 27
-    ic_hex_mark_blocks superblock 28
-    ic_hex_mark_blocks superblock 29
-    ic_hex_mark_blocks superblock 30
-    ic_hex_mark_blocks superblock 31
-    ic_hex_mark_blocks superblock 32
-    ic_hex_mark_blocks superblock 33
-    ic_hex_mark_blocks superblock 34
-    ic_hex_mark_blocks superblock 35
-    ic_hex_mark_blocks superblock 36
-    ic_hex_mark_blocks superblock 37
-
-    # select faces for O-Grid
-    ic_hex_mark_blocks face_neighbors corners { 86 136 110 137 } { 22 141 113 142 } { 21 126 101 127 } { 37 126 102 127 } { 41 128 102 127 } { 25 128 101 127 } { 38 141 114 142 } { 42 143 114 142 } { 26 143 113 142 }
-
-    # create O-Grid
-    ic_hex_ogrid 1 m GEOM BODY SHELL LUMP INLET OUTLET WALLS -version 50
-    ic_hex_mark_blocks unmark
-
-    # adjust O-Grid scale
-    ic_hex_rescale_ogrid 3 0 $ogrid_separation_space m GEOM BODY SHELL LUMP INLET OUTLET WALLS abs
-
-    # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
-    # set edge mesh criteria
-    ic_hex_set_mesh 37 181 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
-
-}
-
-### For octogrid with refined inlet area
-##
-###### NOT VALIDATED!!!!!!!
-##
-if {$mesh_option == 4} {
-    # Make Initial block
-    ic_hex_unload_blocking 
-    ic_hex_initialize_blocking {surface srf.00.4 surface srf.00.3 surface srf.00.2 surface srf.00.1 surface srf.00 surface srf.00.5} BODY 0 101
+    puts "Starting OGrid for Diffuser Body"
+    # Make Initial Block
+    ic_hex_initialize_blocking {surface srf.00 surface srf.00.1 surface srf.00.2 surface srf.00.3} DIFFUSER 0 101
     ic_hex_unblank_blocks 
     ic_hex_multi_grid_level 0
     ic_hex_projection_limit 0
-    ic_hex_default_bunching_law default 2.0
+    ic_hex_default_bunching_law default 2
     ic_hex_floating_grid off
     ic_hex_transfinite_degree 1
-    ic_hex_unstruct_face_type one_tri
+    ic_hex_unstruct_face_type several_tris
     ic_hex_set_unstruct_face_method uniform_quad
     ic_hex_set_n_tetra_smoothing_steps 20
     ic_hex_error_messages off_minor
 
-    # Split Block apart
-        # Major splits (for the diameter transitions)
-    ic_hex_mark_blocks unmark
-    ic_hex_mark_blocks unmark
-    ic_undo_group_begin 
+    # Split at Throat
     ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 41 42 curve:srf.00.1e10:0.8795489503190525 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
-    ic_hex_undo_major_end split_grid
-    ic_undo_group_end 
-    ic_undo_group_begin 
-    ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 74 42 curve:srf.00.4e23:0.8795489503190525 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
+    ic_hex_split_grid 25 26 curve:srf.00.1e12:0.1253280303717014 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
     ic_hex_undo_major_end split_grid
 
-        # Splits down the middle
-    ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 37 41 GEOM.19 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
-    ic_hex_undo_major_end split_grid
-    ic_undo_group_end 
-    ic_undo_group_begin 
-    ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 25 41 GEOM.19 m GEOM BODY SHELL LUMP INLET OUTLET WALLS
-    ic_hex_undo_major_end split_grid
+    # Split down the middle
+    ic_hex_split_grid 25 41 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
+    ic_hex_split_grid 21 25 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
 
-    # Associate block edges with curves
-    ic_hex_set_edge_projection 37 102 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 126 37 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 21 126 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 21 101 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 101 25 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 25 128 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 128 41 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 102 41 0 1 srf.00.1e12
-    ic_undo_group_end 
-    ic_hex_find_comp_curve srf.00.1e10
-    ic_undo_group_begin 
-    ic_hex_set_edge_projection 70 106 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 131 70 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 69 131 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 69 105 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 105 73 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 73 133 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 133 74 0 1 srf.00.1e10
-    ic_hex_set_edge_projection 106 74 0 1 srf.00.1e10
-    ic_undo_group_end 
-    ic_hex_find_comp_curve srf.00.4e23
-    ic_undo_group_begin 
-    ic_hex_set_edge_projection 86 110 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 136 86 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 85 136 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 85 109 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 89 138 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 109 89 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 138 90 0 1 srf.00.4e23
-    ic_hex_set_edge_projection 110 90 0 1 srf.00.4e23
-    ic_undo_group_end 
-    ic_hex_find_comp_curve srf.00.3e19
-    ic_undo_group_begin 
-    ic_hex_set_edge_projection 38 114 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 141 38 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 22 141 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 22 113 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 113 26 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 26 143 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 114 42 0 1 srf.00.3e19
-    ic_hex_set_edge_projection 143 42 0 1 srf.00.3e19
+    # Associate Edges with Curves
+    ic_hex_set_edge_projection 94 42 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 118 42 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 38 118 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 93 38 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 22 93 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 22 116 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 116 26 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 26 94 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 90 74 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 113 74 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 70 113 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 89 70 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 69 89 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 69 111 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 111 73 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 73 90 0 1 srf.00.1e12
+    ic_hex_set_edge_projection 86 41 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 108 41 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 37 108 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 85 37 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 21 106 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 21 85 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 106 25 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 25 86 0 1 srf.00.1e14
 
+    # Snap Edges to Associated Curves
+    ic_hex_project_to_surface INLET SHELL DIFFUSER GEOM OUTLET PLENUM LUMP WALLS
 
-    # Snap verticies to curves
-    ic_hex_project_to_surface INLET SHELL GEOM OUTLET LUMP BODY WALLS
-
-    # select blocks for O-Grid
-    ic_hex_mark_blocks superblock 13
-    ic_hex_mark_blocks superblock 27
+    # Add Blocks and faces to be used in O-Grid
     ic_hex_mark_blocks superblock 28
-    ic_hex_mark_blocks superblock 29
-    ic_hex_mark_blocks superblock 30
+    ic_hex_mark_blocks superblock 13
     ic_hex_mark_blocks superblock 31
+    ic_hex_mark_blocks superblock 30
     ic_hex_mark_blocks superblock 32
     ic_hex_mark_blocks superblock 33
-    ic_hex_mark_blocks superblock 34
-    ic_hex_mark_blocks superblock 35
-    ic_hex_mark_blocks superblock 36
-    ic_hex_mark_blocks superblock 37
+    ic_hex_mark_blocks superblock 27
+    ic_hex_mark_blocks superblock 29
 
-    # select faces for O-Grid
-    ic_hex_mark_blocks face_neighbors corners { 86 136 110 137 } { 22 141 113 142 } { 21 126 101 127 } { 37 126 102 127 } { 41 128 102 127 } { 25 128 101 127 } { 38 141 114 142 } { 42 143 114 142 } { 26 143 113 142 }
+    ic_hex_mark_blocks face_neighbors corners { 25 86 106 107 } { 41 86 108 107 } { 37 85 108 107 } { 21 85 106 107 } { 26 94 116 117 } { 42 94 118 117 } { 38 93 118 117 } { 22 93 116 117 }
 
-    # create O-Grid
-    ic_hex_ogrid 1 m GEOM BODY SHELL LUMP INLET OUTLET WALLS -version 50
-    ic_hex_mark_blocks unmark
+    # Create O Grid
+    ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET -version 50
 
-    # adjust O-Grid scale
-    ic_hex_rescale_ogrid 3 0 $ogrid_separation_space m GEOM BODY SHELL LUMP INLET OUTLET WALLS abs
-
-
-    # Split block for inlet refinement
-    ic_hex_split_grid 25 73 abs:$ogrid_inre_depth m GEOM BODY SHELL LUMP INLET OUTLET WALLS
-
-    # Inlet refinement settings
-    ic_hex_set_mesh 25 219 n $ogrid_inre_layern h1rel $ogrid_inre_initialh h2rel 0.15 r1 $ogrid_inre_rate r2 2 lmax 3 exp1 copy_to_parallel unlocked
-
+    # Set Separation Distance of DIFFUSER OGrid
+    ic_hex_rescale_ogrid 3 0 $ogrid_separation_space m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET abs
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
-    ic_hex_set_mesh 37 181 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+    ic_hex_set_mesh 37 151 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
 
+
+}
