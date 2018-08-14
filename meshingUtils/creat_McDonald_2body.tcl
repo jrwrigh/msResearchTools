@@ -15,18 +15,18 @@ set {mesh_option} 0
 #                                       c3|                         |
 #                                         |                         |
 #                                       p5*                         |
-#                                        /                          |
-#                                       /                           |
-#                                 p3*  / c2                         |
-#                        c1           /                             |
-#               p1*-----------------*/                              |
-#                 |                 ^p2,p4,c6                       |c5
-#                 |                                                 |
-#               c0|                                                 |
-#                 |                                                 |
-#                 |                                                 |
-# rot_axis-->   p0*-------------------------------------------------*p8
-
+#                                        /|                         |
+#                                     c2/ |                         |
+#                                 p3*  /  |                         |
+#                        c1           /   |                         |
+#               p1*-----------------*/    |                         |
+#                 |                 ^p2,  |c7                       |c5
+#                 |                  p4,  |                         |
+#               c0|                  c6   |                         |
+#                 |                       |                         |
+#                 |                       |                         |
+# rot_axis-->   p0*-----------------------*-------------------------*p8
+#                                         ^p9
 
 #### Geometry
 set {in_len_multi}  3
@@ -104,27 +104,33 @@ ic_point {} GEOM pnt.01 0,$in_r,0
 ic_point {} GEOM pnt.02 $in_len,$in_r,0
 ic_point {} GEOM pnt.03 $in_len,[expr $in_r + $trans_r],0
 ic_point {} GEOM pnt.05 $05_i,$05_j,0
+# make arc curve and associated point
 ic_curve arc_ctr_rad GEOM crv.06 "pnt.03 pnt.02 pnt.05 $trans_r 0 $dif_ang"
 ic_point curve_end GEOM pnt.04 {crv.06 ymax}
 ic_point {} GEOM pnt.06 $05_i,$out_expan_r,0
 ic_point {} GEOM pnt.07 $07_i,$07_j,0
 ic_point {} GEOM pnt.08 $07_i,0,0
+ic_point {} GEOM pnt.09 $05_i,0,0
+# making Curves
 ic_curve point GEOM crv.00 {pnt.00 pnt.01}
 ic_curve point GEOM crv.01 {pnt.01 pnt.02}
 ic_curve point GEOM crv.02 {pnt.04 pnt.05}
 ic_curve point GEOM crv.03 {pnt.05 pnt.06}
 ic_curve point GEOM crv.04 {pnt.06 pnt.07}
 ic_curve point GEOM crv.05 {pnt.07 pnt.08}
-ic_geo_cre_srf_rev GEOM srf.00 {crv.00 crv.01 crv.05 crv.04 crv.03 crv.02 crv.06} pnt.00 {1 0 0} 0 360 c 1
+ic_curve point GEOM crv.06 {pnt.05 pnt.09}
+# make revolved surfaces
+ic_geo_cre_srf_rev GEOM srf.00 {crv.00 crv.01 crv.06 crv.02 crv.07} pnt.00 {1 0 0} 0 360 c 1
+ic_geo_cre_srf_rev GEOM srf.00 {crv.07 crv.03 crv.04 crv.05} pnt.00 {1 0 0} 0 360 c 1
 ic_geo_new_family BODY
 ic_boco_set_part_color BODY
 ic_geo_create_body {srf.00.1 srf.00.5 srf.00.4 srf.00.3 srf.00.2 srf.00 srf.06} {} BODY
 
 # Rotationing the part to be axial with Z
-ic_move_geometry surface names {srf.00.6 } rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
-ic_move_geometry curve names {crv.06 crv.00 crv.01 crv.02 crv.03 crv.04 crv.05 srf.00.1e11 srf.00.1e13 srf.00.2e16 srf.00.3e20 srf.00.4e24 srf.00.5e28} rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
-ic_move_geometry body names BODY.0 rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
-ic_move_geometry point names {pnt.03 GEOM.22 GEOM.24 GEOM.28 GEOM.31 GEOM.33 GEOM.37 GEOM.41 GEOM.47} rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
+# ic_move_geometry surface names {srf.00.6 } rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
+# ic_move_geometry curve names {crv.06 crv.00 crv.01 crv.02 crv.03 crv.04 crv.05 srf.00.1e11 srf.00.1e13 srf.00.2e16 srf.00.3e20 srf.00.4e24 srf.00.5e28} rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
+# ic_move_geometry body names BODY.0 rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
+# ic_move_geometry point names {pnt.03 GEOM.22 GEOM.24 GEOM.28 GEOM.31 GEOM.33 GEOM.37 GEOM.41 GEOM.47} rotate 270 rotate_axis {0 1 0} cent {0 0 0} detach 0
 
 
 
