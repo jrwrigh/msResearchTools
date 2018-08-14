@@ -152,24 +152,12 @@ ic_set_meshing_params variable 0 tgrid_n_ortho_layers 0 tgrid_fix_first_layer 0 
 # Setting Family meshing parameters
 ic_geo_set_family_params WALLS prism 1 emax $walls_max_abs
 
-### For octohedral o-grid instead of square o-grid
+### DIFFUSER=OctOgrid PLENUM=OctOgrid
 ##
 ###### NOT VALIDATED!!!!!!!
 ##
-if {$mesh_option == 3} {
-    # Make Initial block
-    ic_hex_unload_blocking 
-    ic_hex_initialize_blocking {surface srf.00.4 surface srf.00.3 surface srf.00.2 surface srf.00.1 surface srf.00 surface srf.00.5} BODY 0 101
-    ic_hex_unblank_blocks 
-    ic_hex_multi_grid_level 0
-    ic_hex_projection_limit 0
-    ic_hex_default_bunching_law default 2.0
-    ic_hex_floating_grid off
-    ic_hex_transfinite_degree 1
-    ic_hex_unstruct_face_type one_tri
-    ic_hex_set_unstruct_face_method uniform_quad
-    ic_hex_set_n_tetra_smoothing_steps 20
-    ic_hex_error_messages off_minor
+if {$mesh_option == 1} {
+    ######### DIFFUSER BODY
 
     # Split Block apart
         # Major splits (for the diameter transitions)
