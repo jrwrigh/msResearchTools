@@ -47,7 +47,7 @@ set {ogrid_separation_layern} 80
     # number of layers in the separation space
 set {ogrid_init_spacing} 0.00164
     # value of initial height layer relative to separation_space
-set {orgid_separation_rate} 1.2
+set {ogrid_separation_rate} 1.2
     # expotential rate at which the layer size increases
 
 ## FOR O-GRID INLET REFINEMENT
@@ -252,7 +252,7 @@ if {$mesh_option == 2} {
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
-    ic_hex_set_mesh 37 109 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+    ic_hex_set_mesh 37 109 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $ogrid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
 }
 
@@ -369,7 +369,7 @@ if {$mesh_option == 3} {
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
-    ic_hex_set_mesh 37 181 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+    ic_hex_set_mesh 37 181 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $ogrid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
 }
 
@@ -494,7 +494,7 @@ if {$mesh_option == 4} {
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
-    ic_hex_set_mesh 37 181 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+    ic_hex_set_mesh 37 181 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $ogrid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
 
 }
