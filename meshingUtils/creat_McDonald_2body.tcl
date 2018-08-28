@@ -43,29 +43,21 @@ set {out_expan_r_multi} 3
 ## FOR O-GRID MESHING
 set {ogrid_separation_space} 10
     # Absolute size change of separation edge
-set {ogrid_separation_layern} 80
+set {ogrid_separation_layern} 50
     # number of layers in the separation space
-set {ogrid_init_spacing} 0.00164
+set {ogrid_init_spacing} 0.00025
     # value of initial height layer relative to separation_space
-set {orgid_separation_rate} 1.2
+set {ogrid_separation_rate} 1.2
     # expotential rate at which the layer size increases
-
-## FOR O-GRID INLET REFINEMENT
-set {ogrid_inre_depth} 20
-    # Inlet refinement block depth
-set {ogrid_inre_layern} 25
-    # Inlet refinement element count
-set {ogrid_inre_initialh} 0.025
-    # Inlet refinement initial height
-set {ogrid_inre_rate} 1.2
-    # Inlet refinement expansion rate
+set {ogrid_separation_space_PLEN} 45
+    # Absolute size change of separation edge
 
 ##FOR TET & O-GRID MESH
-set {global_ref} 3
+set {global_ref} 2
     # global reference size (not used as reference in this script)
 set {global_max_abs} 4
     # absolute global size
-set {walls_max_abs} 3
+set {walls_max_abs} 2
     # absolute maximum element size on wall
 set {vol_expanratio} 1.1
     # expansion rate for volume element mesh
@@ -135,7 +127,11 @@ ic_geo_set_part surface srf.00 INLET 0
 ic_delete_empty_parts 
 ic_geo_set_part surface {srf.00.1 srf.00.2 srf.00.3} WALLS 0
 ic_delete_empty_parts 
-ic_geo_set_part surface {srf.00.6 srf.00.7 srf.00.8} OUTLET 0
+ic_geo_set_part surface {srf.00.7 srf.00.8} OUTLET 0
+ic_delete_empty_parts 
+ic_geo_set_part surface {srf.00.6} NONSLIPWALL 0
+ic_delete_empty_parts 
+ic_geo_set_part surface {srf.00.5} INTERFACEDIFF 0
 ic_delete_empty_parts 
 
 
@@ -181,15 +177,16 @@ if {$mesh_option == 1} {
     ic_hex_split_grid 25 41 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
     ic_hex_split_grid 21 25 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
 
-    # Associate Edges with Curves
-    ic_hex_set_edge_projection 94 42 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 118 42 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 38 118 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 93 38 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 22 93 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 22 116 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 116 26 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 26 94 0 1 srf.00.3e20
+    # # Associate Edges with Curves
+    ic_hex_set_edge_projection 86 41 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 108 41 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 37 108 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 85 37 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 21 85 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 21 106 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 106 25 0 1 srf.00.1e14
+    ic_hex_set_edge_projection 25 86 0 1 srf.00.1e14
+    # ic_hex_find_comp_curve srf.00.1e12
     ic_hex_set_edge_projection 90 74 0 1 srf.00.1e12
     ic_hex_set_edge_projection 113 74 0 1 srf.00.1e12
     ic_hex_set_edge_projection 70 113 0 1 srf.00.1e12
@@ -198,17 +195,18 @@ if {$mesh_option == 1} {
     ic_hex_set_edge_projection 69 111 0 1 srf.00.1e12
     ic_hex_set_edge_projection 111 73 0 1 srf.00.1e12
     ic_hex_set_edge_projection 73 90 0 1 srf.00.1e12
-    ic_hex_set_edge_projection 86 41 0 1 srf.00.1e14
-    ic_hex_set_edge_projection 108 41 0 1 srf.00.1e14
-    ic_hex_set_edge_projection 37 108 0 1 srf.00.1e14
-    ic_hex_set_edge_projection 85 37 0 1 srf.00.1e14
-    ic_hex_set_edge_projection 21 106 0 1 srf.00.1e14
-    ic_hex_set_edge_projection 21 85 0 1 srf.00.1e14
-    ic_hex_set_edge_projection 106 25 0 1 srf.00.1e14
-    ic_hex_set_edge_projection 25 86 0 1 srf.00.1e14
+    # ic_hex_find_comp_curve srf.00.3e20
+    ic_hex_set_edge_projection 94 42 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 118 42 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 38 118 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 93 38 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 22 93 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 22 116 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 116 26 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 26 94 0 1 srf.00.3e20
 
     # Snap Edges to Associated Curves
-    ic_hex_project_to_surface INLET SHELL DIFFUSER GEOM OUTLET PLENUM LUMP WALLS
+    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
 
     # Add Blocks and faces to be used in O-Grid
     ic_hex_mark_blocks superblock 28
@@ -234,4 +232,4 @@ if {$mesh_option == 1} {
 
 
 
-}
+}   
