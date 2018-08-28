@@ -2,7 +2,9 @@ ic_unload_tetin
 # v0.2.0
 #==============Parameters
 # Meta
-set {mesh_option} 1
+set {mesh_option} 2
+# 1 = DiffuserBody
+# 2 = PlenumMesh
 
 
 
@@ -228,7 +230,62 @@ if {$mesh_option == 1} {
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
-    ic_hex_set_mesh 37 151 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $orgid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+    ic_hex_set_mesh 37 151 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $ogrid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+}
+
+if {$mesh_option == 2} {
+    #######
+    # PLENUM BODY
+    #######
+
+    # Make Initial Block
+    ic_hex_initialize_blocking {surface srf.00.6 surface srf.00.7 surface srf.00.8 surface srf.00.5} DIFFUSER 0 101
+    ic_hex_unblank_blocks 
+    ic_hex_multi_grid_level 0
+    ic_hex_projection_limit 0
+    ic_hex_default_bunching_law default 2
+    ic_hex_floating_grid off
+    ic_hex_transfinite_degree 1
+    ic_hex_unstruct_face_type several_tris
+    ic_hex_set_unstruct_face_method uniform_quad
+    ic_hex_set_n_tetra_smoothing_steps 20
+    ic_hex_error_messages off_minor
+
+    # Split Down Middle
+    ic_hex_split_grid 21 25 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
+    ic_hex_split_grid 25 41 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
+
+    # Associate Edges to Curves
+    ic_hex_set_edge_projection 88 41 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 70 41 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 86 37 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 37 70 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 21 86 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 21 69 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 69 25 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 25 88 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 93 42 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 74 42 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 38 74 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 91 38 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 22 91 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 22 73 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 26 93 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 73 26 0 1 srf.00.7e34
+
+    # Snap Edges to Associated Curves
+    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
+
+    # Select Blocks and Faces for Ogrid
+    ic_hex_mark_blocks superblock 29
+    ic_hex_mark_blocks superblock 27
+    ic_hex_mark_blocks superblock 13
+    ic_hex_mark_blocks superblock 28
+
+    ic_hex_mark_blocks face_neighbors corners { 26 93 73 92 } { 42 93 74 92 } { 38 91 74 92 } { 22 91 73 92 } { 41 88 70 87 } { 37 86 70 87 } { 21 86 69 87 } { 25 88 69 87 }
+
+    # Create Ogrid
+    ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET NONSLIPWALL INTERFACEDIFF -version 50
 
 
 
