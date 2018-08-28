@@ -6,13 +6,12 @@ filename = Path('dataUtils/courantnumber_max-rfile.out')
 
 def get_headers(file, headerline, regexstring, exclude):
     # Get string of selected headerline
-    # with file.open() as f:
-    f = file.open()
-    for i, line in enumerate(f):
-        if i == headerline-1:
-            headerstring = line
-        elif i > headerline-1:
-            break
+    with file.open() as f:
+        for i, line in enumerate(f):
+            if i == headerline-1:
+                headerstring = line
+            elif i > headerline-1:
+                break
 
     # Parse headerstring
     reglist = re.split(regexstring, headerstring)
