@@ -214,12 +214,12 @@ if {$mesh_option == 1} {
 
     # Split at Throat
     ic_hex_undo_major_start split_grid
-    ic_hex_split_grid 25 26 curve:srf.00.1e12:0.1253280303717014 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
+    ic_hex_split_grid 25 26 curve:srf.00.1e12:0.1253280303717014 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN
     ic_hex_undo_major_end split_grid
 
     # Split down the middle
-    ic_hex_split_grid 25 41 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
-    ic_hex_split_grid 21 25 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
+    ic_hex_split_grid 25 41 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN
+    ic_hex_split_grid 21 25 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN
 
     # # Associate Edges with Curves
     ic_hex_set_edge_projection 86 41 0 1 srf.00.1e14
@@ -250,7 +250,7 @@ if {$mesh_option == 1} {
     ic_hex_set_edge_projection 26 94 0 1 srf.00.3e20
 
     # Snap Edges to Associated Curves
-    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
+    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLETWALLS OUTLETMAIN
 
     # Add Blocks and faces to be used in O-Grid
     ic_hex_mark_blocks superblock 28
@@ -265,7 +265,7 @@ if {$mesh_option == 1} {
     ic_hex_mark_blocks face_neighbors corners { 25 86 106 107 } { 41 86 108 107 } { 37 85 108 107 } { 21 85 106 107 } { 26 94 116 117 } { 42 94 118 117 } { 38 93 118 117 } { 22 93 116 117 }
 
     # Create O Grid
-    ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET -version 50
+    ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN -version 50
 
     # Associate vertices with control circles
     ic_hex_set_node_projection 146 crv.11
@@ -296,7 +296,7 @@ if {$mesh_option == 1} {
     ic_hex_set_node_projection 138 crv.13
 
     # Snap vertices to control circles
-    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
+    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLETWALLS OUTLETMAIN
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
@@ -322,8 +322,8 @@ if {$mesh_option == 2} {
     ic_hex_error_messages off_minor
 
     # Split Down Middle
-    ic_hex_split_grid 21 25 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
-    ic_hex_split_grid 25 41 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET
+    ic_hex_split_grid 21 25 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN
+    ic_hex_split_grid 25 41 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN
 
     # Associate Edges to Curves
     ic_hex_set_edge_projection 88 41 0 1 srf.00.6e30
@@ -344,7 +344,7 @@ if {$mesh_option == 2} {
     ic_hex_set_edge_projection 73 26 0 1 srf.00.7e34
 
     # Snap Edges to Associated Curves
-    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
+    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLETWALLS OUTLETMAIN
 
     # Select Blocks and Faces for Ogrid
     ic_hex_mark_blocks superblock 29
@@ -355,10 +355,10 @@ if {$mesh_option == 2} {
     ic_hex_mark_blocks face_neighbors corners { 26 93 73 92 } { 42 93 74 92 } { 38 91 74 92 } { 22 91 73 92 } { 41 88 70 87 } { 37 86 70 87 } { 21 86 69 87 } { 25 88 69 87 }
 
     # Create Ogrid
-    ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET NONSLIPWALL INTERFACEDIFF -version 50
+    ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN NONSLIPWALL INTERFACEDIFF -version 50
 
     # Split Ring blocks in half
-    ic_hex_split_grid 38 122 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET NONSLIPWALL INTERFACEDIFF
+    ic_hex_split_grid 38 122 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN NONSLIPWALL INTERFACEDIFF
 
     # Associate inner ring edges to diffuser outlet
     ic_hex_set_edge_projection 142 144 0 1 srf.00.3e20
@@ -399,7 +399,7 @@ if {$mesh_option == 2} {
     ic_hex_set_node_projection 155 crv.14
 
     # Snap associations to geometry
-    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
+    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLETWALLS OUTLETMAIN
 
     # Define inner ring inflation layers
     ic_hex_set_mesh 141 113 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
