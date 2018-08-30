@@ -2,7 +2,7 @@ ic_unload_tetin
 # v0.2.0
 #==============Parameters
 # Meta
-set {mesh_option} 0
+set {mesh_option} 1
 # 0 = Geometry Creation Only
 # 1 = DiffuserBody
 # 2 = PlenumMesh
@@ -260,8 +260,36 @@ if {$mesh_option == 1} {
     # Create O Grid
     ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET -version 50
 
-    # Set Separation Distance of DIFFUSER OGrid
-    ic_hex_rescale_ogrid 3 0 $ogrid_separation_space m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET abs
+    # Associate vertices with control circles
+    ic_hex_set_node_projection 146 crv.11
+    ic_hex_set_node_projection 161 crv.11
+    ic_hex_set_node_projection 156 crv.11
+    ic_hex_set_node_projection 151 crv.11
+    ic_hex_set_node_projection 141 crv.11
+    ic_hex_set_node_projection 126 crv.11
+    ic_hex_set_node_projection 131 crv.11
+    ic_hex_set_node_projection 136 crv.11
+
+    ic_hex_set_node_projection 147 crv.12
+    ic_hex_set_node_projection 162 crv.12
+    ic_hex_set_node_projection 157 crv.12
+    ic_hex_set_node_projection 152 crv.12
+    ic_hex_set_node_projection 142 crv.12
+    ic_hex_set_node_projection 127 crv.12
+    ic_hex_set_node_projection 132 crv.12
+    ic_hex_set_node_projection 137 crv.12
+
+    ic_hex_set_node_projection 148 crv.13
+    ic_hex_set_node_projection 163 crv.13
+    ic_hex_set_node_projection 158 crv.13
+    ic_hex_set_node_projection 153 crv.13
+    ic_hex_set_node_projection 143 crv.13
+    ic_hex_set_node_projection 128 crv.13
+    ic_hex_set_node_projection 133 crv.13
+    ic_hex_set_node_projection 138 crv.13
+
+    # Snap vertices to control circles
+    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
