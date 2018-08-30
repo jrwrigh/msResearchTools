@@ -56,8 +56,6 @@ set {ccirc_outletouter} 45
     # outer circle radius @ domain outlet
 
 ## FOR O-GRID MESHING
-set {ogrid_separation_space} 10
-    # Absolute size change of separation edge
 set {ogrid_separation_layern} 50
     # number of layers in the separation space
 set {ogrid_init_spacing} 0.00025
