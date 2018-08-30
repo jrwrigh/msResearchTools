@@ -151,7 +151,9 @@ ic_geo_set_part surface srf.00 INLET 0
 ic_delete_empty_parts 
 ic_geo_set_part surface {srf.00.1 srf.00.2 srf.00.3} WALLS 0
 ic_delete_empty_parts 
-ic_geo_set_part surface {srf.00.7 srf.00.8} OUTLET 0
+ic_geo_set_part surface {srf.00.8} OUTLETMAIN 0
+ic_delete_empty_parts 
+ic_geo_set_part surface {srf.00.7} OUTLETWALLS 0
 ic_delete_empty_parts 
 ic_geo_set_part surface {srf.00.6} NONSLIPWALL 0
 ic_delete_empty_parts 
