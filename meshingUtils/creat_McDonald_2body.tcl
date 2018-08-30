@@ -68,7 +68,13 @@ set {ogrid_pleninner_layern} 40
 set {ogrid_pleninner_initheight} 0.0065
     # value of initial height layer relative to diffuser ring height
 set {ogrid_pleninner_expansionrate} 1.2
-    # expotential expansion rate of plenum ring layers
+    # expotential expansion rate of inner plenum ring layers
+set {ogrid_plenouter_layern} 34
+    # number of layers in outer plenum ring
+set {ogrid_plenouter_initheight} .002
+    # value of initial height layer relative to outer plenum ring height
+set {ogrid_plenouter_expansionrate} 1.5
+    # expotential expansion rate of inner plenum ring layers
 
 ##FOR TET & O-GRID MESH
 set {global_ref} 2
@@ -403,5 +409,16 @@ if {$mesh_option == 2} {
     ic_hex_set_mesh 144 125 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
     ic_hex_set_mesh 142 121 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
 
+    # Define outer ring inflation layering
+    ic_hex_set_mesh 69 143 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 25 145 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 88 146 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 41 147 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 70 144 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 37 142 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 86 141 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 21 140 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+
+    #### NOTE: The edges on the outlet face of the plenum are assumed to make automatic linear distribution
 
 }   
