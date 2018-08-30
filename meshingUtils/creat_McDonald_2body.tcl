@@ -57,14 +57,12 @@ set {ccirc_outletouter} 45
     # outer circle radius @ domain outlet
 
 ## FOR O-GRID MESHING
-set {ogrid_separation_layern} 50
+set {ogrid_diffring_layern} 50
     # number of layers in the separation space
-set {ogrid_init_spacing} 0.00025
+set {ogrid_diffring_initheight} 0.00025
     # value of initial height layer relative to separation_space
-set {ogrid_separation_rate} 1.2
+set {ogrid_diffring_expansionrate} 1.2
     # expotential rate at which the layer size increases
-set {ogrid_separation_space_PLEN} 45
-    # Absolute size change of separation edge
 
 ##FOR TET & O-GRID MESH
 set {global_ref} 2
@@ -288,7 +286,7 @@ if {$mesh_option == 1} {
 
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
-    ic_hex_set_mesh 37 151 n $ogrid_separation_layern h1rel $ogrid_init_spacing h2rel 0.0 r1 $ogrid_separation_rate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+    ic_hex_set_mesh 37 151 n $ogrid_diffring_layern h1rel $ogrid_diffring_initheight h2rel 0.0 r1 $ogrid_diffring_expansionrate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 }
 
 if {$mesh_option == 2} {
