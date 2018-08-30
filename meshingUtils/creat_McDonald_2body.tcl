@@ -44,15 +44,15 @@ set {out_expan_r_multi} 3
 
 #### Meshing 
 ## Control Circle parameters
-set {ccirc_inletr} 10
+set {ccirc_inletr} 12
     # radius @ inlet face
-set {ccirc_diffinr} 10
+set {ccirc_diffinr} 12
     # radius @ diffuser inlet face
-set {ccirc_diffoutr} 12
+set {ccirc_diffoutr} 14
     # radius @ diffuser outlet
-set {ccirc_outletinner} 15
+set {ccirc_outletinner} 20
     # inner circle radius @ domain outlet
-set {ccirc_outletouter} 30
+set {ccirc_outletouter} 45
     # outer circle radius @ domain outlet
 
 ## FOR O-GRID MESHING
