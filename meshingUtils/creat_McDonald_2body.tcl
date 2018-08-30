@@ -2,7 +2,7 @@ ic_unload_tetin
 # v0.2.0
 #==============Parameters
 # Meta
-set {mesh_option} 1
+set {mesh_option} 2
 # 0 = Geometry Creation Only
 # 1 = DiffuserBody
 # 2 = PlenumMesh
@@ -360,6 +360,50 @@ if {$mesh_option == 2} {
 
     # Create Ogrid
     ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET NONSLIPWALL INTERFACEDIFF -version 50
+
+    # Split Ring blocks in half
+    ic_hex_split_grid 38 122 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLET NONSLIPWALL INTERFACEDIFF
+
+    # Associate inner ring edges to diffuser outlet
+    ic_hex_set_edge_projection 142 144 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 141 142 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 140 141 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 140 143 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 143 145 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 145 146 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 146 147 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 144 147 0 1 srf.00.3e20
+
+    # Associate vertices to control circles
+    ic_hex_set_node_projection 125 crv.13
+    ic_hex_set_node_projection 121 crv.13
+    ic_hex_set_node_projection 113 crv.13
+    ic_hex_set_node_projection 101 crv.13
+    ic_hex_set_node_projection 105 crv.13
+    ic_hex_set_node_projection 109 crv.13
+    ic_hex_set_node_projection 117 crv.13
+    ic_hex_set_node_projection 129 crv.13
+
+    ic_hex_set_node_projection 126 crv.15
+    ic_hex_set_node_projection 122 crv.15
+    ic_hex_set_node_projection 114 crv.15
+    ic_hex_set_node_projection 102 crv.15
+    ic_hex_set_node_projection 106 crv.15
+    ic_hex_set_node_projection 110 crv.15
+    ic_hex_set_node_projection 118 crv.15
+    ic_hex_set_node_projection 130 crv.15
+    
+    ic_hex_set_node_projection 152 crv.14
+    ic_hex_set_node_projection 150 crv.14
+    ic_hex_set_node_projection 149 crv.14
+    ic_hex_set_node_projection 148 crv.14
+    ic_hex_set_node_projection 151 crv.14
+    ic_hex_set_node_projection 153 crv.14
+    ic_hex_set_node_projection 154 crv.14
+    ic_hex_set_node_projection 155 crv.14
+
+    # Snap associations to geometry
+    ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
 
 
 
