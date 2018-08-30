@@ -58,11 +58,17 @@ set {ccirc_outletouter} 45
 
 ## FOR O-GRID MESHING
 set {ogrid_diffring_layern} 50
-    # number of layers in the separation space
+    # number of layers in diffuser ring
 set {ogrid_diffring_initheight} 0.00025
-    # value of initial height layer relative to separation_space
+    # value of initial height layer relative to diffuser ring height
 set {ogrid_diffring_expansionrate} 1.2
-    # expotential rate at which the layer size increases
+    # expotential expansion rate of diffuser ring layers
+set {ogrid_pleninner_layern} 40
+    # number of layers in inner plenum ring
+set {ogrid_pleninner_initheight} 0.0065
+    # value of initial height layer relative to diffuser ring height
+set {ogrid_pleninner_expansionrate} 1.2
+    # expotential expansion rate of plenum ring layers
 
 ##FOR TET & O-GRID MESH
 set {global_ref} 2
@@ -387,6 +393,15 @@ if {$mesh_option == 2} {
     # Snap associations to geometry
     ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLET
 
+    # Define inner ring inflation layers
+    ic_hex_set_mesh 141 113 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 140 101 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 143 105 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 145 109 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 146 117 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 147 129 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 144 125 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 142 121 n $ogrid_pleninner_layern h1rel $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
 
 
 }   
