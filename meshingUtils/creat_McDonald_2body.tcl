@@ -33,12 +33,17 @@ set {mesh_option} 1
 
 #### Geometry
 set {in_len_multi}  3
-    # multiplies by inlet diameter for in_len
+    # multiplies by inlet diameter for diffuser/domain inlet length
 set {out_len_multi} 6 
+    # multiplies by inlet diameter for diffuser outlet length
 set {in_r} 25.4
+    # radius of diffuser/domain inlet
 set {out_r} 28.9604
+    # radius of diffuser outlet
 set {dif_ang} 4.0 
+    # HALF-ANGLE of the diffuser
 set {trans_r} 20
+    # radius of the transition fillet
 set {out_expan_r_multi} 3
     # multiplies by inlet diameter
 
@@ -46,10 +51,6 @@ set {out_expan_r_multi} 3
 ## Control Circle parameters
 set {ccirc_inletr} 12
     # radius @ inlet face
-set {ccirc_diffinr} 12
-    # radius @ diffuser inlet face
-set {ccirc_diffoutr} 14
-    # radius @ diffuser outlet
 set {ccirc_outletinner} 20
     # inner circle radius @ domain outlet
 set {ccirc_outletouter} 45
@@ -85,14 +86,26 @@ set {prsm_growthratio} 1.1
 set {prsm_initheight} .05
     # first layer height of prism
 
-# Calculation of Parameters
+###################################
+######## Calculation of Parameters
+###################################
 
+# Setting basic diffuser dimensions
 set {in_len} [expr $in_len_multi * $in_r * 2]
 set {out_len} [expr $out_len_multi * $in_r * 2]
 set {out_expan_r} [expr $out_expan_r_multi * $in_r]
 
+
+# Setting control circle parameters
+set {ccirc_diffinr} $ccirc_inletr
+    # radius @ diffuser inlet face, same radius @ domain inlet face
+set {ccirc_diffoutr} [expr $ccirc_diffinr * ($out_r / $in_r)]
+    # radius @ diffuser outlet, expands with area expansion
+
+# Setting the total prism layer height (possibly for tet mesh only)
 set {prsm_totheight} [expr $prsm_initheight * ( (1-pow($prsm_growthratio , $prsm_numlayer)) / (1-$prsm_growthratio) )]
 
+# Setting the diffuser geometry point values
 set {dif_angrad} [expr $dif_ang*(3.141592653589793/180)]
 set {05_i} [expr ($out_r - $in_r - $trans_r * (1 - cos($dif_angrad))) / tan($dif_angrad) + $trans_r * sin($dif_angrad) + $in_len]
 set {05_j} $out_r
