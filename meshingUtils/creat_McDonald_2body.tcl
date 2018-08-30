@@ -2,7 +2,8 @@ ic_unload_tetin
 # v0.2.0
 #==============Parameters
 # Meta
-set {mesh_option} 2
+set {mesh_option} 0
+# 0 = Geometry Creation Only
 # 1 = DiffuserBody
 # 2 = PlenumMesh
 
@@ -42,6 +43,18 @@ set {out_expan_r_multi} 3
     # multiplies by inlet diameter
 
 #### Meshing 
+## Control Circle parameters
+set {ccirc_inletr} 10
+    # radius @ inlet face
+set {ccirc_diffinr} 10
+    # radius @ diffuser inlet face
+set {ccirc_diffoutr} 12
+    # radius @ diffuser outlet
+set {ccirc_outletinner} 15
+    # inner circle radius @ domain outlet
+set {ccirc_outletouter} 30
+    # outer circle radius @ domain outlet
+
 ## FOR O-GRID MESHING
 set {ogrid_separation_space} 10
     # Absolute size change of separation edge
@@ -149,6 +162,28 @@ ic_set_meshing_params variable 0 tgrid_n_ortho_layers 0 tgrid_fix_first_layer 0 
 
 # Setting Family meshing parameters
 ic_geo_set_family_params WALLS prism 1 emax $walls_max_abs
+
+##############################
+#### Creating control circles
+##############################
+
+#creating Perpendicular circle points
+ic_point projcurv GEOM pnt.11 {GEOM.19 srf.00.1e14}
+ic_point projcurv GEOM pnt.12 {GEOM.19 srf.00.1e12}
+ic_point projcurv GEOM pnt.13 {GEOM.19 srf.00.3e20}
+ic_point projcurv GEOM pnt.14 {GEOM.19 srf.00.7e34}
+
+#create center point for transition circle
+ic_point {} GEOM pnt.15 0,0,$in_len
+
+
+## Creating Control Circles
+ic_curve arc_ctr_rad GEOM crv.11 "GEOM.19 GEOM.21 pnt.11 $ccirc_inletr 0 360"
+ic_curve arc_ctr_rad GEOM crv.12 "pnt.15 GEOM.25 pnt.12 $ccirc_diffinr 0 360"
+ic_curve arc_ctr_rad GEOM crv.13 "GEOM.45 GEOM.33 pnt.13 $ccirc_diffoutr 0 360"
+ic_curve arc_ctr_rad GEOM crv.13 "GEOM.57 GEOM.54 pnt.14 $ccirc_outletouter 0 360"
+ic_curve arc_ctr_rad GEOM crv.13 "GEOM.57 GEOM.54 pnt.14 $ccirc_outletinner 0 360"
+
 
 ### DIFFUSER=OctOgrid PLENUM=OctOgrid
 ##
