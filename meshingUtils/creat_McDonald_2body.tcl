@@ -76,16 +76,6 @@ set {walls_max_abs} 2
 set {vol_expanratio} 1.1
     # expansion rate for volume element mesh
 
-##FOR TET MESH ONLY
-set {prsm_numlayer} 20
-    # number of prism layers
-set {prsm_law} exponential
-    # prism layer expansion rule
-set {prsm_growthratio} 1.1
-    # prism layer growth rate
-set {prsm_initheight} .05
-    # first layer height of prism
-
 ###################################
 ######## Calculation of Parameters
 ###################################
@@ -102,8 +92,6 @@ set {ccirc_diffinr} $ccirc_inletr
 set {ccirc_diffoutr} [expr $ccirc_diffinr * ($out_r / $in_r)]
     # radius @ diffuser outlet, expands with area expansion
 
-# Setting the total prism layer height (possibly for tet mesh only)
-set {prsm_totheight} [expr $prsm_initheight * ( (1-pow($prsm_growthratio , $prsm_numlayer)) / (1-$prsm_growthratio) )]
 
 # Setting the diffuser geometry point values
 set {dif_angrad} [expr $dif_ang*(3.141592653589793/180)]
@@ -166,10 +154,6 @@ ic_set_meshing_params global 0 gref $global_ref gmax $global_max_abs gfast 0 ged
 
 # Volume Inflation Layer meshing parameters
 ic_set_meshing_params variable 0 tetra_verbose 1 tetra_expansion_factor $vol_expanratio
-
-# Inflation Layer meshing parameters
-ic_set_meshing_params prism 0 law $prsm_law layers $prsm_numlayer height $prsm_initheight ratio $prsm_growthratio total_height $prsm_totheight prism_height_limit 0 max_prism_height_ratio {} stair_step 1 auto_reduction 0 min_prism_quality 0.0099999998 max_prism_angle 180 fillet 0.1 tetra_smooth_limit 0.30000001 n_tetra_smoothing_steps 10 n_triangle_smoothing_steps 5
-ic_set_meshing_params variable 0 tgrid_n_ortho_layers 0 tgrid_fix_first_layer 0 tgrid_gap_factor 0.5 tgrid_enhance_norm_comp 0 tgrid_enhance_offset_comp 0 tgrid_smoothing_level 1 tgrid_max_cap_skew 0.98 tgrid_max_cell_skew 0.90 tgrid_last_layer_aspect {} triangle_quality inscribed_area
 
 # Setting Family meshing parameters
 ic_geo_set_family_params WALLS prism 1 emax $walls_max_abs
