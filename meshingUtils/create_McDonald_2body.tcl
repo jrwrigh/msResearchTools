@@ -2,7 +2,7 @@ ic_unload_tetin
 # v0.2.0
 #==============Parameters
 # Meta
-set {mesh_option} 2
+set {mesh_option} 1
 # 0 = Geometry Creation Only
 # 1 = DiffuserBody
 # 2 = PlenumMesh
@@ -44,7 +44,7 @@ set {dif_ang} 4.0
     # HALF-ANGLE of the diffuser
 set {trans_r} 20
     # radius of the transition fillet
-set {out_expan_r_multi} 3
+set {out_expan_r_multi} 5
     # multiplies by inlet diameter
 
 #### Meshing 
@@ -57,6 +57,8 @@ set {ccirc_outletouter} 45
     # outer circle radius @ domain outlet
 
 ## FOR O-GRID MESHING
+set {ogrid_center_elementn} 21
+    # number of elements to put on one side of center octogon
 set {ogrid_diffring_layern} 50
     # number of layers in diffuser ring
 set {ogrid_diffring_initheight} 0.00025
@@ -75,6 +77,7 @@ set {ogrid_plenouter_initheight} .002
     # value of initial height layer relative to outer plenum ring height
 set {ogrid_plenouter_expansionrate} 1.5
     # expotential expansion rate of inner plenum ring layers
+
 
 ##FOR TET & O-GRID MESH
 set {global_ref} 2
@@ -159,13 +162,6 @@ ic_geo_set_part surface {srf.00.6} NONSLIPWALL 0
 ic_delete_empty_parts 
 ic_geo_set_part surface {srf.00.5} INTERFACEDIFF 0
 ic_delete_empty_parts 
-
-
-# Global Meshing parameters
-ic_set_meshing_params global 0 gref $global_ref gmax $global_max_abs gfast 0 gedgec 0.2 gnat 0 gcgap 1 gnatref 10
-
-# Volume Inflation Layer meshing parameters
-ic_set_meshing_params variable 0 tetra_verbose 1 tetra_expansion_factor $vol_expanratio
 
 # Setting Family meshing parameters
 ic_geo_set_family_params WALLS prism 1 emax $walls_max_abs
@@ -301,6 +297,11 @@ if {$mesh_option == 1} {
     # SPACING IS FRACTION OF EDGE LENGTH, NOT ABSOLUTE VALUE
     # set edge mesh criteria
     ic_hex_set_mesh 37 151 n $ogrid_diffring_layern h1rel $ogrid_diffring_initheight h2rel 0.0 r1 $ogrid_diffring_expansionrate r2 2 lmax 0 exp1 copy_to_parallel unlocked
+
+    ic_hex_set_mesh 107 131 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 107 141 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 107 146 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 156 107 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 }
 
 if {$mesh_option == 2} {
@@ -422,5 +423,11 @@ if {$mesh_option == 2} {
     ic_hex_set_mesh 21 140 n $ogrid_plenouter_layern h1rel 0.0 h2rel $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
 
     #### NOTE: The edges on the outlet face of the plenum are assumed to make automatic linear distribution
+
+    # Define Center block element numbering
+    ic_hex_set_mesh 125 87 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 87 117 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 105 87 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 113 87 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 
 }   
