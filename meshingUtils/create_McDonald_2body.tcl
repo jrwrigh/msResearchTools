@@ -7,6 +7,9 @@ set {mesh_option} 2
 # 1 = DiffuserBody
 # 2 = PlenumMesh
 
+###TODO 
+# Make the outer plenum wall edges have geometric distribution
+
 
 
 
