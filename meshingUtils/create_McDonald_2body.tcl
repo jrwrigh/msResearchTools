@@ -56,6 +56,14 @@ set {ccirc_outletinner} 20
 set {ccirc_outletouter} 45
     # outer circle radius @ domain outlet
 
+## Sweep parameters
+set {ogrid_inlet_sweepn} 100
+    # number of sweeps for the domain inlet
+set {ogrid_diff_sweepn} 30
+    # number of sweeps for the diffuser
+set {ogrid_plenum_sweepn} 150
+    # number of sweeps for the plenum
+
 ## FOR O-GRID MESHING
 set {ogrid_center_elementn} 21
     # number of elements to put on one side of center octogon
@@ -298,10 +306,16 @@ if {$mesh_option == 1} {
     # set edge mesh criteria
     ic_hex_set_mesh 37 151 n $ogrid_diffring_layern h1rel $ogrid_diffring_initheight h2rel 0.0 r1 $ogrid_diffring_expansionrate r2 2 lmax 0 exp1 copy_to_parallel unlocked
 
+    # Set center block element spacing
     ic_hex_set_mesh 107 131 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
     ic_hex_set_mesh 107 141 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
     ic_hex_set_mesh 107 146 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
     ic_hex_set_mesh 156 107 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+
+    # Set number of sweeps
+    ic_hex_set_mesh 21 69 n $ogrid_inlet_sweepn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 22 69 n $ogrid_diff_sweepn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+
 }
 
 if {$mesh_option == 2} {
@@ -429,5 +443,8 @@ if {$mesh_option == 2} {
     ic_hex_set_mesh 87 117 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
     ic_hex_set_mesh 105 87 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
     ic_hex_set_mesh 113 87 n $ogrid_center_elementn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+
+    # Set number of sweeps
+    ic_hex_set_mesh 25 26 n $ogrid_inlet_sweepn h1rel 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 
 }   
