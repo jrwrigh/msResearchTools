@@ -338,6 +338,12 @@ if {$mesh_option == 2} {
     ic_hex_set_edge_projection 84 86 0 1 srf.00.3e20
     ic_hex_set_edge_projection 86 87 0 1 srf.00.3e20
 
+    # Associate inner ring edges to plenum outlet control circle
+    ic_hex_set_edge_projection 88 89 0 1 crv.14
+    ic_hex_set_edge_projection 89 91 0 1 crv.14
+    ic_hex_set_edge_projection 90 91 0 1 crv.14
+    ic_hex_set_edge_projection 88 90 0 1 crv.14
+
     # Associate vertices to control circles
     ic_hex_set_node_projection 73 crv.13
     ic_hex_set_node_projection 65 crv.13
@@ -348,11 +354,6 @@ if {$mesh_option == 2} {
     ic_hex_set_node_projection 66 crv.15
     ic_hex_set_node_projection 70 crv.15
     ic_hex_set_node_projection 78 crv.15
-
-    ic_hex_set_node_projection 89 crv.14
-    ic_hex_set_node_projection 91 crv.14
-    ic_hex_set_node_projection 90 crv.14
-    ic_hex_set_node_projection 88 crv.14
 
     # Snap associations to geometry
     ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLETWALLS OUTLETMAIN
