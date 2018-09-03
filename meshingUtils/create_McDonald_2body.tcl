@@ -451,6 +451,6 @@ if {$mesh_option == 2} {
     ic_hex_set_mesh 113 87 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 
     # Set number of sweeps
-    ic_hex_set_mesh 25 26 n $ogrid_inlet_sweepn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 25 26 n $ogrid_plenum_sweepn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 
 }   
