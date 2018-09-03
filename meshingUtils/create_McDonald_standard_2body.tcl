@@ -2,7 +2,7 @@ ic_unload_tetin
 # v0.2.0
 #==============Parameters
 # Meta
-set {mesh_option} 1
+set {mesh_option} 2
 # 0 = Geometry Creation Only
 # 1 = DiffuserBody
 # 2 = PlenumMesh
@@ -305,115 +305,77 @@ if {$mesh_option == 2} {
     ic_hex_set_n_tetra_smoothing_steps 20
     ic_hex_error_messages off_minor
 
-    # Split Down Middle
-    ic_hex_split_grid 21 25 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN
-    ic_hex_split_grid 25 41 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN
-
     # Associate Edges to Curves
-    ic_hex_set_edge_projection 88 41 0 1 srf.00.6e30
-    ic_hex_set_edge_projection 70 41 0 1 srf.00.6e30
-    ic_hex_set_edge_projection 86 37 0 1 srf.00.6e30
-    ic_hex_set_edge_projection 37 70 0 1 srf.00.6e30
-    ic_hex_set_edge_projection 21 86 0 1 srf.00.6e30
-    ic_hex_set_edge_projection 21 69 0 1 srf.00.6e30
-    ic_hex_set_edge_projection 69 25 0 1 srf.00.6e30
-    ic_hex_set_edge_projection 25 88 0 1 srf.00.6e30
-    ic_hex_set_edge_projection 93 42 0 1 srf.00.7e34
-    ic_hex_set_edge_projection 74 42 0 1 srf.00.7e34
-    ic_hex_set_edge_projection 38 74 0 1 srf.00.7e34
-    ic_hex_set_edge_projection 91 38 0 1 srf.00.7e34
-    ic_hex_set_edge_projection 22 91 0 1 srf.00.7e34
-    ic_hex_set_edge_projection 22 73 0 1 srf.00.7e34
-    ic_hex_set_edge_projection 26 93 0 1 srf.00.7e34
-    ic_hex_set_edge_projection 73 26 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 37 41 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 21 37 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 21 25 0 1 srf.00.6e30
+    ic_hex_set_edge_projection 25 41 0 1 srf.00.6e30
+
+    ic_hex_set_edge_projection 38 42 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 22 38 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 22 26 0 1 srf.00.7e34
+    ic_hex_set_edge_projection 26 42 0 1 srf.00.7e34
 
     # Snap Edges to Associated Curves
     ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLETWALLS OUTLETMAIN
 
     # Select Blocks and Faces for Ogrid
-    ic_hex_mark_blocks superblock 29
-    ic_hex_mark_blocks superblock 27
     ic_hex_mark_blocks superblock 13
-    ic_hex_mark_blocks superblock 28
 
-    ic_hex_mark_blocks face_neighbors corners { 26 93 73 92 } { 42 93 74 92 } { 38 91 74 92 } { 22 91 73 92 } { 41 88 70 87 } { 37 86 70 87 } { 21 86 69 87 } { 25 88 69 87 }
+    ic_hex_mark_blocks face_neighbors corners { 21 37 25 41 } { 22 38 26 42 }
+
 
     # Create Ogrid
     ic_hex_ogrid 1 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN NONSLIPWALL INTERFACEDIFF -version 50
 
     # Split Ring blocks in half
-    ic_hex_split_grid 38 122 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETWALLS OUTLETMAIN NONSLIPWALL INTERFACEDIFF
+    ic_hex_split_grid 37 73 0.5 m GEOM DIFFUSER SHELL LUMP PLENUM INLET WALLS OUTLETMAIN OUTLETWALLS NONSLIPWALL INTERFACEDIFF
+
 
     # Associate inner ring edges to diffuser outlet
-    ic_hex_set_edge_projection 142 144 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 141 142 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 140 141 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 140 143 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 143 145 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 145 146 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 146 147 0 1 srf.00.3e20
-    ic_hex_set_edge_projection 144 147 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 85 87 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 84 85 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 84 86 0 1 srf.00.3e20
+    ic_hex_set_edge_projection 86 87 0 1 srf.00.3e20
 
     # Associate vertices to control circles
-    ic_hex_set_node_projection 125 crv.13
-    ic_hex_set_node_projection 121 crv.13
-    ic_hex_set_node_projection 113 crv.13
-    ic_hex_set_node_projection 101 crv.13
-    ic_hex_set_node_projection 105 crv.13
-    ic_hex_set_node_projection 109 crv.13
-    ic_hex_set_node_projection 117 crv.13
-    ic_hex_set_node_projection 129 crv.13
-
-    ic_hex_set_node_projection 126 crv.15
-    ic_hex_set_node_projection 122 crv.15
-    ic_hex_set_node_projection 114 crv.15
-    ic_hex_set_node_projection 102 crv.15
-    ic_hex_set_node_projection 106 crv.15
-    ic_hex_set_node_projection 110 crv.15
-    ic_hex_set_node_projection 118 crv.15
-    ic_hex_set_node_projection 130 crv.15
+    ic_hex_set_node_projection 73 crv.13
+    ic_hex_set_node_projection 65 crv.13
+    ic_hex_set_node_projection 69 crv.13
+    ic_hex_set_node_projection 77 crv.13
     
-    ic_hex_set_node_projection 152 crv.14
-    ic_hex_set_node_projection 150 crv.14
-    ic_hex_set_node_projection 149 crv.14
-    ic_hex_set_node_projection 148 crv.14
-    ic_hex_set_node_projection 151 crv.14
-    ic_hex_set_node_projection 153 crv.14
-    ic_hex_set_node_projection 154 crv.14
-    ic_hex_set_node_projection 155 crv.14
+    ic_hex_set_node_projection 74 crv.15
+    ic_hex_set_node_projection 66 crv.15
+    ic_hex_set_node_projection 70 crv.15
+    ic_hex_set_node_projection 78 crv.15
+
+    ic_hex_set_node_projection 89 crv.14
+    ic_hex_set_node_projection 91 crv.14
+    ic_hex_set_node_projection 90 crv.14
+    ic_hex_set_node_projection 88 crv.14
 
     # Snap associations to geometry
     ic_hex_project_to_surface PLENUM NONSLIPWALL INLET LUMP GEOM DIFFUSER SHELL INTERFACEDIFF WALLS OUTLETWALLS OUTLETMAIN
 
     # Define inner ring inflation layers
-    ic_hex_set_mesh 141 113 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
-    ic_hex_set_mesh 140 101 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
-    ic_hex_set_mesh 143 105 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
-    ic_hex_set_mesh 145 109 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
-    ic_hex_set_mesh 146 117 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
-    ic_hex_set_mesh 147 129 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
-    ic_hex_set_mesh 144 125 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
-    ic_hex_set_mesh 142 121 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 85 73 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 87 77 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 86 69 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
+    ic_hex_set_mesh 84 65 n $ogrid_pleninner_layern h1 $ogrid_pleninner_initheight h2rel 0.0 r1 $ogrid_pleninner_expansionrate r2 2 lmax 0 exp1 unlocked
 
     # Define outer ring inflation layering
-    ic_hex_set_mesh 69 143 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
-    ic_hex_set_mesh 25 145 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
-    ic_hex_set_mesh 88 146 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
-    ic_hex_set_mesh 41 147 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
-    ic_hex_set_mesh 70 144 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
-    ic_hex_set_mesh 37 142 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
-    ic_hex_set_mesh 86 141 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
-    ic_hex_set_mesh 21 140 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 37 85 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 41 87 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 25 86 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
+    ic_hex_set_mesh 21 84 n $ogrid_plenouter_layern h1 0.0 h2 $ogrid_plenouter_initheight r1 2 r2 $ogrid_plenouter_expansionrate lmax 0 exp2 unlocked
 
     #### NOTE: The edges on the outlet face of the plenum are assumed to make automatic linear distribution
 
     # Define Center block element numbering
-    ic_hex_set_mesh 125 87 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
-    ic_hex_set_mesh 87 117 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
-    ic_hex_set_mesh 105 87 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
-    ic_hex_set_mesh 113 87 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 73 65 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 73 77 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 
     # Set number of sweeps
-    ic_hex_set_mesh 25 26 n $ogrid_plenum_sweepn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 41 42 n $ogrid_plenum_sweepn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 
 }   
