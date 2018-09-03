@@ -24,12 +24,12 @@ echo "#####################"
 
 cd $PBS_O_WORKDIR
 
-FLUENTTYPE=3ddp
-CASEFILE=PlenumMeshTestSBES4.cas
-INITDATAFILE=4038816_PlenumMeshTest_SST.dat
+fluentType=3ddp
+caseFile=PlenumMeshTestSBES4.cas
+initDataFile=4038816_PlenumMeshTest_SST.dat
 
-DATAFILENAME=PlenumMeshTest_SBES
-OUTFILE=SBESTest.log
+dataFileName=PlenumMeshTest_SBES
+outFile=SBESTest.log
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
@@ -37,12 +37,12 @@ MPI=intel
 ############
 jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
 echo "jobid_num: $jobid_num"
-OUTFILEPATH="$PBS_O_WORKDIR/${jobid_num}_${OUTFILE}"
-DATAFILENAME=${jobid_num}_${DATAFILENAME}.dat
+outFilePath="$PBS_O_WORKDIR/${jobid_num}_${outFile}"
+dataFileName=${jobid_num}_${dataFileName}.dat
 
 ### Making the Journal file
-JOURNALFILE="$jobid_num"_FluentSBES.jou
-cat <<EOT >$JOURNALFILE
+journalFile="$jobid_num"_FluentSBES.jou
+cat <<EOT >$journalFile
 /file/set-batch-options
 ; confirm file overwrite?
 yes
@@ -50,8 +50,8 @@ yes
 yes
 ; Hide Questions?
 no
-/file/read-case $CASEFILE
-/file/read-data $INITDATAFILE
+/file/read-case $caseFile
+/file/read-data $initDataFile
 /solve/initialize/init-instantaneous-vel
 ; 24= Coupled
 ; /solve/set/p-v-coupling 24
@@ -76,7 +76,7 @@ define/parameters/input-parameters/edit "TimeStepSize"
 
 !date
 /parallel/timer/usage
-/file/write-data $DATAFILENAME
+/file/write-data $dataFileName
 exit
 yes
 EOT
@@ -88,7 +88,7 @@ echo "\$tot_cpus = " $tot_cpus
 
 fluent_args="-t${tot_cpus} $fluent_args -cnf=$PBS_NODEFILE"
 
-fluent_args="-g -i $JOURNALFILE -mpi=$MPI $fluent_args"
+fluent_args="-g -i $journalFile -mpi=$MPI $fluent_args"
 
 echo "
 +--------------+
@@ -103,15 +103,15 @@ Start Time : $(date)
 
 Inputs:
 -------------
-Journal File = $JOURNALFILE
-Case File = $CASEFILE
-Fluent Verison = $FLUENTTYPE
+Journal File = $journalFile
+Case File = $caseFile
+Fluent Verison = $fluentType
 
 
 Output Files:
 --------------
-Data File = $DATAFILENAME
-Log File = $OUTFILE
+Data File = $dataFileName
+Log File = $outFile
 
 |                           | 
 +---------------------------+
@@ -120,14 +120,14 @@ Log File = $OUTFILE
 
 for node in `uniq $PBS_NODEFILE`
 do
-	ssh $node "cp $PBS_O_WORKDIR/$CASEFILE $TMPDIR"
-	ssh $node "cp $PBS_O_WORKDIR/$INITDATAFILE $TMPDIR"
-	ssh $node "mv $PBS_O_WORKDIR/$JOURNALFILE $TMPDIR"
+	ssh $node "cp $PBS_O_WORKDIR/$caseFile $TMPDIR"
+	ssh $node "cp $PBS_O_WORKDIR/$initDataFile $TMPDIR"
+	ssh $node "mv $PBS_O_WORKDIR/$journalFile $TMPDIR"
 done
 
 cd $TMPDIR
 
-fluent $FLUENTTYPE $fluent_args > $OUTFILEPATH
+fluent $fluentType $fluent_args > $outFilePath
 
 
 for node in `uniq $PBS_NODEFILE`
