@@ -1,9 +1,16 @@
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import pandas as pd
 from pathlib import Path
 import re
 
 filename = Path('courantnumber_max-rfile.out')
+
+mpl.rcParams['font.family'] = 'serif'
+mpl.rcParams['font.serif'] = 'Computer Modern'
+mpl.rcParams['font.size'] = 18
+mpl.rcParams['mathtext.fontset'] = 'cm'
+mpl.rcParams['text.usetex'] = True
 
 def get_headers(file, headerline, regexstring, exclude):
     # Get string of selected headerline
@@ -30,6 +37,7 @@ def get_headers(file, headerline, regexstring, exclude):
     return headerslist
 
 def movingstats(series, interval):
+    """Calculating stats of a moving range"""
     movingaverage = []
     movingstd = []
     for i in range(1,len(series)-interval):
@@ -38,6 +46,7 @@ def movingstats(series, interval):
     return (movingaverage, movingstd)
 
 def extendingstats(series, startindex):
+    """Calculates the stats of a range extending from one point"""
     extendaverage, extendstd = [], []
     for n in range(startindex+1, len(series)+1):
         extendaverage.append(series[startindex:n].mean())
