@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N PlenumMeshTestSBES
+#PBS -N PlenumMeshTestSBES6
 #PBS -l select=3:ncpus=40:mpiprocs=40:mem=32gb:phase=18b
 #PBS -l walltime=72:00:00
 #PBS -j oe
@@ -25,11 +25,11 @@ echo "#####################"
 cd $PBS_O_WORKDIR
 
 fluentType=3ddp
-caseFile=PlenumMeshTestSBES4.cas
-initDataFile=4038816_PlenumMeshTest_SST.dat
+caseFile=PlenumMeshTestSBES6.cas
+initDataFile=4012839_PlenumMeshTest_SST.dat
 
-dataFileName=PlenumMeshTest_SBES
-outFile=SBESTest.log
+dataFileName=PlenumMeshTest_SBES6_S3
+outFile=SBES6_S3.log
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
@@ -86,7 +86,7 @@ echo "\$num_nodes = " $num_nodes
 tot_cpus=$(cat $PBS_NODEFILE | wc -l )
 echo "\$tot_cpus = " $tot_cpus
 
-fluent_args="-t${tot_cpus} $fluent_args -cnf=$PBS_NODEFILE"
+fluent_args="-t${tot_cpus} -cflush $fluent_args -cnf=$PBS_NODEFILE"
 
 fluent_args="-g -i $journalFile -mpi=$MPI $fluent_args"
 
@@ -132,6 +132,7 @@ fluent $fluentType $fluent_args > $outFilePath
 
 for node in `uniq $PBS_NODEFILE`
 do
+    ssh $node "mv *.out report-0_$(jobid_num).out"
     ssh $node "cp -r $TMPDIR/* $PBS_O_WORKDIR"
 done
 
