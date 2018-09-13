@@ -131,7 +131,7 @@ fluent $fluentType $fluent_args > $outFilePath
 
 for filename in *.out
 do 
-    mv $filename ${jobid_num}_$filename
+    mv $filename ${filename%.out}_${jobid_num}.out
 done
 
 for node in `uniq $PBS_NODEFILE`
