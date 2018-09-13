@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N PlenumMeshTestSBES6
-#PBS -l select=3:ncpus=40:mpiprocs=40:mem=32gb:phase=18b
+#PBS -N TESTforRENAME.OUT
+#PBS -l select=3:ncpus=16:mpiprocs=16:mem=48gb:phase=8c
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -28,8 +28,8 @@ fluentType=3ddp
 caseFile=PlenumMeshTestSBES6.cas
 initDataFile=4012839_PlenumMeshTest_SST.dat
 
-dataFileName=PlenumMeshTest_SBES6_S3
-outFile=SBES6_S3.log
+dataFileName=RENAMETEST
+outFile=RENAMETEST.log
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
@@ -72,7 +72,7 @@ define/parameters/input-parameters/edit "TimeStepSize"
 
 /server/start-server server_info.txt
 !date
-/solve/dual-time-iterate 40000
+/solve/dual-time-iterate 2
 
 !date
 /parallel/timer/usage
@@ -86,7 +86,7 @@ echo "\$num_nodes = " $num_nodes
 tot_cpus=$(cat $PBS_NODEFILE | wc -l )
 echo "\$tot_cpus = " $tot_cpus
 
-fluent_args="-t${tot_cpus} -cflush $fluent_args -cnf=$PBS_NODEFILE"
+fluent_args="-t${tot_cpus} $fluent_args -cnf=$PBS_NODEFILE"
 
 fluent_args="-g -i $journalFile -mpi=$MPI $fluent_args"
 
@@ -129,10 +129,13 @@ cd $TMPDIR
 
 fluent $fluentType $fluent_args > $outFilePath
 
+for filename in *.out
+do 
+    mv $filename ${jobid_num}_$filename
+done
 
 for node in `uniq $PBS_NODEFILE`
 do
-    ssh $node "mv *.out report-0_$(jobid_num).out"
     ssh $node "cp -r $TMPDIR/* $PBS_O_WORKDIR"
 done
 
