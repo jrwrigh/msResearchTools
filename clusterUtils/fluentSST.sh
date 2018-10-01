@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N FluentSST
-#PBS -l select=1:ncpus=40:mpiprocs=40:mem=32gb:phase=18b
+#PBS -N PlenumMeshTestSST5_S0
+#PBS -l select=2:ncpus=20:mpiprocs=20:mem=32gb:phase=11a
 #PBS -l walltime=02:00:00
 #PBS -j oe
 #PBS -m abe
@@ -12,25 +12,29 @@ module add intel/17.0
 
 set echo on 
 
+echo "###SCRIPT FILE START###"
+cat $0
+echo "###SCRIPT FILE END###"
+
 cd $PBS_O_WORKDIR
 
-fluentType=3ddp
-caseFile=McD13_4S3_SST_Coupled.cas
+FLUENTTYPE=3ddp
+CASEFILE=PlenumMeshTestSST4.cas
 
-dataFileName=McD13_4S3_SST_test
-outFile=InitialTest.log
+DATAFILENAME=PlenumMeshTest_SST
+OUTFILE=PlenumMeshTest_SST.log
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
 
 ############
 jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
-outFilePath="$PBS_O_WORKDIR/${jobid_num}_${outFile}"
-dataFileName=${jobid_num}_${dataFileName}.dat
+OUTFILEPATH="$PBS_O_WORKDIR/${jobid_num}_${OUTFILE}"
+DATAFILENAME=${jobid_num}_${DATAFILENAME}.dat
 
 ### Making the Journal file
-journalFile="$jobid_num"_FluentSST.jou
-cat <<EOT >$journalFile
+JOURNALFILE="$jobid_num"_FluentSST.jou
+cat <<EOT >$JOURNALFILE
 /file/set-batch-options
 ; confirm file overwrite?
 yes
@@ -38,14 +42,24 @@ yes
 yes
 ; Hide Questions?
 no
-/file/read-case $caseFile
+/file/read-case $CASEFILE
 /define/parameters/input-parameters/edit "rotationalVelocity"
 
 0
+/solve/monitors/residual/convergence-criteria
+.00001
+.00001
+.00001
+.00001
+
+
+
+
+
 !date
-/solve/iterate 900
+/solve/iterate 1800
 !date
-/file/write-data $dataFileName
+/file/write-data $DATAFILENAME
 exit
 yes
 EOT
@@ -57,7 +71,7 @@ echo "\$tot_cpus = " $tot_cpus
 
 fluent_args="-t${tot_cpus} $fluent_args -cnf=$PBS_NODEFILE"
 
-fluent_args="-g -i $journalFile -mpi=$MPI $fluent_args"
+fluent_args="-g -i $JOURNALFILE -mpi=$MPI $fluent_args"
 
 echo "
 +--------------+
@@ -72,15 +86,15 @@ Start Time : $(date)
 
 Inputs:
 -------------
-Journal File = $journalFile
-Case File = $caseFile
-Fluent Verison = $fluentType
+Journal File = $JOURNALFILE
+Case File = $CASEFILE
+Fluent Verison = $FLUENTTYPE
 
 
 Output Files:
 --------------
-Data File = $dataFileName
-Log File = $outFile
+Data File = $DATAFILENAME
+Log File = $OUTFILE
 
 |                           | 
 +---------------------------+
@@ -89,13 +103,13 @@ Log File = $outFile
 
 for node in `uniq $PBS_NODEFILE`
 do
-	ssh $node "cp $PBS_O_WORKDIR/$caseFile $TMPDIR"
-	ssh $node "mv $PBS_O_WORKDIR/$journalFile $TMPDIR"
+	ssh $node "cp $PBS_O_WORKDIR/$CASEFILE $TMPDIR"
+	ssh $node "mv $PBS_O_WORKDIR/$JOURNALFILE $TMPDIR"
 done
 
 cd $TMPDIR
 
-fluent $fluentType $fluent_args > $outFilePath
+fluent $FLUENTTYPE $fluent_args > $OUTFILEPATH
 
 
 for node in `uniq $PBS_NODEFILE`
