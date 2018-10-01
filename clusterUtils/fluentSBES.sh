@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N TESTforRENAME.OUT
-#PBS -l select=3:ncpus=16:mpiprocs=16:mem=48gb:phase=8c
+#PBS -N PlenumMeshTestSBES6
+#PBS -l select=3:ncpus=40:mpiprocs=40:mem=30gb:phase=18c
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -11,6 +11,10 @@ module add ansys/19.0
 module add intel/17.0
 
 set echo on 
+
+echo "###START NOTES###"
+echo "Spectral fluxuations, swirl 0, McD13_4 diffuser"
+echo "###END NOTES###"
 
 echo "#######################"
 echo "###SCRIPT FILE START###"
@@ -28,8 +32,8 @@ fluentType=3ddp
 caseFile=PlenumMeshTestSBES6.cas
 initDataFile=4012839_PlenumMeshTest_SST.dat
 
-dataFileName=RENAMETEST
-outFile=RENAMETEST.log
+dataFileName=PlenumMeshTest_SBES6_S0
+outFile=SBES6_S0.log
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
@@ -60,7 +64,7 @@ define/parameters/input-parameters/edit "TimeStepSize"
 5e-6
 /define/parameters/input-parameters/edit "rotationalVelocity"
 
-916.7
+0
 /solve/monitors/residual/convergence-criteria
 .0001
 .0001
@@ -72,7 +76,7 @@ define/parameters/input-parameters/edit "TimeStepSize"
 
 /server/start-server server_info.txt
 !date
-/solve/dual-time-iterate 2
+/solve/dual-time-iterate 40000
 
 !date
 /parallel/timer/usage
