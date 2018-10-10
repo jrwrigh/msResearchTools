@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N PlenumMeshTestSBES6
-#PBS -l select=3:ncpus=40:mpiprocs=40:mem=30gb:phase=18c
+#PBS -N PlenumMeshTest3SBES1
+#PBS -l select=3:ncpus=40:mpiprocs=40:mem=30gb:phase=18b
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -13,7 +13,7 @@ module add intel/17.0
 set echo on 
 
 echo "###START NOTES###"
-echo "Spectral fluxuations, swirl 0, McD13_4 diffuser"
+echo "S3, Dewoestine inlet profile, vortex method (190 points), timestep 5e-8"
 echo "###END NOTES###"
 
 echo "#######################"
@@ -28,12 +28,15 @@ echo "#####################"
 
 cd $PBS_O_WORKDIR
 
-fluentType=3ddp
-caseFile=PlenumMeshTestSBES6.cas
-initDataFile=4012839_PlenumMeshTest_SST.dat
+num_iterations=5000
+timeStep=5e-8
+autosave_frequency=5000
+autosave_maxfilestokeep=3
 
-dataFileName=PlenumMeshTest_SBES6_S0
-outFile=SBES6_S0.log
+fluentType=3ddp
+caseFile=PlenumMeshTest3_SBES3.cas
+initDataFile=4278672_PlenumMeshTest3_SST1_S3.dat
+dataFileName=PlenumMeshTest3_SBES3_S3
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
@@ -41,8 +44,8 @@ MPI=intel
 ############
 jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
 echo "jobid_num: $jobid_num"
-outFilePath="$PBS_O_WORKDIR/${jobid_num}_${outFile}"
-dataFileName=${jobid_num}_${dataFileName}.dat
+dataFileName=${jobid_num}_${dataFileName}
+outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
 
 ### Making the Journal file
 journalFile="$jobid_num"_FluentSBES.jou
@@ -61,10 +64,7 @@ no
 ; /solve/set/p-v-coupling 24
 define/parameters/input-parameters/edit "TimeStepSize"
 
-5e-6
-/define/parameters/input-parameters/edit "rotationalVelocity"
-
-0
+$timeStep
 /solve/monitors/residual/convergence-criteria
 .0001
 .0001
@@ -74,13 +74,20 @@ define/parameters/input-parameters/edit "TimeStepSize"
 
 
 
+; Autosave Settings
+/file/auto-save/retain-most-recent-files yes
+/file/auto-save/max-files $autosave_maxfilestokeep
+/file/auto-save/data-frequency $autosave_frequency
+/file/auto-save/append-file-name-with time-step 6
+/file/auto-save/root-name "${PBS_O_WORKDIR}/$dataFileName"
+
 /server/start-server server_info.txt
 !date
-/solve/dual-time-iterate 40000
+/solve/dual-time-iterate $num_iterations
 
 !date
 /parallel/timer/usage
-/file/write-data $dataFileName
+/file/write-data ${dataFileName}.dat
 exit
 yes
 EOT
@@ -114,8 +121,8 @@ Fluent Verison = $fluentType
 
 Output Files:
 --------------
-Data File = $dataFileName
-Log File = $outFile
+Data File = ${dataFileName}.dat
+Log File = ${dataFileName}.log
 
 |                           | 
 +---------------------------+
