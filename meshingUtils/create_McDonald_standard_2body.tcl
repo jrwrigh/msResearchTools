@@ -35,37 +35,41 @@ set {mesh_option} 2
 #                                         ^p9
 
 #### Geometry
-set {in_len_multi}  3
+set {in_len_multi}  1
     # multiplies by inlet diameter for diffuser/domain inlet length
-set {out_len_multi} 6 
+set {out_len_multi} 5 
     # multiplies by inlet diameter for diffuser outlet length
-set {in_r} 25.4
+set {in_r} 130
     # radius of diffuser/domain inlet
-set {out_r} 28.9604
+set {out_r} 219.08
     # radius of diffuser outlet
-set {dif_ang} 4.0 
+set {dif_ang} 10
     # HALF-ANGLE of the diffuser
-set {trans_r} 20
+set {trans_r} 10
     # radius of the transition fillet
 set {out_expan_r_multi} 5
     # multiplies by inlet radius
 
 #### Meshing 
 ## Control Circle parameters
-set {ccirc_inletr} 12
+set {ccirc_inletr} 100
     # radius @ inlet face
-set {ccirc_outletinner} 20
+set {ccirc_outletinner} 110
     # inner circle radius @ domain outlet
-set {ccirc_outletouter} 45
+set {ccirc_outletouter} 330
     # outer circle radius @ domain outlet
 
 ## Sweep parameters
-set {ogrid_inlet_sweepn} 100
+set {ogrid_inlet_sweepn} 50
     # number of sweeps for the domain inlet
-set {ogrid_diff_sweepn} 30
+set {ogrid_diff_sweepn} 70
     # number of sweeps for the diffuser
-set {ogrid_plenum_sweepn} 150
+set {ogrid_plenum_sweepn} 90
     # number of sweeps for the plenum
+set {ogrid_plenum_sweepinit} 8
+    # initial length of sweep mesh element
+set {ogrid_plenum_sweepexpanratio} 1.5
+    # geometric expansion ratio of the sweep
 
 ## FOR O-GRID MESHING
 set {ogrid_center_elementn} 42
@@ -73,21 +77,21 @@ set {ogrid_center_elementn} 42
 
 set {ogrid_diffring_layern} 50
     # number of layers in diffuser ring
-set {ogrid_diffring_initheight} 0.0025
+set {ogrid_diffring_initheight} 0.02
     # value of initial height layer in mm
 set {ogrid_diffring_expansionrate} 1.2
     # expotential expansion rate of diffuser ring layers
 
 set {ogrid_pleninner_layern} 40
     # number of layers in inner plenum ring
-set {ogrid_pleninner_initheight} 0.065
+set {ogrid_pleninner_initheight} 0.15
     # value of initial height layer in mm
 set {ogrid_pleninner_expansionrate} 1.2
     # expotential expansion rate of inner plenum ring layers
 
-set {ogrid_plenouter_layern} 34
+set {ogrid_plenouter_layern} 40
     # number of layers in outer plenum ring
-set {ogrid_plenouter_initheight} .065
+set {ogrid_plenouter_initheight} .2
     # value of initial height layer in mm
 set {ogrid_plenouter_expansionrate} 1.5
     # expotential expansion rate of inner plenum ring layers
@@ -376,7 +380,6 @@ if {$mesh_option == 2} {
     ic_hex_set_mesh 73 65 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
     ic_hex_set_mesh 73 77 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 
-    # Set number of sweeps
-    ic_hex_set_mesh 41 42 n $ogrid_plenum_sweepn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
-
+    # Set number of sweeps and expansion settings
+    ic_hex_set_mesh 41 42 n $ogrid_plenum_sweepn h1 $ogrid_plenum_sweepinit h2rel 0.0 r1 $ogrid_plenum_sweepexpanratio r2 0 lmax 0 geo1 copy_to_parallel unlocked
 }   
