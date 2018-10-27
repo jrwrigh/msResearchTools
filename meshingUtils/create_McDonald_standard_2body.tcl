@@ -48,7 +48,7 @@ set {dif_ang} 4.0
 set {trans_r} 20
     # radius of the transition fillet
 set {out_expan_r_multi} 5
-    # multiplies by inlet diameter
+    # multiplies by inlet radius
 
 #### Meshing 
 ## Control Circle parameters
