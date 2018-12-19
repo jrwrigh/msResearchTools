@@ -2,7 +2,7 @@ ic_unload_tetin
 # v0.2.0
 #==============Parameters
 # Meta
-set {mesh_option} 2
+set {mesh_option} 1
 # 0 = Geometry Creation Only
 # 1 = DiffuserBody
 # 2 = PlenumMesh
@@ -60,10 +60,14 @@ set {ccirc_outletouter} 330
     # outer circle radius @ domain outlet
 
 ## Sweep parameters
-set {ogrid_inlet_sweepn} 50
+set {ogrid_inlet_sweepn} 80
     # number of sweeps for the domain inlet
+set {ogrid_inlet_sweepr} 1.02
+    # geometric rate of increase for the domain inlet
 set {ogrid_diff_sweepn} 70
     # number of sweeps for the diffuser
+set {ogrid_diff_sweepr} 1.00001
+    # geometric rate of increase for the diffuser
 set {ogrid_plenum_sweepn} 90
     # number of sweeps for the plenum
 set {ogrid_plenum_sweepinit} 8
@@ -286,8 +290,8 @@ if {$mesh_option == 1} {
     ic_hex_set_mesh 91 81 n $ogrid_center_elementn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
 
     # Set number of sweeps
-    ic_hex_set_mesh 41 74 n $ogrid_inlet_sweepn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
-    ic_hex_set_mesh 42 74 n $ogrid_diff_sweepn h1 0.0 h2rel 0.0 r1 2 r2 2 lmax 0 default copy_to_parallel unlocked
+    ic_hex_set_mesh 41 74 n $ogrid_inlet_sweepn h1 0.0 h2rel 0.0 r1 $ogrid_inlet_sweepr r2 2 lmax 0 geo1 copy_to_parallel unlocked
+    ic_hex_set_mesh 42 74 n $ogrid_diff_sweepn h1 0.0 h2rel 0.0 r1 $ogrid_diff_sweepr r2 2 lmax 0 geo1 copy_to_parallel unlocked
 
 }
 
