@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N PlenumMeshTest3SBES1
-#PBS -l select=3:ncpus=40:mpiprocs=40:mem=30gb:phase=18b
+#PBS -N ERCOFTAC_m2c1_SBES_specsynth
+#PBS -l select=1:ncpus=40:mpiprocs=40:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -11,9 +11,8 @@ module add ansys/19.0
 module add intel/17.0
 
 set echo on 
-
-echo "###START NOTES###"
-echo "S3, Dewoestine inlet profile, vortex method (190 points), timestep 5e-8"
+echo "###START NOTES###" 
+echo "Spectral Synthesizer used for Velocity perturbation"
 echo "###END NOTES###"
 
 echo "#######################"
@@ -28,15 +27,17 @@ echo "#####################"
 
 cd $PBS_O_WORKDIR
 
-num_iterations=5000
-timeStep=5e-8
-autosave_frequency=5000
-autosave_maxfilestokeep=3
+num_iterations=20000
+timeStep=1e-5
+init_num_iterations=500
+initTimeStep=5e-8
+autosave_frequency=2000
+autosave_maxfilestokeep=1
 
-fluentType=3ddp
-caseFile=PlenumMeshTest3_SBES3.cas
-initDataFile=4278672_PlenumMeshTest3_SST1_S3.dat
-dataFileName=PlenumMeshTest3_SBES3_S3
+fluentType=3d
+caseFile=ERCOFTAC_m2c1_SBES_specsynth.cas
+initDataFile=4783505_ERCOFTAC_m2c1_SST.dat
+dataFileName=ERCOFTAC_m2c1_SBES
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
@@ -60,13 +61,24 @@ no
 /file/read-case $caseFile
 /file/read-data $initDataFile
 /solve/initialize/init-instantaneous-vel
+; /solve/initialize/init-flow-statistics
 ; 24= Coupled
 ; /solve/set/p-v-coupling 24
+
+; RELAXATION FACTORS
+; Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
+; /solve/set/under-relaxation/body-force 1
+; /solve/set/under-relaxation/mom 0.7
+; /solve/set/under-relaxation/turb-viscosity 0.8
+; /solve/set/under-relaxation/density 1
+; /solve/set/under-relaxation/omega 0.8
+; /solve/set/under-relaxation/k 0.8
+; /solve/set/under-relaxation/pressure 0.3
 define/parameters/input-parameters/edit "TimeStepSize"
 
-$timeStep
+$initTimeStep
 /solve/monitors/residual/convergence-criteria
-.0001
+.001
 .0001
 .0001
 .0001
@@ -74,7 +86,7 @@ $timeStep
 
 
 
-; Autosave Settings
+; AUTOSAVE SETTINGS
 /file/auto-save/retain-most-recent-files yes
 /file/auto-save/max-files $autosave_maxfilestokeep
 /file/auto-save/data-frequency $autosave_frequency
@@ -83,6 +95,13 @@ $timeStep
 
 /server/start-server server_info.txt
 !date
+/solve/dual-time-iterate $init_num_iterations
+
+; collect stats?, sampleInt, flow shear?, flow heat?, wall stats?
+; solve/set/data-sampling yes $sampleInterval yes no yes
+define/parameters/input-parameters/edit "TimeStepSize"
+
+$timeStep
 /solve/dual-time-iterate $num_iterations
 
 !date
