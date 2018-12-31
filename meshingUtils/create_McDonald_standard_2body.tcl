@@ -206,8 +206,8 @@ ic_point {} GEOM pnt.15 0,0,$in_len
 ic_curve arc_ctr_rad GEOM crv.11 "GEOM.19 GEOM.21 pnt.11 $ccirc_inletr 0 360"
 ic_curve arc_ctr_rad GEOM crv.12 "pnt.15 GEOM.25 pnt.12 $ccirc_diffinr 0 360"
 ic_curve arc_ctr_rad GEOM crv.13 "GEOM.45 GEOM.33 pnt.13 $ccirc_diffoutr 0 360"
-ic_curve arc_ctr_rad GEOM crv.13 "GEOM.57 GEOM.54 pnt.14 $ccirc_outletouter 0 360"
-ic_curve arc_ctr_rad GEOM crv.13 "GEOM.57 GEOM.54 pnt.14 $ccirc_outletinner 0 360"
+ic_curve arc_ctr_rad GEOM crv.14 "GEOM.57 GEOM.54 pnt.14 $ccirc_outletouter 0 360"
+ic_curve arc_ctr_rad GEOM crv.15 "GEOM.57 GEOM.54 pnt.14 $ccirc_outletinner 0 360"
 
 
 ### DIFFUSER=OctOgrid PLENUM=OctOgrid
