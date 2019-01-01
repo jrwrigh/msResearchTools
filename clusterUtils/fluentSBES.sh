@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N ERCOFTAC_m2c1_SBES_specsynth
-#PBS -l select=1:ncpus=40:mpiprocs=40:mem=30gb
+#PBS -N ERCOFTAC_m2c1_SBES
+#PBS -l select=2:ncpus=40:mpiprocs=40:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -12,7 +12,7 @@ module add intel/17.0
 
 set echo on 
 echo "###START NOTES###" 
-echo "Spectral Synthesizer used for Velocity perturbation"
+echo "Vorticity Method used for Velocity perturbation"
 echo "###END NOTES###"
 
 echo "#######################"
@@ -29,16 +29,25 @@ cd $PBS_O_WORKDIR
 
 num_iterations=20000
 timeStep=1e-5
-init_num_iterations=500
+init_num_iterations=2000
 initTimeStep=5e-8
 autosave_frequency=2000
 autosave_maxfilestokeep=1
 
 fluentType=3d
-caseFile=ERCOFTAC_m2c1_SBES_specsynth.cas
+caseFile=ERCOFTAC_m2c1_SBES.cas
 initDataFile=4783505_ERCOFTAC_m2c1_SST.dat
 dataFileName=ERCOFTAC_m2c1_SBES
 
+
+    # Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
+bodyforce_relax=0.001
+density_relax=0.001
+mom_relax=0.0007
+turbvisc_relax=0.0008
+omega_relax=0.0008
+k_relax=0.0008
+pressure_relax=0.0003
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
 
@@ -47,6 +56,20 @@ jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
 echo "jobid_num: $jobid_num"
 dataFileName=${jobid_num}_${dataFileName}
 outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
+
+#### Making Journal File Parts
+init_iterations="define/parameters/input-parameters/edit \"TimeStepSize\"
+
+$initTimeStep
+/solve/dual-time-iterate $init_num_iterations"
+
+relax_SIMPLE="/solve/set/under-relaxation/body-force $bodyforce_relax
+/solve/set/under-relaxation/mom $mom_relax
+/solve/set/under-relaxation/turb-viscosity $turbvisc_relax
+/solve/set/under-relaxation/density $density_relax
+/solve/set/under-relaxation/omega $omega_relax
+/solve/set/under-relaxation/k $k_relax
+/solve/set/under-relaxation/pressure $pressure_relax"
 
 ### Making the Journal file
 journalFile="$jobid_num"_FluentSBES.jou
@@ -65,18 +88,7 @@ no
 ; 24= Coupled
 ; /solve/set/p-v-coupling 24
 
-; RELAXATION FACTORS
-; Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
-; /solve/set/under-relaxation/body-force 1
-; /solve/set/under-relaxation/mom 0.7
-; /solve/set/under-relaxation/turb-viscosity 0.8
-; /solve/set/under-relaxation/density 1
-; /solve/set/under-relaxation/omega 0.8
-; /solve/set/under-relaxation/k 0.8
-; /solve/set/under-relaxation/pressure 0.3
-define/parameters/input-parameters/edit "TimeStepSize"
-
-$initTimeStep
+$relax_SIMPLE
 /solve/monitors/residual/convergence-criteria
 .001
 .0001
@@ -95,7 +107,7 @@ $initTimeStep
 
 /server/start-server server_info.txt
 !date
-/solve/dual-time-iterate $init_num_iterations
+$init_iterations
 
 ; collect stats?, sampleInt, flow shear?, flow heat?, wall stats?
 ; solve/set/data-sampling yes $sampleInterval yes no yes
