@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N ERCOFTAC_m2c1_SBES
+#PBS -N ERCOFTAC_m3c1_SBES
 #PBS -l select=2:ncpus=40:mpiprocs=40:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
@@ -15,31 +15,44 @@ echo "###START NOTES###"
 echo "Vorticity Method used for Velocity perturbation"
 echo "###END NOTES###"
 
-echo "#######################"
-echo "###SCRIPT FILE START###"
-echo "#######################"
+echo ""
+echo "#########################################################################"
+echo "###                       SCRIPT FILE START                           ###"
+echo "#########################################################################"
 echo ""
 cat $0
 echo ""
-echo "#####################"
-echo "###SCRIPT FILE END###"
-echo "#####################"
+echo "#########################################################################"
+echo "###                        SCRIPT FILE END                            ###"
+echo "#########################################################################"
+echo ""
 
 cd $PBS_O_WORKDIR
 
+#####################################################################
+#                         Parameters
+
 num_iterations=20000
 timeStep=1e-5
+
+SWITCH_INITIAL_ITERATIONS=true
 init_num_iterations=2000
 initTimeStep=5e-8
+
 autosave_frequency=2000
 autosave_maxfilestokeep=1
 
+    # MPI options are [ibmmpi, intel, openmpi, cray]
+MPI=intel
 fluentType=3d
-caseFile=ERCOFTAC_m2c1_SBES.cas
+
+caseFile=ERCOFTAC_m3c1_SBES.cas
 initDataFile=4783505_ERCOFTAC_m2c1_SST.dat
-dataFileName=ERCOFTAC_m2c1_SBES
+dataFileName=ERCOFTAC_m3c1_SBES
 
 
+# Relaxation Parameter settings
+SWITCH_CHANGE_RELAX_PARAMS=false
     # Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
 bodyforce_relax=0.001
 density_relax=0.001
@@ -48,31 +61,48 @@ turbvisc_relax=0.0008
 omega_relax=0.0008
 k_relax=0.0008
 pressure_relax=0.0003
-    # MPI options are [ibmmpi, intel, openmpi, cray]
-MPI=intel
 
-############
+#####################################################################
+#                     Fluent Journal File Logic
+
+if $SWITCH_INITIAL_ITERATIONS; then
+    init_iterations="define/parameters/input-parameters/edit \"TimeStepSize\"
+
+    $initTimeStep
+    /solve/dual-time-iterate $init_num_iterations"
+else
+    init_iterations=
+fi
+
+if $SWITCH_CHANGE_RELAX_PARAMS; then
+    relax_SIMPLE="/solve/set/under-relaxation/body-force $bodyforce_relax
+    /solve/set/under-relaxation/mom $mom_relax
+    /solve/set/under-relaxation/turb-viscosity $turbvisc_relax
+    /solve/set/under-relaxation/density $density_relax
+    /solve/set/under-relaxation/omega $omega_relax
+    /solve/set/under-relaxation/k $k_relax
+    /solve/set/under-relaxation/pressure $pressure_relax"
+else
+    relax_SIMPLE=
+fi
+
+#              ^^END Fluent Journal File Logic END^^
+#####################################################################
+
+#####################################################################
+#                     Name Wrangling
+
+num_nodes=$(cat $PBS_NODEFILE | sort -u | wc -l)
+tot_cpus=$(cat $PBS_NODEFILE | wc -l )
 jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
-echo "jobid_num: $jobid_num"
+
 dataFileName=${jobid_num}_${dataFileName}
 outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
-
-#### Making Journal File Parts
-init_iterations="define/parameters/input-parameters/edit \"TimeStepSize\"
-
-$initTimeStep
-/solve/dual-time-iterate $init_num_iterations"
-
-relax_SIMPLE="/solve/set/under-relaxation/body-force $bodyforce_relax
-/solve/set/under-relaxation/mom $mom_relax
-/solve/set/under-relaxation/turb-viscosity $turbvisc_relax
-/solve/set/under-relaxation/density $density_relax
-/solve/set/under-relaxation/omega $omega_relax
-/solve/set/under-relaxation/k $k_relax
-/solve/set/under-relaxation/pressure $pressure_relax"
-
-### Making the Journal file
 journalFile="$jobid_num"_FluentSBES.jou
+
+#####################################################################
+#                     Journal File Creation
+
 cat <<EOT >$journalFile
 /file/set-batch-options
 ; confirm file overwrite?
@@ -122,43 +152,54 @@ $timeStep
 exit
 yes
 EOT
+#              ^^END Journal File Creation END^^
+#####################################################################
 
-num_nodes=$(cat $PBS_NODEFILE | sort -u | wc -l)
-echo "\$num_nodes = " $num_nodes
-tot_cpus=$(cat $PBS_NODEFILE | wc -l )
-echo "\$tot_cpus = " $tot_cpus
+#####################################################################
+#                     Building Fluent Arguements
 
 fluent_args="-t${tot_cpus} $fluent_args -cnf=$PBS_NODEFILE"
 
 fluent_args="-g -i $journalFile -mpi=$MPI $fluent_args"
 
-echo "
-+--------------+
-| START SOLVER | 
-+--------------+
+#####################################################################
+#                     Printing Job Information
 
-+---------------------------+
-|                           | 
+echo "
++--------------------------+
+|       START SOLVER       | 
++--------------------------+
+
++-------------------------------------+
+|                                     | 
 
 Start Time : $(date)
 
+Job Information:
+----------------
+Num. CPUS = $tot_cpus
+Num. Nodes = $num_nodes
+Job ID # = $jobid_num
 
 Inputs:
--------------
+----------------
 Journal File = $journalFile
 Case File = $caseFile
 Fluent Verison = $fluentType
 
 
 Output Files:
---------------
+-----------------
 Data File = ${dataFileName}.dat
 Log File = ${dataFileName}.log
 
-|                           | 
-+---------------------------+
+|                                     | 
++-------------------------------------+
 
 "
+
+#####################################################################
+#                     Running the Job Itself
 
 for node in `uniq $PBS_NODEFILE`
 do
