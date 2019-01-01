@@ -7,6 +7,18 @@ set {mesh_option} 1
 # 1 = DiffuserBody
 # 2 = PlenumMesh
 
+
+# Unload the geometry, blocking, and mesh
+ic_uns_diag_reset_degen_min_max 
+ic_hex_unload_blocking 
+ic_delete_empty_parts 
+ic_csystem_set_current global
+ic_unload_tetin 
+ic_empty_tetin 
+ic_delete_empty_parts 
+ic_unload_mesh
+ic_delete_empty_parts 
+
 ###TODO 
 # Make the outer plenum wall edges have geometric distribution
 
