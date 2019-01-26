@@ -5,7 +5,6 @@ ic_unload_tetin
 set {mesh_option} 1
 # 0 = Geometry Creation Only
 # 1 = DiffuserBody
-# 2 = PlenumMesh
 
 
 # Unload the geometry, blocking, and mesh
@@ -35,8 +34,6 @@ ic_delete_empty_parts
 #### Geometry
 set {in_len_multi}  4
     # multiplies by inlet diameter for diffuser/domain inlet length
-set {out_len_multi} 5 
-    # multiplies by inlet diameter for diffuser outlet length
 set {in_r} 130
     # radius of diffuser/domain inlet
 
