@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N ERCOFTAC_m3c1_SBES
-#PBS -l select=2:ncpus=40:mpiprocs=40:mem=30gb
+#PBS -N ER_Mesh_Test1_SBES
+#PBS -l select=5:ncpus=24:mpiprocs=24:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -8,11 +8,12 @@
 
 module purge
 module add ansys/19.0
-module add intel/17.0
+module add intel/19.0
 
 set echo on 
 echo "###START NOTES###" 
-echo "Vorticity Method used for Velocity perturbation"
+echo "Using NITA, Relaxation Parameters set to 1"
+echo "PV Scheme changed to Fractional Step"
 echo "###END NOTES###"
 
 echo ""
@@ -32,8 +33,10 @@ cd $PBS_O_WORKDIR
 #####################################################################
 #                         Parameters
 
+SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
+
 num_iterations=20000
-timeStep=1e-5
+timeStep=5e-7
 
 SWITCH_INITIAL_ITERATIONS=true
 init_num_iterations=2000
@@ -45,10 +48,11 @@ autosave_maxfilestokeep=1
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
 fluentType=3d
+export I_MPI_FABRICS=shm:tcp
 
-caseFile=ERCOFTAC_m3c1_SBES.cas
-initDataFile=4783505_ERCOFTAC_m2c1_SST.dat
-dataFileName=ERCOFTAC_m3c1_SBES
+caseFile=ER_Mesh_Test1_SBES.cas
+initDataFile=4964659_ER_Mesh_Test1_SST.dat
+dataFileName=ER_Mesh_Test1_SBES
 
 
 # Relaxation Parameter settings
@@ -86,6 +90,12 @@ else
     relax_SIMPLE=
 fi
 
+if $SWITCH_INITIALIZE_UNSTEADY_STATISTICS; then
+    initFlowStatistics="/solve/initialize/init-flow-statistics"
+else
+    initFlowStatistics=
+fi
+
 #              ^^END Fluent Journal File Logic END^^
 #####################################################################
 
@@ -114,7 +124,7 @@ no
 /file/read-case $caseFile
 /file/read-data $initDataFile
 /solve/initialize/init-instantaneous-vel
-; /solve/initialize/init-flow-statistics
+$initFlowStatistics
 ; 24= Coupled
 ; /solve/set/p-v-coupling 24
 
@@ -137,6 +147,8 @@ $relax_SIMPLE
 
 /server/start-server server_info.txt
 !date
+
+report summary no
 $init_iterations
 
 ; collect stats?, sampleInt, flow shear?, flow heat?, wall stats?
@@ -149,6 +161,11 @@ $timeStep
 !date
 /parallel/timer/usage
 /file/write-data ${dataFileName}.dat
+
+;###################################
+;######## Report Summary ###########
+;###################################
+report summary no
 exit
 yes
 EOT
