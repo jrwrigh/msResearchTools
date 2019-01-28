@@ -12,8 +12,7 @@ module add intel/19.0
 
 set echo on 
 echo "###START NOTES###" 
-echo "Using NITA, Relaxation Parameters set to 1"
-echo "PV Scheme changed to Fractional Step"
+echo "Test of the mkdir functionality of the script"
 echo "###END NOTES###"
 
 echo ""
@@ -35,36 +34,36 @@ cd $PBS_O_WORKDIR
 
 SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
 
-num_iterations=20000
-timeStep=5e-7
+num_iterations=10
+timeStep=5e-6
 
-SWITCH_INITIAL_ITERATIONS=true
-init_num_iterations=2000
-initTimeStep=5e-8
+SWITCH_INITIAL_ITERATIONS=false
+init_num_iterations=1000
+initTimeStep=5e-7
 
-autosave_frequency=2000
-autosave_maxfilestokeep=1
+autosave_frequency=4
+autosave_maxfilestokeep=2
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
 fluentType=3d
 export I_MPI_FABRICS=shm:tcp
 
-caseFile=ER_Mesh_Test1_SBES.cas
-initDataFile=4964659_ER_Mesh_Test1_SST.dat
+caseFile=4964953_ER_Mesh_Test1_SBES-2.cas
+initDataFile=4964953_ER_Mesh_Test1_SBES-2-10000.dat
 dataFileName=ER_Mesh_Test1_SBES
 
 
 # Relaxation Parameter settings
-SWITCH_CHANGE_RELAX_PARAMS=false
+SWITCH_CHANGE_RELAX_PARAMS=true
     # Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
-bodyforce_relax=0.001
-density_relax=0.001
-mom_relax=0.0007
-turbvisc_relax=0.0008
-omega_relax=0.0008
-k_relax=0.0008
-pressure_relax=0.0003
+bodyforce_relax=1
+density_relax=1
+mom_relax=0.7
+turbvisc_relax=0.8
+omega_relax=0.8
+k_relax=0.8
+pressure_relax=0.7
 
 #####################################################################
 #                     Fluent Journal File Logic
@@ -109,6 +108,7 @@ jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
 dataFileName=${jobid_num}_${dataFileName}
 outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
 journalFile="$jobid_num"_FluentSBES.jou
+outDirName=$dataFileName
 
 #####################################################################
 #                     Journal File Creation
@@ -143,7 +143,7 @@ $relax_SIMPLE
 /file/auto-save/max-files $autosave_maxfilestokeep
 /file/auto-save/data-frequency $autosave_frequency
 /file/auto-save/append-file-name-with time-step 6
-/file/auto-save/root-name "${PBS_O_WORKDIR}/$dataFileName"
+/file/auto-save/root-name "${PBS_O_WORKDIR}/${dataFileName}/$dataFileName"
 
 /server/start-server server_info.txt
 !date
@@ -218,6 +218,9 @@ Log File = ${dataFileName}.log
 #####################################################################
 #                     Running the Job Itself
 
+# make directory to store the solution files
+mkdir ${PBS_O_WORKDIR}/$outDirName
+
 for node in `uniq $PBS_NODEFILE`
 do
 	ssh $node "cp $PBS_O_WORKDIR/$caseFile $TMPDIR"
@@ -236,8 +239,6 @@ done
 
 for node in `uniq $PBS_NODEFILE`
 do
-    ssh $node "cp -r $TMPDIR/* $PBS_O_WORKDIR"
+    ssh $node "cp -r $TMPDIR/* $PBS_O_WORKDIR/$outDirName"
 done
-
-
 
