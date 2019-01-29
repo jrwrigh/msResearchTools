@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N ER_Mesh_Test1_SBES
-#PBS -l select=5:ncpus=24:mpiprocs=24:mem=30gb
+#PBS -l select=2:ncpus=40:mpiprocs=40:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -12,7 +12,7 @@ module add intel/19.0
 
 set echo on 
 echo "###START NOTES###" 
-echo "Test of the mkdir functionality of the script"
+echo "restart of 4964953_ER_Mesh_Test1_SBES with better hardware"
 echo "###END NOTES###"
 
 echo ""
@@ -34,23 +34,23 @@ cd $PBS_O_WORKDIR
 
 SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
 
-num_iterations=10
+num_iterations=20000
 timeStep=5e-6
 
-SWITCH_INITIAL_ITERATIONS=false
-init_num_iterations=1000
+SWITCH_INITIAL_ITERATIONS=true
+init_num_iterations=300
 initTimeStep=5e-7
 
-autosave_frequency=4
-autosave_maxfilestokeep=2
+autosave_frequency=500
+autosave_maxfilestokeep=1
 
     # MPI options are [ibmmpi, intel, openmpi, cray]
 MPI=intel
 fluentType=3d
 export I_MPI_FABRICS=shm:tcp
 
-caseFile=4964953_ER_Mesh_Test1_SBES-2.cas
-initDataFile=4964953_ER_Mesh_Test1_SBES-2-10000.dat
+casePath=./4964953_ER_Mesh_Test1_SBES/4964953_ER_Mesh_Test1_SBES-2.cas
+initDataPath=./4964953_ER_Mesh_Test1_SBES/4964953_ER_Mesh_Test1_SBES-2-10000.dat
 dataFileName=ER_Mesh_Test1_SBES
 
 
@@ -105,6 +105,9 @@ num_nodes=$(cat $PBS_NODEFILE | sort -u | wc -l)
 tot_cpus=$(cat $PBS_NODEFILE | wc -l )
 jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
 
+
+caseFile="$(basename $casePath)"
+initDataFile="$(basename $initDataPath)"
 dataFileName=${jobid_num}_${dataFileName}
 outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
 journalFile="$jobid_num"_FluentSBES.jou
@@ -223,8 +226,8 @@ mkdir ${PBS_O_WORKDIR}/$outDirName
 
 for node in `uniq $PBS_NODEFILE`
 do
-	ssh $node "cp $PBS_O_WORKDIR/$caseFile $TMPDIR"
-	ssh $node "cp $PBS_O_WORKDIR/$initDataFile $TMPDIR"
+	ssh $node "cp $PBS_O_WORKDIR/$casePath $TMPDIR"
+	ssh $node "cp $PBS_O_WORKDIR/$initDataPath $TMPDIR"
 	ssh $node "mv $PBS_O_WORKDIR/$journalFile $TMPDIR"
 done
 
