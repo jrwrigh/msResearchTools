@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N ER_Mesh_Test1_SBES
-#PBS -l select=2:ncpus=40:mpiprocs=40:mem=30gb
+#PBS -N ER_m5c1_SBES
+#PBS -l select=6:ncpus=40:mpiprocs=40:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -12,7 +12,7 @@ module add intel/19.0
 
 set echo on 
 echo "###START NOTES###" 
-echo "restart of 4964953_ER_Mesh_Test1_SBES with better hardware"
+echo "First run of simple diffuser geometry"
 echo "###END NOTES###"
 
 echo ""
@@ -35,11 +35,11 @@ cd $PBS_O_WORKDIR
 SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
 
 num_iterations=20000
-timeStep=5e-6
+timeStep=5e-5
 
 SWITCH_INITIAL_ITERATIONS=true
-init_num_iterations=300
-initTimeStep=5e-7
+init_num_iterations=1000
+initTimeStep=1e-6
 
 autosave_frequency=500
 autosave_maxfilestokeep=1
@@ -49,13 +49,13 @@ MPI=intel
 fluentType=3d
 export I_MPI_FABRICS=shm:tcp
 
-casePath=./4964953_ER_Mesh_Test1_SBES/4964953_ER_Mesh_Test1_SBES-2.cas
-initDataPath=./4964953_ER_Mesh_Test1_SBES/4964953_ER_Mesh_Test1_SBES-2-10000.dat
-dataFileName=ER_Mesh_Test1_SBES
+casePath=ER_m5c1_SBES.cas
+initDataPath=4988413_ER_m5c1_SST.dat
+dataFileName=ER_m5c1_SBES
 
 
 # Relaxation Parameter settings
-SWITCH_CHANGE_RELAX_PARAMS=true
+SWITCH_CHANGE_RELAX_PARAMS=false
     # Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
 bodyforce_relax=1
 density_relax=1
@@ -162,13 +162,25 @@ $timeStep
 /solve/dual-time-iterate $num_iterations
 
 !date
-/parallel/timer/usage
 /file/write-data ${dataFileName}.dat
 
 ;###################################
 ;######## Report Summary ###########
 ;###################################
 report summary no
+
+;########### Parallel Timer Usage #####################
+/parallel/timer/usage
+
+;########## Time Statistics ###########################
+report/system/time-stats
+
+;########## System Statistics ###########################
+report/system/time-stats
+
+;########## Processor Statistics ###########################
+report/system/proc-stats
+
 exit
 yes
 EOT
