@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N ERCOFTAC_m4c1_SST
-#PBS -l select=1:ncpus=40:mpiprocs=40:mem=32gb
+#PBS -N ER_m5c1_SST
+#PBS -l select=2:ncpus=40:mpiprocs=40:mem=32gb
 #PBS -l walltime=02:00:00
 #PBS -j oe
 #PBS -m abe
@@ -23,8 +23,8 @@ cd $PBS_O_WORKDIR
 #####################################################################
 #                         Parameters
 
-caseFile=ERCOFTAC_m4c1_SST.cas
-dataFileName=ERCOFTAC_m4c1_SST
+caseFile=ER_m5c1_SST.cas
+dataFileName=ER_m5c1_SST
     
 num_iterations=1800
 
@@ -85,6 +85,8 @@ $rotationalVelocityParameter
 
 
 !date
+report summary no
+/server/start-server server_info.txt
 /solve/iterate $num_iterations
 !date
 /file/write-data $dataFileName
