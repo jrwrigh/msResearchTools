@@ -55,7 +55,7 @@ initDataPath=498951_1800_Interpolation.ip
 dataFileName=ER_m6c1_SBES
 
 # Relaxation Parameter settings
-SWITCH_CHANGE_RELAX_PARAMS=true
+SWITCH_CHANGE_RELAX_PARAMS=false
     # Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
 bodyforce_relax=1
 density_relax=1
