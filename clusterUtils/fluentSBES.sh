@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N ER_m5c1_SBES
-#PBS -l select=6:ncpus=40:mpiprocs=40:mem=30gb
+#PBS -N ER_m6c1_SBES_TEST
+#PBS -l select=2:ncpus=16:mpiprocs=16:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -12,7 +12,8 @@ module add intel/19.0
 
 set echo on 
 echo "###START NOTES###" 
-echo "First run of simple diffuser geometry"
+echo "Testing interpolation and script for interpolation"
+echo "Coarser mesh, interpolating last results from 498951"
 echo "###END NOTES###"
 
 echo ""
@@ -34,10 +35,10 @@ cd $PBS_O_WORKDIR
 
 SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
 
-num_iterations=20000
-timeStep=5e-5
+num_iterations=5
+timeStep=5e-6
 
-SWITCH_INITIAL_ITERATIONS=true
+SWITCH_INITIAL_ITERATIONS=false
 init_num_iterations=1000
 initTimeStep=1e-6
 
@@ -49,13 +50,12 @@ MPI=intel
 fluentType=3d
 export I_MPI_FABRICS=shm:tcp
 
-casePath=ER_m5c1_SBES.cas
-initDataPath=4988413_ER_m5c1_SST.dat
-dataFileName=ER_m5c1_SBES
-
+casePath=ER_m6c1_SBES.cas
+initDataPath=498951_1800_Interpolation.ip
+dataFileName=ER_m6c1_SBES
 
 # Relaxation Parameter settings
-SWITCH_CHANGE_RELAX_PARAMS=false
+SWITCH_CHANGE_RELAX_PARAMS=true
     # Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
 bodyforce_relax=1
 density_relax=1
@@ -63,7 +63,22 @@ mom_relax=0.7
 turbvisc_relax=0.8
 omega_relax=0.8
 k_relax=0.8
-pressure_relax=0.7
+pressure_relax=0.8
+
+#####################################################################
+#                     Name Wrangling
+
+num_nodes=$(cat $PBS_NODEFILE | sort -u | wc -l)
+tot_cpus=$(cat $PBS_NODEFILE | wc -l )
+jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
+
+
+caseFile="$(basename $casePath)"
+initDataFile="$(basename $initDataPath)"
+dataFileName=${jobid_num}_${dataFileName}
+outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
+journalFile="$jobid_num"_FluentSBES.jou
+outDirName=$dataFileName
 
 #####################################################################
 #                     Fluent Journal File Logic
@@ -95,23 +110,18 @@ else
     initFlowStatistics=
 fi
 
+DATATYPEEXT="${initDataFile##*.}"
+if [ "$DATATYPEEXT" = "ip" ]; then
+    initializeDomain="file/interpolate/read-data $initDataFile"
+elif [ "$DATATYPEEXT" = "dat" ]; then
+    initializeDomain="/file/read-data $initDataFile"
+else
+    echo "INITDATATYPE \"$INITDATATYPE\" not a valid term"
+    exit 1
+fi
+
 #              ^^END Fluent Journal File Logic END^^
 #####################################################################
-
-#####################################################################
-#                     Name Wrangling
-
-num_nodes=$(cat $PBS_NODEFILE | sort -u | wc -l)
-tot_cpus=$(cat $PBS_NODEFILE | wc -l )
-jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
-
-
-caseFile="$(basename $casePath)"
-initDataFile="$(basename $initDataPath)"
-dataFileName=${jobid_num}_${dataFileName}
-outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
-journalFile="$jobid_num"_FluentSBES.jou
-outDirName=$dataFileName
 
 #####################################################################
 #                     Journal File Creation
@@ -125,7 +135,7 @@ yes
 ; Hide Questions?
 no
 /file/read-case $caseFile
-/file/read-data $initDataFile
+$initializeDomain
 /solve/initialize/init-instantaneous-vel
 $initFlowStatistics
 ; 24= Coupled
