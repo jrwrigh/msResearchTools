@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N ER_m6c1_SBES_TEST
-#PBS -l select=2:ncpus=16:mpiprocs=16:mem=30gb
+#PBS -N ER_m6c2_SBES
+#PBS -l select=3:ncpus=40:mpiprocs=40:mem=30gb:phase=18b
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -12,8 +12,7 @@ module add intel/19.0
 
 set echo on 
 echo "###START NOTES###" 
-echo "Testing interpolation and script for interpolation"
-echo "Coarser mesh, interpolating last results from 498951"
+echo "Corrected inlet pressure"
 echo "###END NOTES###"
 
 echo ""
@@ -35,12 +34,12 @@ cd $PBS_O_WORKDIR
 
 SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
 
-num_iterations=5
-timeStep=5e-6
+num_iterations=20000
+timeStep=8e-5
 
-SWITCH_INITIAL_ITERATIONS=false
-init_num_iterations=1000
-initTimeStep=1e-6
+SWITCH_INITIAL_ITERATIONS=true
+init_num_iterations=100
+initTimeStep=5e-6
 
 autosave_frequency=500
 autosave_maxfilestokeep=1
@@ -50,12 +49,14 @@ MPI=intel
 fluentType=3d
 export I_MPI_FABRICS=shm:tcp
 
-casePath=ER_m6c1_SBES.cas
-initDataPath=498951_1800_Interpolation.ip
-dataFileName=ER_m6c1_SBES
+casePath=ER_m6c2_SBES.cas
+initDataPath=5426975_ER_m6c2_SST.dat
+dataFileName=ER_m6c2_SBES
+
+SWITCH_DROP_CACHE=false
 
 # Relaxation Parameter settings
-SWITCH_CHANGE_RELAX_PARAMS=false
+SWITCH_CHANGE_RELAX_PARAMS=true
     # Default: 1[body-force,density] 0.7[mom] 0.8[turbvisc,omega,k] 0.3[pressure]
 bodyforce_relax=1
 density_relax=1
@@ -110,6 +111,12 @@ else
     initFlowStatistics=
 fi
 
+if $SWITCH_DROP_CACHE; then
+    dropCache="(flush-cache)"
+else
+    dropCache=
+fi
+
 DATATYPEEXT="${initDataFile##*.}"
 if [ "$DATATYPEEXT" = "ip" ]; then
     initializeDomain="file/interpolate/read-data $initDataFile"
@@ -134,6 +141,8 @@ yes
 yes
 ; Hide Questions?
 no
+/server/start-server server_info.txt
+$dropCache
 /file/read-case $caseFile
 $initializeDomain
 /solve/initialize/init-instantaneous-vel
@@ -158,7 +167,6 @@ $relax_SIMPLE
 /file/auto-save/append-file-name-with time-step 6
 /file/auto-save/root-name "${PBS_O_WORKDIR}/${dataFileName}/$dataFileName"
 
-/server/start-server server_info.txt
 !date
 
 report summary no
