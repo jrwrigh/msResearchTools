@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N ER_m6c2_SBES
-#PBS -l select=3:ncpus=40:mpiprocs=40:mem=30gb:phase=18b
+#PBS -l select=3:ncpus=40:mpiprocs=40:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
