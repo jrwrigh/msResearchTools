@@ -1,5 +1,6 @@
 #!/bin/bash
 # NOTE: This script requires the associated PBS Job Script to work along side it.
+# Arguements: [caseName] [initDataPath]
 
 jobScriptPath="/home/jrwrigh/gitRepos/msresearchtools/clusterUtils/exportFluentCGNS_jobscript.sh"
 jobScriptName=$(basename $jobScriptPath)
