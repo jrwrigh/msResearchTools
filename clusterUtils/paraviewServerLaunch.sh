@@ -10,11 +10,13 @@ simgPath="paraview_5.6.0RC3-egl.simg"
 nodehost=${HOSTNAME:0:4} 
 
 if [ "$nodehost" == "node" ]; then
+    module unload python
 	module load singularity
 	export DISPLAY=:0
 	export SINGULARITY="$(which singularity) exec -B /common/miller/jrwrigh:/common -B /usr/lib64/nvidia/:/.singularity.d/libs -B /etc/machine-id:/etc/machine-id -B /run/user:/run/user -B /usr/bin:/host_bin -B $(pwd):/host_pwd ${simgPath}" 
 	${SINGULARITY} pvserver -display :0
+ 
 else 
-	qsub -I -X -l select=1:ncpus=2:ngpus=1:mem=20gb,walltime=4:00:00
+	qsub -I -l select=1:ncpus=2:ngpus=1:mem=20gb,walltime=4:00:00
 fi 
 
