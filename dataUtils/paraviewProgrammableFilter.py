@@ -62,6 +62,13 @@ for key in VectorDict.keys():
         algs.dot(VectorDict[key], zVec))
 
 ###########################################
+#        SPECIALIZED DATA OUTPUT
+###########################################
+
+# Dynamic Pressure
+DynPres = algs.mag(VelocityVec)**2 * 0.5 * input0.PointData['Density'].Arrays[0]
+
+###########################################
 #            OUTPUTING DATA
 ###########################################
 
@@ -83,6 +90,9 @@ output.PointData.append(VelRMSEVec, 'Velocity_RMSE')
 output.PointData.append(VectorCylDict['VelCyl'], 'VelocityCyl')
 output.PointData.append(VectorCylDict['VelCylMean'], 'VelocityCyl_Mean')
 output.PointData.append(VectorCylDict['VelCylRMSE'], 'VelocityCyl_RMSE')
+
+# Specialized Data
+output.PointData.append(DynPres, 'Pressure_Dynamic')
 
 # for key in input0.PointData.keys():
 #     output.PointData.append(input0.PointData[key], key
