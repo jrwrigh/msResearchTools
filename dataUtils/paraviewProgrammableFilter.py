@@ -94,5 +94,5 @@ output.PointData.append(VectorCylDict['VelCylRMSE'], 'VelocityCyl_RMSE')
 # Specialized Data
 output.PointData.append(DynPres, 'Pressure_Dynamic')
 
-# for key in input0.PointData.keys():
-#     output.PointData.append(input0.PointData[key], key
+for key in input0.PointData.keys():
+    output.PointData.append(input0.PointData[key], key)
