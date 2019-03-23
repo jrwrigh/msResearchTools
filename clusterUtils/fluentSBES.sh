@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N ER_m6c2_SBES
-#PBS -l select=3:ncpus=40:mpiprocs=40:mem=30gb
+#PBS -N p150L0510_S200_SBES
+#PBS -l select=2:ncpus=40:mpiprocs=40:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -12,7 +12,7 @@ module add intel/19.0
 
 set echo on 
 echo "###START NOTES###" 
-echo "Corrected inlet pressure"
+echo ""
 echo "###END NOTES###"
 
 echo ""
@@ -34,12 +34,17 @@ cd $PBS_O_WORKDIR
 
 SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
 
-num_iterations=20000
-timeStep=8e-5
+num_iterations=1800
+timeStep=7e-5
 
 SWITCH_INITIAL_ITERATIONS=true
 init_num_iterations=100
 initTimeStep=5e-6
+
+SWITCH_UNSTEADY_STAT_INITIALIZATION=true
+    # drops the first N timesteps from the data
+unsteadyStatIterations=4000
+unsteadyStatTimeStep=$timeStep
 
 autosave_frequency=500
 autosave_maxfilestokeep=1
@@ -49,9 +54,9 @@ MPI=intel
 fluentType=3d
 export I_MPI_FABRICS=shm:tcp
 
-casePath=ER_m6c2_SBES.cas
-initDataPath=5426975_ER_m6c2_SST.dat
-dataFileName=ER_m6c2_SBES
+casePath=p150L0510_S200_SBES.cas
+initDataPath=5668167_p150L0510_S200_SST.dat
+dataFileName=p150L0510_S200_SBES
 
 SWITCH_DROP_CACHE=false
 
@@ -117,6 +122,18 @@ else
     dropCache=
 fi
 
+if $SWITCH_UNSTEADY_STAT_INITIALIZATION; then
+    unsteadyStatInitialization="define/parameters/input-parameters/edit \"TimeStepSize\"
+
+    $unsteadyStatTimeStep
+    /solve/dual-time-iterate $unsteadyStatIterations
+
+    /solve/initialize/init-flow-statistics    
+    "
+else
+    unsteadyStatInitialization=
+fi
+
 DATATYPEEXT="${initDataFile##*.}"
 if [ "$DATATYPEEXT" = "ip" ]; then
     initializeDomain="file/interpolate/read-data $initDataFile"
@@ -174,6 +191,7 @@ $init_iterations
 
 ; collect stats?, sampleInt, flow shear?, flow heat?, wall stats?
 ; solve/set/data-sampling yes $sampleInterval yes no yes
+$unsteadyStatInitialization
 define/parameters/input-parameters/edit "TimeStepSize"
 
 $timeStep
