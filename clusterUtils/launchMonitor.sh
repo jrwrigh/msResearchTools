@@ -2,7 +2,10 @@
 set -e
 set -u
 usage="
-launchMonitor launches a monitoring for an ongoing simulation
+launchMonitor allows you to keep track of a job as it runs. It can launch a 
+CFX or Fluent simulation monitor for an ongoing simulation or even launch 
+an SSH session to the nodes being used by the job.
+
 Usage: launchMonitor {-f | -c | -s | -h} <JobID>
      Example: launchMonitor -f 4999233
 Options:
