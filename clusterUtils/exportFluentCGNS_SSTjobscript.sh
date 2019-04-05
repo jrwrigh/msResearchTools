@@ -31,6 +31,7 @@ module load intel/19.0
 velocities="x-velocity
 y-velocity
 z-velocity
+velocity-magnitude
 "
 wallShears="
 x-wall-shear
@@ -45,12 +46,12 @@ absolute-pressure
 miscData="cell-volume
 cell-volume-change
 cell-wall-distance
-cell-convective-courant-number
 curv-corr-fr
 turb-kinetic-energy
 turb-diss-rate
 y-plus
 "
+
 cat <<EOT >$journalFile
 /file/set-batch-options
 ; confirm file overwrite?
