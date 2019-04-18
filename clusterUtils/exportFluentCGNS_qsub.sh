@@ -2,8 +2,8 @@
 # NOTE: This script requires the associated PBS Job Script to work along side it.
 # Arguements: [SBES|SST] [caseName] [initDataPath]
 
-jobScriptPathSBES="/home/jrwrigh/gitRepos/msresearchtools/clusterUtils/exportFluentCGNS_SBESjobscript.sh"
-jobScriptPathSST="/home/jrwrigh/gitRepos/msresearchtools/clusterUtils/exportFluentCGNS_SSTjobscript.sh"
+jobScriptPathSBES="/home/jrwrigh/gitRepos/msresearchtools/clusterUtils/exportFluent_jobscripts/exportFluentCGNS_SBESjobscript.sh"
+jobScriptPathSST="/home/jrwrigh/gitRepos/msresearchtools/clusterUtils/exportFluent_jobscripts/exportFluentCGNS_SSTjobscript.sh"
 if [ $1 = "SBES" ]; then
     jobScriptName=$(basename $jobScriptPathSBES)
         # copy the PBS job script to the current directory
