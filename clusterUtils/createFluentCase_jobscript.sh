@@ -1,72 +1,39 @@
 #!/bin/bash
-#PBS -N exportFluentCGNS
+#PBS -N createFluentCase
 #PBS -l select=1:ncpus=2:mem=20gb
 #PBS -l walltime=00:10:00
 #PBS -j oe
 
 cd $PBS_O_WORKDIR
 
-casePath=casePathNameThing
-initDataPath=initDataPathNameThing
-echo "casePath = $casePath"
-echo "initDataPath = $initDataPath"
+meshPath=meshPathNameThing
+settingsPath=settingsPathNameThing
+settingsProfilePath=settingsProfilePathNameThing
+velocityProfilePath=velocityProfilePathNameThing
+turbProfilePath=turbProfilePathNameThing
 
+echo "meshPath = $meshPath"
+echo "settingsPath = $settingsPath"
+echo "velocityProfilePath = $velocityProfilePath"
+echo "turbProfilePath = $turbProfilePath"
+echo "
+
+"
 echo "All environment variables:"
 printenv
 
-caseFile=$(basename $casePath)
-initDataFile=$(basename $initDataPath)
+meshFile=$(basename $meshPath)
+settingsFile=$(basename $settingsPath)
+velocityProfileFile=$(basename $velocityProfilePath)
+turbProfileFile=$(basename $turbProfilePath)
 
-    # cellCentered=no for Node value points, yes for Cell Centered points
-cellCentered='no'
+caseFileName=caseFileNameThing
 
-journalFile='CGNSExportJournal.jou'
-
-cgnsFileName=$(basename $initDataFile .dat)
+journalFile='createFluentCase.jou'
 
 module purge
 module load ansys/19.0
 module load intel/19.0
-
-velocities="x-velocity
-y-velocity
-z-velocity
-rmse-x-velocity
-rmse-y-velocity
-rmse-z-velocity
-mean-x-velocity
-mean-y-velocity
-mean-z-velocity
-"
-wallShears="
-mean-x-wall-shear
-mean-y-wall-shear
-mean-z-wall-shear
-"
-
-pressures="mean-dynpres_unsteady
-rmse-dynpres_unsteady
-dynpres_unsteady
-pressure
-absolute-pressure
-"
-
-miscData="mean-sbes-shield-value
-rmse-sbes-shield-value
-sbes-shield-value
-cell-volume
-cell-volume-change
-cell-wall-distance
-cell-convective-courant-number
-curv-corr-fr
-turb-kinetic-energy
-turb-diss-rate
-y-plus
-"
-reynoldsStresses="resolved-uv-stress
-resolved-uw-stress
-resolved-vw-stress
-"
 
 cat <<EOT >$journalFile
 /file/set-batch-options
@@ -76,24 +43,16 @@ yes
 yes
 ; Hide Questions?
 no
-/file/read-case $caseFile
-/file/read-data $initDataFile
-/file/export/cgns $cgnsFileName $cellCentered 
-density
-viscosity-lam
-$velocities
-$pressures
-$miscData
-$reynoldsStresses
-$wallShears
-()
+/file/read-case $meshFile
+/mesh/scale .001 .001 .001
+/file/read-settings $settingsFile
+/file/read-profile $velocityProfileFile
+/file/read-profile $turbProfileFile
+/file/write-case $caseFileName
 
 exit
 yes
 EOT
-
-echo "pwd $(pwd)"
-echo "ls $(ls)"
 
 echo "
 ############################################
@@ -120,13 +79,16 @@ Start Time : $(date)
 Inputs:
 ----------------
 Journal File = $journalFile
-Case File = $caseFile
-Data File = $initDataFile
+Mesh File = $meshFile
+Settings File = $settingsFile
+Velocity Profile File = $velocityProfileFile
+Turbulence Profile File = $turbProfileFile
+
 
 
 Output Files:
 -----------------
-CGNS File = ${cgnsFileName}.cgns
+Case File = ${caseFileName}.cas
 
 |                                     | 
 +-------------------------------------+
@@ -143,8 +105,11 @@ fluent_args="-g -i $journalFile $fluent_args"
 
 for node in `uniq $PBS_NODEFILE`
 do
-	ssh $node "cp $PBS_O_WORKDIR/$casePath $TMPDIR"
-	ssh $node "cp $PBS_O_WORKDIR/$initDataPath $TMPDIR"
+	ssh $node "cp $PBS_O_WORKDIR/$meshPath $TMPDIR"
+	ssh $node "cp $settingsPath $TMPDIR"
+	ssh $node "cp $settingsProfilePath$TMPDIR"
+	ssh $node "cp $velocityProfilePath $TMPDIR"
+	ssh $node "cp $turbProfilePath $TMPDIR"
 	ssh $node "mv $PBS_O_WORKDIR/$journalFile $TMPDIR"
 done
 
@@ -164,6 +129,6 @@ ls -al
 
 for node in `uniq $PBS_NODEFILE`
 do
-    ssh $node "cp -r $TMPDIR/${cgnsFileName}.cgns $PBS_O_WORKDIR"
+    ssh $node "cp -r $TMPDIR/${caseFileName}.cas $PBS_O_WORKDIR"
 done
 
