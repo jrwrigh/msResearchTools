@@ -14,7 +14,7 @@ fi
 
 reportFileName=$(basename $dataFile .cdat)_Report
 
-echo cfdpost -report $reportStateFilePath -name $reportFileName -outdir $PBS_O_WORKDIR ${PBS_O_WORKDIR}$dataFile
+echo cfdpost -report $reportStateFilePath -name $reportFileName -outdir ./ ./$dataFile
 
-cfdpost -report $reportStateFilePath -name $reportFileName -outdir $PBS_O_WORKDIR ${PBS_O_WORKDIR}$dataFile
+cfdpost -report $reportStateFilePath -name $reportFileName -outdir ./ ./$dataFile
 
