@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N ER_m5c1_SST
-#PBS -l select=2:ncpus=40:mpiprocs=40:mem=32gb
+#PBS -N p136L0260_S050_SST
+#PBS -l select=1:ncpus=28:mpiprocs=28:mem=32gb
 #PBS -l walltime=02:00:00
 #PBS -j oe
 #PBS -m abe
@@ -23,31 +23,18 @@ cd $PBS_O_WORKDIR
 #####################################################################
 #                         Parameters
 
-caseFile=ER_m5c1_SST.cas
-dataFileName=ER_m5c1_SST
+caseFile=p136L0260_S050_SST.cas
+dataFileName=p136L0260_S050_SST
     
 num_iterations=1800
 
 SWITCH_ROTATIONAL_VELOCITY=false
+WRITE_CFDP_FILE=true
 rotationalVelocity=0
 
 # Fluent parameters
 mpi=intel # MPI options are [ibmmpi, intel, openmpi, cray]
 fluentType=3ddp
-
-#####################################################################
-#                     Fluent Journal File Logic
-
-if $SWITCH_ROTATIONAL_VELOCITY; then
-    rotationalVelocityParameter="/define/parameters/input-parameters/edit \"rotationalVelocity\"
-
-    $rotationalVelocity"
-else
-    rotationalVelocityParameter=""
-fi
-
-#              ^^END Fluent Journal File Logic END^^
-#####################################################################
 
 #####################################################################
 #                     Name Wrangling
@@ -60,6 +47,48 @@ dataFileName=${jobid_num}_${dataFileName}
 outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
 journalFile="$jobid_num"_SST.jou
 outDirName=$dataFileName
+
+#####################################################################
+#                     Fluent Journal File Logic
+
+if $SWITCH_ROTATIONAL_VELOCITY; then
+    rotationalVelocityParameter="/define/parameters/input-parameters/edit \"rotationalVelocity\"
+
+    $rotationalVelocity"
+else
+    rotationalVelocityParameter=""
+fi
+
+if $WRITE_CFDP_FILE; then
+    writeCFDPParameters="/file/export/cfd-post-compatible $dataFileName * () * ()
+density
+viscosity-lam
+x-velocity
+y-velocity
+z-velocity
+velocity-magnitude
+x-wall-shear
+y-wall-shear
+z-wall-shear
+pressure
+absolute-pressure
+dynamic-pressure
+cell-volume
+cell-volume-change
+cell-wall-distance
+curv-corr-fr
+turb-kinetic-energy
+turb-diss-rate
+y-plus
+()
+yes
+no "
+else
+    writeCFDPParameters=""
+fi
+
+#              ^^END Fluent Journal File Logic END^^
+#####################################################################
 
 #####################################################################
 #                     Journal File Creation
@@ -90,6 +119,7 @@ report summary no
 /solve/iterate $num_iterations
 !date
 /file/write-data $dataFileName
+$writeCFDPParameters
 exit
 yes
 EOT
