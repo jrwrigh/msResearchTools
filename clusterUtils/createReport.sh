@@ -2,6 +2,11 @@
 
 # Arguements: [SST|SBES] [data file]
 
+if [ "$1" == "-h" ]; then
+    echo "createReport [SST|SBES] [data file]"
+    exit 1
+fi
+
 dataFile=$2
 reportStateDirPath='/common/miller/jrwrigh/DesignSpaceSims/cfdpost_statefiles'
 

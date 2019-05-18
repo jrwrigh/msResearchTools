@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -N p136L0260_S050_SST
 #PBS -l select=1:ncpus=28:mpiprocs=28:mem=32gb
-#PBS -l walltime=02:00:00
+#PBS -l walltime=04:00:00
 #PBS -j oe
 #PBS -m abe
 #PBS -M jrwrigh@g.clemson.edu
