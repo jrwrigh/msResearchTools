@@ -34,7 +34,7 @@ cd $PBS_O_WORKDIR
 
 SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
 
-num_iterations=1800
+num_iterations=22000
 timeStep=7e-5
 
 SWITCH_INITIAL_ITERATIONS=true

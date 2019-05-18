@@ -26,7 +26,7 @@ cd $PBS_O_WORKDIR
 caseFile=p136L0260_S050_SST.cas
 dataFileName=p136L0260_S050_SST
     
-num_iterations=1800
+num_iterations=800
 
 SWITCH_ROTATIONAL_VELOCITY=false
 WRITE_CFDP_FILE=true
