@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -N p150L0510_S200_SBES
-#PBS -l select=2:ncpus=40:mpiprocs=40:mem=30gb
+#PBS -N p131L32S75_SBES
+#PBS -l select=1:ncpus=28:ngpus=1:mpiprocs=28:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
@@ -11,6 +11,7 @@ module add ansys/19.0
 module add intel/19.0
 
 set echo on 
+set -o xtrace
 echo "###START NOTES###" 
 echo ""
 echo "###END NOTES###"
@@ -34,14 +35,14 @@ cd $PBS_O_WORKDIR
 
 SWITCH_INITIALIZE_UNSTEADY_STATISTICS=false
 
-num_iterations=22000
+num_iterations=10000
 timeStep=7e-5
 
-SWITCH_INITIAL_ITERATIONS=true
+SWITCH_INITIAL_ITERATIONS=false
 init_num_iterations=100
 initTimeStep=5e-6
 
-SWITCH_UNSTEADY_STAT_INITIALIZATION=true
+SWITCH_UNSTEADY_STAT_INITIALIZATION=false
     # drops the first N timesteps from the data
 unsteadyStatIterations=4000
 unsteadyStatTimeStep=$timeStep
@@ -54,9 +55,10 @@ MPI=intel
 fluentType=3d
 export I_MPI_FABRICS=shm:tcp
 
-casePath=p150L0510_S200_SBES.cas
-initDataPath=5668167_p150L0510_S200_SST.dat
-dataFileName=p150L0510_S200_SBES
+casePath=p131L0325_S075_SBES.cas
+initDataPath=6077765_p131L0325_S075_SBES/6077765_p131L0325_S075_SBES.dat
+dataFileName=p131L0325_S075_SBES
+outDirPath="/scratch2/jrwrigh"
 
 SWITCH_DROP_CACHE=false
 
@@ -78,11 +80,10 @@ num_nodes=$(cat $PBS_NODEFILE | sort -u | wc -l)
 tot_cpus=$(cat $PBS_NODEFILE | wc -l )
 jobid_num=$(echo $PBS_JOBID | grep -Eo "[0-9]{3,}")
 
-
 caseFile="$(basename $casePath)"
 initDataFile="$(basename $initDataPath)"
 dataFileName=${jobid_num}_${dataFileName}
-outFilePath="$PBS_O_WORKDIR/${dataFileName}.log"
+outFilePath="${outDirPath}/${dataFileName}.log"
 journalFile="$jobid_num"_FluentSBES.jou
 outDirName=$dataFileName
 
@@ -182,7 +183,7 @@ $relax_SIMPLE
 /file/auto-save/max-files $autosave_maxfilestokeep
 /file/auto-save/data-frequency $autosave_frequency
 /file/auto-save/append-file-name-with time-step 6
-/file/auto-save/root-name "${PBS_O_WORKDIR}/${dataFileName}/$dataFileName"
+/file/auto-save/root-name "${outDirPath}/${outDirName}/$dataFileName"
 
 !date
 
@@ -256,8 +257,9 @@ Case File = $caseFile
 Fluent Verison = $fluentType
 
 
-Output Files:
+Outputs:
 -----------------
+Out Directory = ${outDirPath}/${outDirName}
 Data File = ${dataFileName}.dat
 Log File = ${dataFileName}.log
 
@@ -270,7 +272,7 @@ Log File = ${dataFileName}.log
 #                     Running the Job Itself
 
 # make directory to store the solution files
-mkdir ${PBS_O_WORKDIR}/$outDirName
+mkdir ${outDirPath}/$outDirName
 
 for node in `uniq $PBS_NODEFILE`
 do
@@ -281,7 +283,23 @@ done
 
 cd $TMPDIR
 
+# Launch outfile copying
+(while [ 1 ]
+do
+    myarray=(`find ./ -maxdepth 2 -name "*.out"`)
+    if [ ${#myarray[@]} -gt 0 ]; then 
+        sleep 30
+        filename=$myarray
+        cp -u $filename $outDirPath/$outDirName/${filename%.out}_${jobid_num}.out
+    fi
+done) &
+SUBSHELL_PID=$!                 # Get the PID of the backgrounded subshell
+echo $SUBSHELL_PID
+
+# Launch fluent
 fluent $fluentType $fluent_args > $outFilePath
+
+kill $SUBSHELL_PID
 
 for filename in *.out
 do 
@@ -290,6 +308,8 @@ done
 
 for node in `uniq $PBS_NODEFILE`
 do
-    ssh $node "cp -r $TMPDIR/* $PBS_O_WORKDIR/$outDirName"
+    ssh $node "cp -r $TMPDIR/* $outDirPath/$outDirName"
 done
+cp  $outFilePath $PBS_O_WORKDIR/
+cp -r $outDirPath/$outDirName $PBS_O_WORKDIR/
 
