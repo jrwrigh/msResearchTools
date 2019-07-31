@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -N exportFluentCFDP
 #PBS -l select=1:ncpus=2:mem=20gb
-#PBS -l walltime=00:10:00
+#PBS -l walltime=00:40:00
 #PBS -j oe
 
 cd $PBS_O_WORKDIR
