@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N p131L32S75_SBES
-#PBS -l select=1:ncpus=28:ngpus=1:mpiprocs=28:mem=30gb
+#PBS -l select=1:ncpus=28:ngpus=0:mpiprocs=28:mem=30gb
 #PBS -l walltime=72:00:00
 #PBS -j oe
 #PBS -m abe
