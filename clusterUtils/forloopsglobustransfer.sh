@@ -8,16 +8,16 @@ BrickDesign=$BrickEndpntID:'/~/odrive/Google Drive -Clemson/1. Grad Research/1. 
 clusterDesignPath=/common/miller/jrwrigh/DesignSpaceSims
 clusterEndpntID=$(globus endpoint search --format unix --jmespath "DATA[?name=='xfer01-ext.clemson.edu'].id" clemson)
 
-for msh in {p066L0780,p082L0780}
-# for msh in p066L0780
+# for msh in {p066L0780,p082L0780}
+for msh in p082L0780
 # for msh in ./p^(125|150|r)*(/)
 do
     # echo msh $msh
     cd ${clusterDesignPath}/$msh
 
     # for swirl in $msh_S*(/)
-    for swirl in S{100,150}
-    # for swirl in S100
+    # for swirl in S{100,150}
+    for swirl in S150
     do
         cd ${msh}_${swirl}/SBES
         brickdirs=$(globus ls --jmespath "DATA[?type=='dir'].name" ${BrickDesign}/${msh}/${msh}_${swirl})
@@ -27,11 +27,11 @@ do
             # print "\n"
            print "\n" WORKING ON $simrun '=========='
            cd $simrun
+           pathsimrun=${msh}/${msh}_${swirl}/${simrun}
+           pathsimrunclstr=${msh}/${msh}_${swirl}/SBES/${simrun}
            if echo $brickdirs | grep $simrun ; then
                echo $simrun in BrickDrive
 
-               pathsimrun=${msh}/${msh}_${swirl}/${simrun}
-               pathsimrunclstr=${msh}/${msh}_${swirl}/SBES/${simrun}
                bricksimruncontent=$(globus ls ${BrickDesign}/${pathsimrun})
                if echo $bricksimruncontent | grep .out ; then
                    echo brick $simrun already has .out file
@@ -49,7 +49,7 @@ do
                fi
 
            else
-               echo $simrun no in BrickDrive
+               echo $simrun dir not in BrickDrive
                myarray=(`find ./ -maxdepth 2 -name "*.out"`)
                if [ ${#myarray[@]} -gt 0 ]; then 
                    echo cluster $simrun has .out file
